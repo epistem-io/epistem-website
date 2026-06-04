@@ -37,6 +37,7 @@ export const Events = () => {
                 </p>
                 <Link
                   href="/event/luma-launch"
+                  // href={`/events/${event.slug}`}
                   className="flex items-center gap-1.5 text-primary-pink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2 hover:underline"
                 >
                   <span className="shrink-0 font-pjs text-right text-[10px] font-bold leading-6 lg:font-lp-text-l-semibold">

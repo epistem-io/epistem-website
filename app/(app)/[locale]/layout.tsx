@@ -38,62 +38,62 @@ const pjs = Plus_Jakarta_Sans({
 const aptos = localFont({
   src: [
     {
-      path: "../../public/fonts/Aptos-Light.ttf",
+      path: "../../../public/fonts/Aptos-Light.ttf",
       weight: "300",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Aptos.ttf",
+      path: "../../../public/fonts/Aptos.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Aptos-SemiBold.ttf",
+      path: "../../../public/fonts/Aptos-SemiBold.ttf",
       weight: "600",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Aptos-Bold.ttf",
+      path: "../../../public/fonts/Aptos-Bold.ttf",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Aptos-ExtraBold.ttf",
+      path: "../../../public/fonts/Aptos-ExtraBold.ttf",
       weight: "800",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Aptos-Black.ttf",
+      path: "../../../public/fonts/Aptos-Black.ttf",
       weight: "900",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Aptos-Light-Italic.ttf",
+      path: "../../../public/fonts/Aptos-Light-Italic.ttf",
       weight: "300",
       style: "italic",
     },
     {
-      path: "../../public/fonts/Aptos-Italic.ttf",
+      path: "../../../public/fonts/Aptos-Italic.ttf",
       weight: "400",
       style: "italic",
     },
     {
-      path: "../../public/fonts/Aptos-SemiBold-Italic.ttf",
+      path: "../../../public/fonts/Aptos-SemiBold-Italic.ttf",
       weight: "600",
       style: "italic",
     },
     {
-      path: "../../public/fonts/Aptos-Bold-Italic.ttf",
+      path: "../../../public/fonts/Aptos-Bold-Italic.ttf",
       weight: "700",
       style: "italic",
     },
     {
-      path: "../../public/fonts/Aptos-ExtraBold-Italic.ttf",
+      path: "../../../public/fonts/Aptos-ExtraBold-Italic.ttf",
       weight: "800",
       style: "italic",
     },
     {
-      path: "../../public/fonts/Aptos-Black-Italic.ttf",
+      path: "../../../public/fonts/Aptos-Black-Italic.ttf",
       weight: "900",
       style: "italic",
     },

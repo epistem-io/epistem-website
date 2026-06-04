@@ -12,16 +12,18 @@ interface RelatedEventItem {
 interface RelatedEventsProps {
   items?: RelatedEventItem[];
   emptyMessage?: string;
+  title?: string;
 }
 
 export function RelatedEvents({
   items = [],
+  title = "Related Events",
   emptyMessage = "Oops, there is no related events at this time",
 }: RelatedEventsProps) {
   return (
     <aside className="w-full rounded-2xl border border-[#EAECF0] bg-white p-4">
       <h2 className="font-lp-text-xl-bold text-text-icons-base-main">
-        Related Events
+        {title}
       </h2>
 
       {items.length === 0 ? (
