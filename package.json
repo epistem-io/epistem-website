@@ -2,6 +2,7 @@
   "name": "epistem-landing-page-next",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,6 +13,9 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@next/third-parties": "^16.1.6",
+    "@payloadcms/db-postgres": "^3.85.0",
+    "@payloadcms/next": "^3.85.0",
+    "@payloadcms/richtext-lexical": "^3.85.0",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-separator": "^1.1.8",
     "@radix-ui/react-slot": "^1.2.4",
@@ -20,11 +24,14 @@
     "libphonenumber-js": "^1.12.33",
     "lucide-react": "^0.561.0",
     "motion": "^12.23.26",
-    "next": "16.0.10",
+    "next": "16.2.7",
     "next-intl": "^4.8.1",
+    "payload": "^3.85.0",
+    "radix-ui": "^1.4.3",
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "react-hook-form": "^7.69.0",
+    "sharp": "^0.34.5",
     "tailwind-merge": "^3.4.0",
     "zod": "^4.2.1"
   },
