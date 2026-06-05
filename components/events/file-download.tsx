@@ -3,7 +3,7 @@ import Image from "next/image";
 interface FileDownloadProps {
   href: string;
   filename: string;
-  filesize: number;
+  filesize?: number | null;
   filetype?: string;
 }
 
@@ -13,8 +13,12 @@ export function FileDownload({
   filesize,
   filetype = "PDF",
 }: FileDownloadProps) {
+  const sizeLabel = formatFileSize(filesize);
+
   return (
     <a
+      target="_blank"
+      rel="noopener noreferrer"
       href={href}
       className="flex w-full items-center gap-4 rounded-2xl border border-[#EAEBF0] bg-white px-4 py-4 transition-colors hover:bg-[#fff8fb] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2 sm:px-6"
     >
@@ -36,7 +40,7 @@ export function FileDownload({
           {filename}
         </p>
         <p className="mt-1 font-lp-body-m-regular text-[#515151]">
-          {filetype} {filesize.toFixed(1)} MB
+          {filetype} {sizeLabel}
         </p>
       </div>
 
@@ -45,4 +49,23 @@ export function FileDownload({
       </span>
     </a>
   );
+}
+
+function formatFileSize(filesize?: number | null) {
+  if (
+    typeof filesize !== "number" ||
+    !Number.isFinite(filesize) ||
+    filesize <= 0
+  ) {
+    return "Unknown size";
+  }
+
+  const megabyte = 1024 * 1024;
+  const kilobyte = 1024;
+
+  if (filesize >= megabyte) {
+    return `${(filesize / megabyte).toFixed(1)} MB`;
+  }
+
+  return `${Math.max(filesize / kilobyte, 0.1).toFixed(1)} KB`;
 }

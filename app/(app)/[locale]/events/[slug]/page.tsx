@@ -2,6 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MapPinIcon } from "lucide-react";
 
+import { EventRichText } from "@/components/events/event-rich-text";
 import { FileDownload } from "@/components/events/file-download";
 import { RelatedEvents } from "@/components/events/related-events";
 import {
@@ -14,6 +15,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Link } from "@/i18n/navigation";
 import { getEventBySlug } from "@/lib/events";
+import type { Document, Event } from "@/payload-types";
 
 type Props = {
   params: Promise<{
@@ -34,15 +36,17 @@ export default async function EventDetailPage({ params }: Props) {
       : "/images/collage.webp";
 
   const relatedItems =
-    event.relatedEvents?.map((item: any) => ({
-      title: item.title,
-      meta: item.location,
-      img:
-        typeof item.heroImage === "object" && item.heroImage?.url
-          ? item.heroImage.url
-          : "/images/collage.webp",
-      url: `/events/${item.slug}`,
-    })) || [];
+    event.relatedEvents
+      ?.filter((item): item is Event => typeof item === "object")
+      .map((item) => ({
+        title: item.title,
+        meta: item.location,
+        img:
+          typeof item.heroImage === "object" && item.heroImage?.url
+            ? item.heroImage.url
+            : "/images/collage.webp",
+        url: `/events/${item.slug}`,
+      })) || [];
 
   return (
     <main className="relative overflow-hidden bg-white pb-20 pt-[120px]">
@@ -120,27 +124,25 @@ export default async function EventDetailPage({ params }: Props) {
                 </div>
 
                 <div className="space-y-6 pt-1">
-                  <div className="font-lp-body-m-regular text-justify text-text-icons-base-second">
-                    {"root" in event.content
-                      ? JSON.stringify(event.content)
-                      : null}
-                  </div>
+                  <EventRichText content={event.content} />
                 </div>
               </div>
 
               <div className="mt-8 space-y-4">
-                {event.downloads?.map((download: any) => (
-                  <FileDownload
-                    key={download.id}
-                    href={
-                      typeof download.file === "object"
-                        ? download.file.url || "#"
-                        : "#"
-                    }
-                    filename={download.label}
-                    filesize={0}
-                  />
-                ))}
+                {event.downloads?.map((download) => {
+                  const file =
+                    typeof download.file === "object" ? download.file : null;
+
+                  return (
+                    <FileDownload
+                      key={download.id}
+                      href={file?.url || "#"}
+                      filename={download.label}
+                      filesize={file?.filesize}
+                      filetype={getFileTypeLabel(file)}
+                    />
+                  );
+                })}
               </div>
             </div>
 
@@ -152,4 +154,16 @@ export default async function EventDetailPage({ params }: Props) {
       </section>
     </main>
   );
+}
+
+function getFileTypeLabel(file: Document | null) {
+  const mimeType = file?.mimeType?.split("/")[1];
+
+  if (mimeType) {
+    return mimeType.toUpperCase();
+  }
+
+  const extension = file?.filename?.split(".").pop();
+
+  return extension?.toUpperCase() || "FILE";
 }

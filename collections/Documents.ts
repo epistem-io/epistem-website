@@ -2,6 +2,9 @@ import { CollectionConfig } from "payload";
 
 export const Documents: CollectionConfig = {
   slug: "documents",
+  access: {
+    read: () => true,
+  },
   upload: {
     mimeTypes: ["application/pdf"],
   },
