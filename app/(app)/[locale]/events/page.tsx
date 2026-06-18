@@ -6,8 +6,9 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { HighlightEvent } from "@/components/events/highlight-event";
+import { PastEvents } from "@/components/events/past-events";
 import { Link } from "@/i18n/navigation";
-import { getFeaturedEvent } from "@/lib/events";
+import { getFeaturedEvent, getPastEvents } from "@/lib/events";
 
 type Props = {
   params: Promise<{
@@ -18,6 +19,7 @@ type Props = {
 export default async function EventsPage({ params }: Props) {
   const { locale } = await params;
   const featuredEvent = await getFeaturedEvent(locale);
+  const pastEvents = await getPastEvents(locale);
 
   return (
     // <main className="pt-[120px] pb-20">
@@ -66,10 +68,12 @@ export default async function EventsPage({ params }: Props) {
         </section>
       </div>
       <div className="bg-white py-20">
-        <div className="base-container w-full">
+        <div className="base-container flex w-full flex-col gap-16">
           {featuredEvent ? (
             <HighlightEvent event={featuredEvent} locale={locale} />
           ) : null}
+
+          <PastEvents events={pastEvents} locale={locale} />
         </div>
       </div>
     </main>
