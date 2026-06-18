@@ -4,7 +4,6 @@ import { MapPinIcon } from "lucide-react";
 
 import { EventRichText } from "@/components/events/event-rich-text";
 import { FileDownload } from "@/components/events/file-download";
-import { RelatedEvents } from "@/components/events/related-events";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -15,7 +14,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Link } from "@/i18n/navigation";
 import { getEventBySlug } from "@/lib/events";
-import type { Document, Event } from "@/payload-types";
+import type { Document } from "@/payload-types";
 
 type Props = {
   params: Promise<{
@@ -34,19 +33,6 @@ export default async function EventDetailPage({ params }: Props) {
     typeof event.heroImage === "object" && event.heroImage?.url
       ? event.heroImage.url
       : "/images/collage.webp";
-
-  const relatedItems =
-    event.relatedEvents
-      ?.filter((item): item is Event => typeof item === "object")
-      .map((item) => ({
-        title: item.title,
-        meta: item.location,
-        img:
-          typeof item.heroImage === "object" && item.heroImage?.url
-            ? item.heroImage.url
-            : "/images/collage.webp",
-        url: `/events/${item.slug}`,
-      })) || [];
 
   return (
     <main className="relative overflow-hidden bg-white pb-20 pt-[120px]">
@@ -147,7 +133,14 @@ export default async function EventDetailPage({ params }: Props) {
             </div>
 
             <div className="w-full shrink-0 lg:w-[382px]">
-              <RelatedEvents items={relatedItems} />
+              <aside className="w-full rounded-2xl border border-[#EAECF0] bg-white p-4">
+                <h2 className="font-lp-text-xl-bold text-text-icons-base-main">
+                  Additional Resources
+                </h2>
+                <p className="mt-6 font-lp-text-l-regular text-text-icons-base-second">
+                  Event documents and extra materials will appear here.
+                </p>
+              </aside>
             </div>
           </div>
         </div>
