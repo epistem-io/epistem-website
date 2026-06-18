@@ -71,6 +71,7 @@
   --color-gray-dark: rgba(81, 81, 81, 1);
 
   --color-custom-text-grey-mid: rgba(104, 114, 125, 1);
+  --color-custom-text-grey-dark: rgba(81, 81, 81, 1);
 }
 
 :root {
@@ -168,6 +169,13 @@
   font-family: var(--font-inter);
   font-size: 18px;
   font-weight: 600;
+  line-height: normal;
+}
+
+@utility font-lp-body-xl-regular {
+  font-family: var(--font-inter);
+  font-size: 20px;
+  font-weight: 400;
   line-height: normal;
 }
 
