@@ -1,4 +1,10 @@
 {
+  "EventDetailPage": {
+    "speakersTitle": "Pembicara",
+    "showingRange": "Menampilkan {start}-{end} dari {total}",
+    "previousSpeakers": "Pembicara sebelumnya",
+    "nextSpeakers": "Pembicara berikutnya"
+  },
   "HomePage": {
     "Hero": {
       "title1": "Bersama,",

@@ -1,4 +1,10 @@
 {
+  "EventDetailPage": {
+    "speakersTitle": "Speakers",
+    "showingRange": "Showing {start}-{end} of {total}",
+    "previousSpeakers": "Previous speakers",
+    "nextSpeakers": "Next speakers"
+  },
   "HomePage": {
     "Hero": {
       "title1": "Together,",

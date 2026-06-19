@@ -5,6 +5,7 @@ import { MapPinIcon, PlayIcon } from "lucide-react";
 import { EventImageCarousel } from "@/components/events/event-image-carousel";
 import { EventRichText } from "@/components/events/event-rich-text";
 import { FileDownload } from "@/components/events/file-download";
+import { SpeakersSection } from "@/components/events/speakers-section";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -51,6 +52,28 @@ export default async function EventDetailPage({ params }: Props) {
       ) || [];
   const hasDownloads = (event.downloads?.length ?? 0) > 0;
   const previewLink = await getPreviewLink(event.previewYoutubeUrl);
+  const speakers =
+    event.speakers
+      ?.map((speaker) => {
+        const profilePhoto =
+          typeof speaker.profilePhoto === "object" ? speaker.profilePhoto : null;
+
+        return getSpeakerCard({
+          image: profilePhoto,
+          name: speaker.name,
+          title: speaker.title,
+        });
+      })
+      .filter(
+        (
+          speaker,
+        ): speaker is {
+          imageSrc: string;
+          imageAlt: string;
+          name: string;
+          title: string;
+        } => Boolean(speaker),
+      ) ?? [];
 
   return (
     <main className="relative overflow-hidden bg-white pb-20 pt-[120px]">
@@ -137,6 +160,10 @@ export default async function EventDetailPage({ params }: Props) {
                 <div className="space-y-6 pt-1">
                   <EventRichText content={event.content} />
                 </div>
+
+                <SpeakersSection
+                  speakers={speakers}
+                />
               </div>
             </div>
 
@@ -333,5 +360,29 @@ function getGalleryImage({
   return {
     src: image.url,
     alt: image.alt?.trim() || `${eventTitle} image ${index + 1}`,
+  };
+}
+
+function getSpeakerCard({
+  image,
+  name,
+  title,
+}: {
+  image: Media | null;
+  name: string | null | undefined;
+  title: string | null | undefined;
+}) {
+  const trimmedName = name?.trim();
+  const trimmedTitle = title?.trim();
+
+  if (!image?.url || !trimmedName || !trimmedTitle) {
+    return null;
+  }
+
+  return {
+    imageSrc: image.url,
+    imageAlt: image.alt?.trim() || trimmedName,
+    name: trimmedName,
+    title: trimmedTitle,
   };
 }

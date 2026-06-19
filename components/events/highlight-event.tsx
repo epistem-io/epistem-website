@@ -128,7 +128,7 @@ function formatEventDate(dateString: string, locale: "en" | "id") {
 }
 
 function getEventSummary(event: Event) {
-  return "Event summary";
+  // return "Event summary";
 
   const excerpt = event.excerpt?.trim();
 
