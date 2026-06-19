@@ -4,15 +4,15 @@ import { withPayload } from "@payloadcms/next/withPayload";
 
 const nextConfig = {
   /* config options here */
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       protocol: "https",
-  //       hostname: "www.figma.com",
-  //       pathname: "/api/mcp/asset/**",
-  //     },
-  //   ],
-  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+        pathname: "/vi/**",
+      },
+    ],
+  },
   async redirects() {
     return [
       {
