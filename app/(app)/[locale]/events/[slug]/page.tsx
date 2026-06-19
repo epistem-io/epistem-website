@@ -2,6 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { MapPinIcon } from "lucide-react";
 
+import { EventImageCarousel } from "@/components/events/event-image-carousel";
 import { EventRichText } from "@/components/events/event-rich-text";
 import { FileDownload } from "@/components/events/file-download";
 import {
@@ -14,7 +15,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Link } from "@/i18n/navigation";
 import { getEventBySlug } from "@/lib/events";
-import type { Document } from "@/payload-types";
+import type { Document, Media } from "@/payload-types";
 
 type Props = {
   params: Promise<{
@@ -33,6 +34,20 @@ export default async function EventDetailPage({ params }: Props) {
     typeof event.heroImage === "object" && event.heroImage?.url
       ? event.heroImage.url
       : "/images/collage.webp";
+
+  const galleryImages =
+    event.images
+      ?.map((entry, index) => {
+        const image = typeof entry.image === "object" ? entry.image : null;
+
+        return getGalleryImage({
+          image,
+          eventTitle: event.title,
+          index,
+        });
+      })
+      .filter((image): image is { src: string; alt: string } => Boolean(image)) ||
+    [];
 
   return (
     <main className="relative overflow-hidden bg-white pb-20 pt-[120px]">
@@ -98,16 +113,23 @@ export default async function EventDetailPage({ params }: Props) {
                   </div>
                 </div>
 
-                <div className="relative aspect-[500/261] overflow-hidden rounded-xl">
-                  <Image
-                    src={heroImage}
-                    alt={event.title}
-                    fill
-                    priority
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 778px"
+                {galleryImages.length > 0 ? (
+                  <EventImageCarousel
+                    title={event.title}
+                    images={galleryImages}
                   />
-                </div>
+                ) : (
+                  <div className="relative aspect-[778/406] overflow-hidden rounded-xl">
+                    <Image
+                      src={heroImage}
+                      alt={event.title}
+                      fill
+                      priority
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 778px"
+                    />
+                  </div>
+                )}
 
                 <div className="space-y-6 pt-1">
                   <EventRichText content={event.content} />
@@ -159,4 +181,21 @@ function getFileTypeLabel(file: Document | null) {
   const extension = file?.filename?.split(".").pop();
 
   return extension?.toUpperCase() || "FILE";
+}
+
+function getGalleryImage({
+  image,
+  eventTitle,
+  index,
+}: {
+  image: Media | null;
+  eventTitle: string;
+  index: number;
+}) {
+  if (!image?.url) return null;
+
+  return {
+    src: image.url,
+    alt: image.alt?.trim() || `${eventTitle} image ${index + 1}`,
+  };
 }
