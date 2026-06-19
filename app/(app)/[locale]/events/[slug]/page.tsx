@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { MapPinIcon } from "lucide-react";
+import { MapPinIcon, Share2Icon } from "lucide-react";
 
 import { EventImageCarousel } from "@/components/events/event-image-carousel";
 import { EventRichText } from "@/components/events/event-rich-text";
@@ -48,6 +48,8 @@ export default async function EventDetailPage({ params }: Props) {
       })
       .filter((image): image is { src: string; alt: string } => Boolean(image)) ||
     [];
+  const hasDownloads = (event.downloads?.length ?? 0) > 0;
+  const previewLink = getPreviewLink(event.previewYoutubeUrl);
 
   return (
     <main className="relative overflow-hidden bg-white pb-20 pt-[120px]">
@@ -135,33 +137,61 @@ export default async function EventDetailPage({ params }: Props) {
                   <EventRichText content={event.content} />
                 </div>
               </div>
-
-              <div className="mt-8 space-y-4">
-                {event.downloads?.map((download) => {
-                  const file =
-                    typeof download.file === "object" ? download.file : null;
-
-                  return (
-                    <FileDownload
-                      key={download.id}
-                      href={file?.url || "#"}
-                      filename={download.label}
-                      filesize={file?.filesize}
-                      filetype={getFileTypeLabel(file)}
-                    />
-                  );
-                })}
-              </div>
             </div>
 
             <div className="w-full shrink-0 lg:w-[382px]">
-              <aside className="w-full rounded-2xl border border-[#EAECF0] bg-white p-4">
-                <h2 className="font-lp-text-xl-bold text-text-icons-base-main">
-                  Additional Resources
-                </h2>
-                <p className="mt-6 font-lp-text-l-regular text-text-icons-base-second">
-                  Event documents and extra materials will appear here.
-                </p>
+              <aside className="space-y-6">
+                {hasDownloads ? (
+                  <section className="rounded-2xl border border-[#EAECF0] bg-white p-4">
+                    <h2 className="font-lp-text-xl-bold text-text-icons-base-main">
+                      Documents
+                    </h2>
+                    <div className="mt-6 space-y-4">
+                      {event.downloads?.map((download) => {
+                        const file =
+                          typeof download.file === "object"
+                            ? download.file
+                            : null;
+
+                        return (
+                          <FileDownload
+                            key={download.id}
+                            href={file?.url || "#"}
+                            filename={download.label}
+                            filesize={file?.filesize}
+                            filetype={getFileTypeLabel(file)}
+                            compact
+                          />
+                        );
+                      })}
+                    </div>
+                  </section>
+                ) : null}
+
+                {previewLink ? (
+                  <section className="rounded-2xl border border-[#EAECF0] bg-white p-4">
+                    <h2 className="font-lp-text-xl-bold text-text-icons-base-main">
+                      Links
+                    </h2>
+                    <a
+                      href={previewLink.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-6 block break-all font-lp-body-l-semibold text-[#111A13] underline decoration-[#111A13] underline-offset-[3px] transition-colors hover:text-primary-pink hover:decoration-primary-pink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2"
+                    >
+                      {previewLink.label}
+                    </a>
+                  </section>
+                ) : null}
+
+                <section className="rounded-2xl border border-[#EAECF0] bg-white p-4">
+                  <div className="flex items-center justify-center gap-3 py-1">
+                    <Share2Icon className="size-6 shrink-0 text-[#111A13]" />
+                    <p className="font-text-button-semibold-small text-[#111A13]">
+                      Share this event
+                    </p>
+                  </div>
+                </section>
               </aside>
             </div>
           </div>
@@ -181,6 +211,24 @@ function getFileTypeLabel(file: Document | null) {
   const extension = file?.filename?.split(".").pop();
 
   return extension?.toUpperCase() || "FILE";
+}
+
+function getPreviewLink(value: string | null | undefined) {
+  if (!value) return null;
+
+  try {
+    const url = new URL(value);
+
+    return {
+      href: url.toString(),
+      label: url.toString().replace(/^https?:\/\//, ""),
+    };
+  } catch {
+    return {
+      href: value,
+      label: value,
+    };
+  }
 }
 
 function getGalleryImage({
