@@ -1,6 +1,7 @@
 {
   "EventDetailPage": {
     "speakersTitle": "Speakers",
+    "agendaTitle": "Event Agenda",
     "showingRange": "Showing {start}-{end} of {total}",
     "previousSpeakers": "Previous speakers",
     "nextSpeakers": "Next speakers"

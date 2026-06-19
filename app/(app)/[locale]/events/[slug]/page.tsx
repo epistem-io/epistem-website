@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { MapPinIcon, PlayIcon } from "lucide-react";
 
 import { EventImageCarousel } from "@/components/events/event-image-carousel";
+import { AgendaSection } from "@/components/events/agenda-section";
 import { EventRichText } from "@/components/events/event-rich-text";
 import { FileDownload } from "@/components/events/file-download";
 import { SpeakersSection } from "@/components/events/speakers-section";
@@ -73,6 +74,18 @@ export default async function EventDetailPage({ params }: Props) {
           name: string;
           title: string;
         } => Boolean(speaker),
+      ) ?? [];
+  const agendas =
+    event.agendas
+      ?.map((agenda) => getAgendaItem(agenda))
+      .filter(
+        (
+          agenda,
+        ): agenda is {
+          title: string;
+          description: string;
+          time: string;
+        } => Boolean(agenda),
       ) ?? [];
 
   return (
@@ -164,6 +177,8 @@ export default async function EventDetailPage({ params }: Props) {
                 <SpeakersSection
                   speakers={speakers}
                 />
+
+                <AgendaSection agendas={agendas} />
               </div>
             </div>
 
@@ -384,5 +399,25 @@ function getSpeakerCard({
     imageAlt: image.alt?.trim() || trimmedName,
     name: trimmedName,
     title: trimmedTitle,
+  };
+}
+
+function getAgendaItem(agenda: {
+  title: string | null | undefined;
+  description: string | null | undefined;
+  time: string | null | undefined;
+}) {
+  const title = agenda.title?.trim();
+  const description = agenda.description?.trim();
+  const time = agenda.time?.trim();
+
+  if (!title || !description || !time) {
+    return null;
+  }
+
+  return {
+    title,
+    description,
+    time,
   };
 }

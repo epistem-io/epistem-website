@@ -1,6 +1,7 @@
 {
   "EventDetailPage": {
     "speakersTitle": "Pembicara",
+    "agendaTitle": "Agenda Acara",
     "showingRange": "Menampilkan {start}-{end} dari {total}",
     "previousSpeakers": "Pembicara sebelumnya",
     "nextSpeakers": "Pembicara berikutnya"
