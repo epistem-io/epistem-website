@@ -209,8 +209,10 @@ export interface Event {
     };
     [k: string]: unknown;
   };
-  eventDate: string;
-  location: string;
+  startDate: string;
+  endDate: string;
+  locationGeneral: string;
+  locationDetail: string;
   heroImage: number | Media;
   downloads?:
     | {
@@ -396,8 +398,10 @@ export interface EventsSelect<T extends boolean = true> {
   featured?: T;
   excerpt?: T;
   content?: T;
-  eventDate?: T;
-  location?: T;
+  startDate?: T;
+  endDate?: T;
+  locationGeneral?: T;
+  locationDetail?: T;
   heroImage?: T;
   downloads?:
     | T

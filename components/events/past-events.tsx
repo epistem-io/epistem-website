@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import type { Event } from "@/payload-types";
 import { Link } from "@/i18n/navigation";
+import { formatEventDateRange, formatEventLocation } from "@/lib/events";
 
 type PastEventsProps = {
   events: Event[];
@@ -69,7 +70,7 @@ function PastEventCard({ event, locale }: PastEventCardProps) {
       <div className="flex flex-1 flex-col p-6">
         <div className="flex items-start justify-between gap-4">
           <p className="font-lp-text-l-semibold text-text-icons-base-second">
-            {formatEventDate(event.eventDate, locale)}
+            {formatEventDateRange(event.startDate, event.endDate, locale)}
           </p>
 
           <Link
@@ -96,7 +97,10 @@ function PastEventCard({ event, locale }: PastEventCardProps) {
             <div className="flex min-w-0 items-end gap-1 text-custom-text-grey-dark">
               <MapPinIcon className="mt-0.5 size-5 shrink-0 text-primary-pink" />
               <span className="truncate font-lp-text-l-regular">
-                {event.location}
+                {formatEventLocation(
+                  event.locationDetail,
+                  event.locationGeneral,
+                )}
               </span>
             </div>
 
@@ -110,17 +114,6 @@ function PastEventCard({ event, locale }: PastEventCardProps) {
         </div>
       </div>
     </article>
-  );
-}
-
-function formatEventDate(dateString: string, locale: "en" | "id") {
-  return new Date(dateString).toLocaleDateString(
-    locale === "id" ? "id-ID" : "en-US",
-    {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    },
   );
 }
 
@@ -141,6 +134,7 @@ function getEventSummary(event: Event) {
 }
 
 type LexicalNode = {
+  [key: string]: unknown;
   children?: LexicalNode[];
   text?: string;
 };

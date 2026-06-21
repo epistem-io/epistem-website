@@ -1,4 +1,4 @@
-import { CollectionConfig } from "payload";
+import type { CollectionConfig, DateFieldValidation } from "payload";
 
 const isValidYouTubeUrl = (value: string | null | undefined) => {
   if (!value) {
@@ -25,6 +25,24 @@ const isValidYouTubeUrl = (value: string | null | undefined) => {
   } catch {
     return "Please enter a valid YouTube URL.";
   }
+};
+
+const validateEndDate: DateFieldValidation = (value, { siblingData }) => {
+  const startDate = (siblingData as { startDate?: string | Date } | undefined)
+    ?.startDate;
+
+  if (!value || !startDate) {
+    return true;
+  }
+
+  const start = new Date(startDate);
+  const end = new Date(value);
+
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+    return true;
+  }
+
+  return end >= start || "End date must be on or after the start date.";
 };
 
 export const Events: CollectionConfig = {
@@ -66,12 +84,24 @@ export const Events: CollectionConfig = {
       required: true,
     },
     {
-      name: "eventDate",
+      name: "startDate",
       type: "date",
       required: true,
     },
     {
-      name: "location",
+      name: "endDate",
+      type: "date",
+      required: true,
+      validate: validateEndDate,
+    },
+    {
+      name: "locationGeneral",
+      type: "text",
+      localized: true,
+      required: true,
+    },
+    {
+      name: "locationDetail",
       type: "text",
       localized: true,
       required: true,

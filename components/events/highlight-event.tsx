@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import type { Event } from "@/payload-types";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
+import { formatEventDateRange, formatEventLocation } from "@/lib/events";
 
 type HighlightEventProps = {
   event: Event;
@@ -63,11 +64,18 @@ export function HighlightEvent({ event, locale }: HighlightEventProps) {
             <div className="mt-6 flex flex-wrap gap-4">
               <MetadataChip
                 icon={<CalendarDaysIcon className="size-6 text-primary-pink" />}
-                title={formatEventDate(event.eventDate, locale)}
+                title={formatEventDateRange(
+                  event.startDate,
+                  event.endDate,
+                  locale,
+                )}
               />
               <MetadataChip
                 icon={<MapPinIcon className="size-6 text-primary-pink" />}
-                title={event.location}
+                title={formatEventLocation(
+                  event.locationDetail,
+                  event.locationGeneral,
+                )}
               />
             </div>
 
@@ -116,17 +124,6 @@ function MetadataChip({ icon, title, subtitle }: MetadataChipProps) {
   );
 }
 
-function formatEventDate(dateString: string, locale: "en" | "id") {
-  return new Date(dateString).toLocaleDateString(
-    locale === "id" ? "id-ID" : "en-US",
-    {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    },
-  );
-}
-
 function getEventSummary(event: Event) {
   // return "Event summary";
 
@@ -146,6 +143,7 @@ function getEventSummary(event: Event) {
 }
 
 type LexicalNode = {
+  [key: string]: unknown;
   children?: LexicalNode[];
   text?: string;
 };

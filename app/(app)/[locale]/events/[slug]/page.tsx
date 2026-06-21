@@ -16,7 +16,11 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Link } from "@/i18n/navigation";
-import { getEventBySlug } from "@/lib/events";
+import {
+  formatEventDateRange,
+  formatEventLocation,
+  getEventBySlug,
+} from "@/lib/events";
 import type { Document, Media } from "@/payload-types";
 
 type Props = {
@@ -135,19 +139,19 @@ export default async function EventDetailPage({ params }: Props) {
               <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
                   <p className="font-lp-text-l-semibold text-gray-dark">
-                    {new Date(event.eventDate).toLocaleDateString(
-                      locale === "id" ? "id-ID" : "en-US",
-                      {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      },
+                    {formatEventDateRange(
+                      event.startDate,
+                      event.endDate,
+                      locale,
                     )}
                   </p>
                   <div className="flex items-center gap-1 text-gray-dark">
                     <MapPinIcon className="size-5 shrink-0" />
                     <span className="font-lp-text-l-semibold">
-                      {event.location}
+                      {formatEventLocation(
+                        event.locationDetail,
+                        event.locationGeneral,
+                      )}
                     </span>
                   </div>
                 </div>
