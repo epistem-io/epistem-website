@@ -4,7 +4,9 @@
     "agendaTitle": "Agenda Acara",
     "showingRange": "Menampilkan {start}-{end} dari {total}",
     "previousSpeakers": "Pembicara sebelumnya",
-    "nextSpeakers": "Pembicara berikutnya"
+    "nextSpeakers": "Pembicara berikutnya",
+    "previousPastEvents": "Acara sebelumnya",
+    "nextPastEvents": "Acara berikutnya"
   },
   "HomePage": {
     "Hero": {

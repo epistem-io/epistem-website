@@ -4,7 +4,9 @@
     "agendaTitle": "Event Agenda",
     "showingRange": "Showing {start}-{end} of {total}",
     "previousSpeakers": "Previous speakers",
-    "nextSpeakers": "Next speakers"
+    "nextSpeakers": "Next speakers",
+    "previousPastEvents": "Previous past events",
+    "nextPastEvents": "Next past events"
   },
   "HomePage": {
     "Hero": {

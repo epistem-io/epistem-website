@@ -1,9 +1,23 @@
-import { ArrowRightIcon, MapPinIcon, PaperclipIcon } from "lucide-react";
+"use client";
+
+import {
+  ArrowRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  MapPinIcon,
+  PaperclipIcon,
+} from "lucide-react";
 import Image from "next/image";
+import { useFormatter, useTranslations } from "next-intl";
+import { useEffect, useState, type ReactNode } from "react";
 
 import type { Event } from "@/payload-types";
 import { Link } from "@/i18n/navigation";
-import { formatEventDateRange, formatEventLocation } from "@/lib/events";
+import {
+  formatEventDateRange,
+  formatEventLocation,
+} from "@/lib/event-formatting";
+import { cn } from "@/lib/utils";
 
 type PastEventsProps = {
   events: Event[];
@@ -21,19 +35,95 @@ const copy = {
   },
 } as const;
 
+const MOBILE_PAGE_SIZE = 3;
+const TABLET_PAGE_SIZE = 4;
+const DESKTOP_PAGE_SIZE = 6;
+
 export function PastEvents({ events, locale }: PastEventsProps) {
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(MOBILE_PAGE_SIZE);
+  const t = useTranslations("EventDetailPage");
+  const format = useFormatter();
+
+  useEffect(() => {
+    const desktopMediaQuery = window.matchMedia("(min-width: 1280px)");
+    const tabletMediaQuery = window.matchMedia("(min-width: 768px)");
+
+    const syncPageSize = () => {
+      if (desktopMediaQuery.matches) {
+        setPageSize(DESKTOP_PAGE_SIZE);
+        return;
+      }
+
+      if (tabletMediaQuery.matches) {
+        setPageSize(TABLET_PAGE_SIZE);
+        return;
+      }
+
+      setPageSize(MOBILE_PAGE_SIZE);
+    };
+
+    syncPageSize();
+
+    desktopMediaQuery.addEventListener("change", syncPageSize);
+    tabletMediaQuery.addEventListener("change", syncPageSize);
+
+    return () => {
+      desktopMediaQuery.removeEventListener("change", syncPageSize);
+      tabletMediaQuery.removeEventListener("change", syncPageSize);
+    };
+  }, []);
+
+  const totalPages = Math.ceil(events.length / pageSize);
+  const safePageIndex = Math.min(pageIndex, Math.max(totalPages - 1, 0));
+  const startIndex = safePageIndex * pageSize;
+  const visibleEvents = events.slice(startIndex, startIndex + pageSize);
+  const hasPagination = totalPages > 1;
+  const pageRange = getPageRange(safePageIndex, pageSize, events.length);
+
   if (events.length === 0) {
     return null;
   }
 
   return (
     <section className="flex flex-col gap-9">
-      <h2 className="font-lp-headline-xs-bold text-custom-text-grey-dark">
-        {copy[locale].title}
-      </h2>
+      <div className="flex items-end justify-between gap-3">
+        <h2 className="font-lp-headline-xs-bold text-custom-text-grey-dark">
+          {copy[locale].title}
+        </h2>
+
+        <div className="flex shrink-0 items-center gap-3 md:gap-4">
+          <p className="text-[12px] leading-[18px] text-text-icons-base-second md:font-lp-text-s-regular">
+            {t("showingRange", {
+              start: format.number(pageRange.start),
+              end: format.number(pageRange.end),
+              total: format.number(events.length),
+            })}
+          </p>
+
+          {hasPagination ? (
+            <div className="flex items-center gap-3">
+              <PaginationButton
+                label={t("previousPastEvents")}
+                disabled={safePageIndex === 0}
+                onClick={() => setPageIndex((currentPage) => currentPage - 1)}
+              >
+                <ChevronLeftIcon className="size-4" />
+              </PaginationButton>
+              <PaginationButton
+                label={t("nextPastEvents")}
+                disabled={safePageIndex === totalPages - 1}
+                onClick={() => setPageIndex((currentPage) => currentPage + 1)}
+              >
+                <ChevronRightIcon className="size-4" />
+              </PaginationButton>
+            </div>
+          ) : null}
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 gap-7 md:grid-cols-2 xl:grid-cols-3">
-        {events.map((event) => (
+        {visibleEvents.map((event) => (
           <PastEventCard key={event.id} event={event} locale={locale} />
         ))}
       </div>
@@ -156,4 +246,48 @@ function flattenLexicalText(nodes: LexicalNode[]): string {
     })
     .join(" ")
     .replace(/\s+/g, " ");
+}
+
+type PaginationButtonProps = {
+  children: ReactNode;
+  className?: string;
+  disabled?: boolean;
+  label: string;
+  onClick: () => void;
+};
+
+function PaginationButton({
+  children,
+  className,
+  disabled = false,
+  label,
+  onClick,
+}: PaginationButtonProps) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      disabled={disabled}
+      onClick={onClick}
+      className={cn(
+        "flex size-6 items-center justify-center rounded-full text-text-icons-base-second transition-colors",
+        "hover:text-primary-pink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2",
+        "disabled:pointer-events-none disabled:text-[#D0D5DD]",
+        className,
+      )}
+    >
+      {children}
+    </button>
+  );
+}
+
+function getPageRange(pageIndex: number, pageSize: number, totalItems: number) {
+  const safePageIndex = Math.min(
+    Math.max(pageIndex, 0),
+    Math.max(Math.ceil(totalItems / pageSize) - 1, 0),
+  );
+  const start = totalItems === 0 ? 0 : safePageIndex * pageSize + 1;
+  const end = Math.min((safePageIndex + 1) * pageSize, totalItems);
+
+  return { start, end };
 }

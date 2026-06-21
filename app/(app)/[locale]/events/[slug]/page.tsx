@@ -17,10 +17,12 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Link } from "@/i18n/navigation";
 import {
-  formatEventDateRange,
-  formatEventLocation,
   getEventBySlug,
 } from "@/lib/events";
+import {
+  formatEventDateRange,
+  formatEventLocation,
+} from "@/lib/event-formatting";
 import type { Document, Media } from "@/payload-types";
 
 type Props = {
