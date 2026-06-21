@@ -32,7 +32,7 @@ export function SpeakersSection({ speakers }: SpeakersSectionProps) {
   }
 
   return (
-    <section className="space-y-6 border-t border-[#EAECF0] pt-8">
+    <section className="space-y-0 border-t-0 border-[#EAECF0]">
       <PaginatedSpeakersLayout
         speakers={speakers}
         pageSize={MOBILE_PAGE_SIZE}
@@ -92,7 +92,7 @@ export function SpeakersSection({ speakers }: SpeakersSectionProps) {
         titleClassName="font-lp-headline-xs-bold"
         infoRowClassName="items-center justify-between gap-4 sm:justify-end sm:gap-6"
         showingTextClassName="font-lp-text-s-regular"
-        gridClassName="grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4"
+        gridClassName="grid-cols-1 gap-5 sm:grid-cols-4 xl:grid-cols-4"
         cardClassName="space-y-2.5"
         imageWrapperClassName="aspect-[144/177] rounded-[3px]"
         imageSizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 144px"

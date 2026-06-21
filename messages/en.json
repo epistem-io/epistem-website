@@ -6,7 +6,8 @@
     "previousSpeakers": "Previous speakers",
     "nextSpeakers": "Next speakers",
     "previousPastEvents": "Previous past events",
-    "nextPastEvents": "Next past events"
+    "nextPastEvents": "Next past events",
+    "aboutThisEvent": "About this event"
   },
   "HomePage": {
     "Hero": {
@@ -176,8 +177,8 @@
         "mat3Type": "PDF"
       }
     },
-    
-"pressRelease": {
+
+    "pressRelease": {
       "label": "PRESS RELEASE",
       "title": "Mapping Technology That Connects People,",
       "titleHighlight": "Epistem Launches the Luma Mapping Platform",
