@@ -52,6 +52,10 @@ export default async function EventDetailPage({ params }: Props) {
           image,
           eventTitle: event.title,
           index,
+          fallbackAltLabel: t("galleryImageAlt", {
+            title: event.title,
+            index: index + 1,
+          }),
         });
       })
       .filter((image): image is { src: string; alt: string } =>
@@ -108,7 +112,7 @@ export default async function EventDetailPage({ params }: Props) {
                 asChild
                 className="font-aptos font-semibold text-text-icons-base-second hover:text-primary-pink"
               >
-                <Link href="/">Home</Link>
+                <Link href="/">{t("breadcrumb.home")}</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator className="text-text-icons-base-second">
@@ -119,7 +123,7 @@ export default async function EventDetailPage({ params }: Props) {
                 asChild
                 className="font-aptos font-semibold text-text-icons-base-second hover:text-primary-pink"
               >
-                <Link href="/events">Events</Link>
+                <Link href="/events">{t("breadcrumb.events")}</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator className="text-text-icons-base-second">
@@ -135,7 +139,7 @@ export default async function EventDetailPage({ params }: Props) {
 
         {event.featured && (
           <p className="font-lp-text-xs-semibold text-primary-pink md:font-lp-text-xl-bold text-center md:text-left md:pt-10">
-            Upcoming Event
+            {t("upcomingEvent")}
           </p>
         )}
 
@@ -202,7 +206,7 @@ export default async function EventDetailPage({ params }: Props) {
                 {hasDownloads ? (
                   <section className="rounded-2xl md:border md:border-[#EAECF0] md:bg-white md:p-4">
                     <h2 className="font-lp-text-s-semibold md:font-lp-text-xl-bold text-text-icons-base-main">
-                      Documents
+                      {t("documents")}
                     </h2>
                     <div className="mt-6 space-y-4">
                       {event.downloads?.map((download) => {
@@ -217,7 +221,7 @@ export default async function EventDetailPage({ params }: Props) {
                             href={file?.url || "#"}
                             filename={download.label}
                             filesize={file?.filesize}
-                            filetype={getFileTypeLabel(file)}
+                            filetype={getFileTypeLabel(file, t("fileFallback"))}
                             compact
                           />
                         );
@@ -229,7 +233,7 @@ export default async function EventDetailPage({ params }: Props) {
                 {previewLink ? (
                   <section className="rounded-2xl md:border md:border-[#EAECF0] md:bg-white md:p-4">
                     <h2 className="font-lp-text-s-semibold md:font-lp-text-xl-bold text-text-icons-base-main">
-                      Links
+                      {t("links")}
                     </h2>
                     {previewLink.title ? (
                       <div className="pt-2">
@@ -244,15 +248,17 @@ export default async function EventDetailPage({ params }: Props) {
                       rel="noopener noreferrer"
                       aria-label={
                         previewLink.title
-                          ? `Watch ${previewLink.title} on YouTube`
-                          : `Watch preview video for ${event.title} on YouTube`
+                          ? t("watchOnYoutube", { title: previewLink.title })
+                          : t("watchPreviewOnYoutube", {
+                              title: event.title,
+                            })
                       }
                       className="group mt-6 block overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2"
                     >
                       <div className="relative aspect-video overflow-hidden rounded-2xl bg-[#FAEDF2]">
                         <Image
                           src={previewLink.thumbnailUrl}
-                          alt={`YouTube video thumbnail for ${event.title}`}
+                          alt={t("youtubeThumbnailAlt", { title: event.title })}
                           fill
                           className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                           sizes="(max-width: 1024px) 100vw, 350px"
@@ -265,8 +271,10 @@ export default async function EventDetailPage({ params }: Props) {
                         </div>
                         <span className="sr-only">
                           {previewLink.title
-                            ? `Watch ${previewLink.title} on YouTube`
-                            : `Watch preview video for ${event.title} on YouTube`}
+                            ? t("watchOnYoutube", { title: previewLink.title })
+                            : t("watchPreviewOnYoutube", {
+                                title: event.title,
+                              })}
                         </span>
                       </div>
                     </a>
@@ -290,7 +298,7 @@ export default async function EventDetailPage({ params }: Props) {
   );
 }
 
-function getFileTypeLabel(file: Document | null) {
+function getFileTypeLabel(file: Document | null, fallbackLabel: string) {
   const mimeType = file?.mimeType?.split("/")[1];
 
   if (mimeType) {
@@ -299,7 +307,7 @@ function getFileTypeLabel(file: Document | null) {
 
   const extension = file?.filename?.split(".").pop();
 
-  return extension?.toUpperCase() || "FILE";
+  return extension?.toUpperCase() || fallbackLabel;
 }
 
 type PreviewLink = {
@@ -380,16 +388,22 @@ function getGalleryImage({
   image,
   eventTitle,
   index,
+  fallbackAltLabel,
 }: {
   image: Media | null;
   eventTitle: string;
   index: number;
+  fallbackAltLabel: string;
 }) {
   if (!image?.url) return null;
 
   return {
     src: image.url,
-    alt: image.alt?.trim() || `${eventTitle} image ${index + 1}`,
+    alt:
+      image.alt?.trim() ||
+      fallbackAltLabel
+        .replace("{title}", eventTitle)
+        .replace("{index}", String(index + 1)),
   };
 }
 

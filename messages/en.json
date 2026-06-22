@@ -1,5 +1,9 @@
 {
   "EventDetailPage": {
+    "breadcrumb": {
+      "home": "Home",
+      "events": "Events"
+    },
     "speakersTitle": "Speakers",
     "agendaTitle": "Event Agenda",
     "showingRange": "Showing {start}-{end} of {total}",
@@ -7,7 +11,15 @@
     "nextSpeakers": "Next speakers",
     "previousPastEvents": "Previous past events",
     "nextPastEvents": "Next past events",
-    "aboutThisEvent": "About this event"
+    "aboutThisEvent": "About this event",
+    "upcomingEvent": "Upcoming Event",
+    "documents": "Documents",
+    "links": "Links",
+    "watchOnYoutube": "Watch {title} on YouTube",
+    "watchPreviewOnYoutube": "Watch preview video for {title} on YouTube",
+    "youtubeThumbnailAlt": "YouTube video thumbnail for {title}",
+    "galleryImageAlt": "{title} image {index}",
+    "fileFallback": "FILE"
   },
   "HomePage": {
     "Hero": {
