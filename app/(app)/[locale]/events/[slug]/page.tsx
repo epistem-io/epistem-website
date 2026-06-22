@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { MapPinIcon, PlayIcon } from "lucide-react";
+import { ChevronLeftIcon, MapPinIcon, PlayIcon } from "lucide-react";
 
 import { EventImageCarousel } from "@/components/events/event-image-carousel";
 import { AgendaSection } from "@/components/events/agenda-section";
@@ -101,10 +101,20 @@ export default async function EventDetailPage({ params }: Props) {
       ) ?? [];
 
   return (
-    <main className="relative overflow-hidden bg-white pb-20 pt-[120px]">
+    <main className="relative overflow-hidden bg-white pb-20 pt-20 md:pt-[120px]">
       <div className="absolute inset-x-0 top-0 h-[350px] md:h-[494px] bg-[#FAEDF2]" />
 
       <section className="base-container relative z-10 mx-auto flex w-full flex-col px-2">
+        <Link
+          href="/events"
+          className="inline-flex items-center gap-2 self-start text-primary-pink md:hidden"
+        >
+          <ChevronLeftIcon className="size-3" aria-hidden="true" />
+          <span className="font-lp-text-xs-semibold">
+            {t("breadcrumb.events")}
+          </span>
+        </Link>
+
         <Breadcrumb className="hidden md:block">
           <BreadcrumbList className="gap-1 text-[15px] leading-[22px]">
             <BreadcrumbItem>
@@ -138,7 +148,7 @@ export default async function EventDetailPage({ params }: Props) {
         </Breadcrumb>
 
         {event.featured && (
-          <p className="font-lp-text-xs-semibold text-primary-pink md:font-lp-text-xl-bold text-center md:text-left md:pt-10">
+          <p className="font-lp-text-xs-semibold text-primary-pink md:font-lp-text-xl-bold text-center md:text-left pt-3 md:pt-10">
             {t("upcomingEvent")}
           </p>
         )}
