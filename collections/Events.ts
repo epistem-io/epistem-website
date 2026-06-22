@@ -1,3 +1,4 @@
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import type { CollectionConfig, DateFieldValidation } from "payload";
 
 const isValidYouTubeUrl = (value: string | null | undefined) => {
@@ -80,6 +81,10 @@ export const Events: CollectionConfig = {
     {
       name: "content",
       type: "richText",
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) =>
+          rootFeatures.filter((feature) => feature.key !== "upload"),
+      }),
       localized: true,
       required: true,
     },
