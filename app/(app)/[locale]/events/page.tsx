@@ -85,7 +85,7 @@ export default async function EventsPage({ params }: Props) {
         </section>
       </div>
       <div className="bg-white py-3 md:py-20">
-        <div className="base-container flex w-full flex-col gap-16">
+        <div className="base-container flex w-full flex-col gap-3 md:gap-16">
           {featuredEvent ? (
             <HighlightEvent event={featuredEvent} locale={locale} />
           ) : null}

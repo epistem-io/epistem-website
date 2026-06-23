@@ -117,7 +117,7 @@ export function PastEvents({
     <section className="flex flex-col gap-3 md:gap-9">
       <div className="flex items-end justify-between gap-3">
         {showTitle && (
-          <h2 className="font-lp-headline-xs-bold text-custom-text-grey-dark">
+          <h2 className="font-lp-text-l-semibold md:font-lp-headline-xs-bold text-custom-text-grey-dark">
             {t("pastEventsTitle")}
             {/* {copy[locale].title} */}
           </h2>
