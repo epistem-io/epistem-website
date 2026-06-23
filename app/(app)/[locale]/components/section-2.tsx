@@ -56,7 +56,7 @@ export const Section2 = () => {
               </p>
             </div>
             <div className="">
-              <Link href={`${process.env.LUMA_URL}`}>
+              <Link href={`${process.env.NEXT_PUBLIC_LUMA_URL}`}>
                 <Button
                   variant={"primary"}
                   size={"lg"}

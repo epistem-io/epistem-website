@@ -6,28 +6,30 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import type { Event } from "@/payload-types";
+import { getTranslations } from "next-intl/server";
 
 type HighlightEventProps = {
   event: Event;
   locale: "en" | "id";
 };
 
-const copy = {
-  en: {
-    eyebrow: "Upcoming Event",
-    cta: "See Event Detail",
-    day: "Day Event",
-    days: "Days Event",
-  },
-  id: {
-    eyebrow: "Acara Mendatang",
-    cta: "Lihat Detail Acara",
-    day: "Hari Acara",
-    days: "Hari Acara",
-  },
-} as const;
+// const copy = {
+//   en: {
+//     eyebrow: "Upcoming Event",
+//     cta: "See Event Detail",
+//     day: "Day Event",
+//     days: "Days Event",
+//   },
+//   id: {
+//     eyebrow: "Acara Mendatang",
+//     cta: "Lihat Detail Acara",
+//     day: "Hari Acara",
+//     days: "Hari Acara",
+//   },
+// } as const;
 
-export function HighlightEvent({ event, locale }: HighlightEventProps) {
+export async function HighlightEvent({ event, locale }: HighlightEventProps) {
+  const t = await getTranslations("EventDetailPage");
   const heroImage =
     typeof event.heroImage === "object" && event.heroImage?.url
       ? event.heroImage.url
@@ -43,6 +45,8 @@ export function HighlightEvent({ event, locale }: HighlightEventProps) {
     event.startDate,
     event.endDate,
     locale,
+    t("eventDurationDay"),
+    t("eventDurationDays"),
   );
 
   return (
@@ -50,7 +54,7 @@ export function HighlightEvent({ event, locale }: HighlightEventProps) {
       <div className="flex flex-col gap-3 md:gap-6 lg:flex-row lg:items-stretch">
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="font-lp-text-xs-semibold text-primary-pink md:font-lp-text-xl-bold">
-            {copy[locale].eyebrow}
+            {t("upcomingEvent")}
           </p>
 
           <div className="mt-3 flex flex-1 flex-col md:mt-4">
@@ -92,7 +96,8 @@ export function HighlightEvent({ event, locale }: HighlightEventProps) {
                   className="gap-1.5 md:gap-2"
                 >
                   <span className="font-aptos text-[13px] font-semibold leading-[18px] md:font-text-button-semibold-large">
-                    {copy[locale].cta}
+                    {t("featuredEventCta")}
+                    {/* {copy[locale].cta} */}
                   </span>
                   {/* <ArrowRightIcon className="hidden size-4 md:block" /> */}
                 </Link>
@@ -200,6 +205,8 @@ function formatEventDuration(
   startDate: string,
   endDate: string,
   locale: "en" | "id",
+  dayCopy: string,
+  daysCopy: string,
 ) {
   const start = new Date(startDate);
   const end = new Date(endDate);
@@ -221,7 +228,8 @@ function formatEventDuration(
   const msInDay = 1000 * 60 * 60 * 24;
   const roundedDiff = Math.round((endUtc - startUtc) / msInDay);
   const duration = Math.max(roundedDiff, 1);
-  const durationLabel = duration === 1 ? copy[locale].day : copy[locale].days;
+  const durationLabel = duration === 1 ? dayCopy : daysCopy;
+  // const durationLabel = duration === 1 ? copy[locale].day : copy[locale].days;
 
   return `${duration} ${durationLabel}`;
 }

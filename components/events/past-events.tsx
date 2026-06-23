@@ -22,24 +22,33 @@ import { cn } from "@/lib/utils";
 type PastEventsProps = {
   events: Event[];
   locale: "en" | "id";
+  isOverview?: boolean;
+  showTitle?: boolean;
 };
 
-const copy = {
-  en: {
-    title: "Past Events",
-    cta: "See detail event",
-  },
-  id: {
-    title: "Acara Sebelumnya",
-    cta: "Lihat detail acara",
-  },
-} as const;
+// const copy = {
+//   en: {
+//     title: "Past Events",
+//     cta: "See detail event",
+//   },
+//   id: {
+//     title: "Acara Sebelumnya",
+//     cta: "Lihat detail acara",
+//   },
+// } as const;
 
 const MOBILE_PAGE_SIZE = 3;
 const TABLET_PAGE_SIZE = 4;
 const DESKTOP_PAGE_SIZE = 6;
 
-export function PastEvents({ events, locale }: PastEventsProps) {
+const HOME_PAGE_SIZE = 3;
+
+export function PastEvents({
+  events,
+  locale,
+  isOverview = false,
+  showTitle = true,
+}: PastEventsProps) {
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(MOBILE_PAGE_SIZE);
   const t = useTranslations("EventDetailPage");
@@ -50,6 +59,11 @@ export function PastEvents({ events, locale }: PastEventsProps) {
     const tabletMediaQuery = window.matchMedia("(min-width: 768px)");
 
     const syncPageSize = () => {
+      if (isOverview) {
+        setPageSize(HOME_PAGE_SIZE);
+        return;
+      }
+
       if (desktopMediaQuery.matches) {
         setPageSize(DESKTOP_PAGE_SIZE);
         return;
@@ -88,45 +102,67 @@ export function PastEvents({ events, locale }: PastEventsProps) {
   return (
     <section className="flex flex-col gap-9">
       <div className="flex items-end justify-between gap-3">
-        <h2 className="font-lp-headline-xs-bold text-custom-text-grey-dark">
-          {copy[locale].title}
-        </h2>
+        {showTitle && (
+          <h2 className="font-lp-headline-xs-bold text-custom-text-grey-dark">
+            {t("pastEventsTitle")}
+            {/* {copy[locale].title} */}
+          </h2>
+        )}
 
-        <div className="flex shrink-0 items-center gap-3 md:gap-4">
-          <p className="text-[12px] leading-[18px] text-text-icons-base-second md:font-lp-text-s-regular">
-            {t("showingRange", {
-              start: format.number(pageRange.start),
-              end: format.number(pageRange.end),
-              total: format.number(events.length),
-            })}
-          </p>
+        {!isOverview && (
+          <div className="flex shrink-0 items-center gap-3 md:gap-4">
+            <p className="text-[12px] leading-[18px] text-text-icons-base-second md:font-lp-text-s-regular">
+              {t("showingRange", {
+                start: format.number(pageRange.start),
+                end: format.number(pageRange.end),
+                total: format.number(events.length),
+              })}
+            </p>
 
-          {hasPagination ? (
-            <div className="flex items-center gap-3">
-              <PaginationButton
-                label={t("previousPastEvents")}
-                disabled={safePageIndex === 0}
-                onClick={() => setPageIndex((currentPage) => currentPage - 1)}
-              >
-                <ChevronLeftIcon className="size-4" />
-              </PaginationButton>
-              <PaginationButton
-                label={t("nextPastEvents")}
-                disabled={safePageIndex === totalPages - 1}
-                onClick={() => setPageIndex((currentPage) => currentPage + 1)}
-              >
-                <ChevronRightIcon className="size-4" />
-              </PaginationButton>
-            </div>
-          ) : null}
-        </div>
+            {hasPagination ? (
+              <div className="flex items-center gap-3">
+                <PaginationButton
+                  label={t("previousPastEvents")}
+                  disabled={safePageIndex === 0}
+                  onClick={() => setPageIndex((currentPage) => currentPage - 1)}
+                >
+                  <ChevronLeftIcon className="size-4" />
+                </PaginationButton>
+                <PaginationButton
+                  label={t("nextPastEvents")}
+                  disabled={safePageIndex === totalPages - 1}
+                  onClick={() => setPageIndex((currentPage) => currentPage + 1)}
+                >
+                  <ChevronRightIcon className="size-4" />
+                </PaginationButton>
+              </div>
+            ) : null}
+          </div>
+        )}
       </div>
 
-      <div className="grid grid-cols-1 gap-7 md:grid-cols-2 xl:grid-cols-3">
+      <div
+        className={cn("grid grid-cols-1 gap-7 md:grid-cols-2 xl:grid-cols-3")}
+      >
         {visibleEvents.map((event) => (
-          <PastEventCard key={event.id} event={event} locale={locale} />
+          <PastEventCard
+            key={event.id}
+            event={event}
+            locale={locale}
+            ctaCopy={t("pastEventsCta")}
+          />
         ))}
       </div>
+
+      {isOverview && (
+        <Link
+          href={`/events`}
+          className="flex shrink-0 items-center gap-2 text-primary-pink transition-colors hover:text-primary-pink-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2 ml-auto"
+        >
+          <span className="font-lp-text-l-semibold">See all events</span>
+          <ArrowRightIcon className="size-5" />
+        </Link>
+      )}
     </section>
   );
 }
@@ -134,9 +170,10 @@ export function PastEvents({ events, locale }: PastEventsProps) {
 type PastEventCardProps = {
   event: Event;
   locale: "en" | "id";
+  ctaCopy: string;
 };
 
-function PastEventCard({ event, locale }: PastEventCardProps) {
+function PastEventCard({ event, locale, ctaCopy }: PastEventCardProps) {
   const heroImage =
     typeof event.heroImage === "object" && event.heroImage?.url
       ? event.heroImage.url
@@ -167,7 +204,10 @@ function PastEventCard({ event, locale }: PastEventCardProps) {
             href={`/events/${event.slug}`}
             className="flex shrink-0 items-center gap-2 text-primary-pink transition-colors hover:text-primary-pink-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2"
           >
-            <span className="font-lp-text-l-semibold">{copy[locale].cta}</span>
+            <span className="font-lp-text-l-semibold">
+              {/* {copy[locale].cta} */}
+              {ctaCopy}
+            </span>
             <ArrowRightIcon className="size-5" />
           </Link>
         </div>
@@ -197,7 +237,9 @@ function PastEventCard({ event, locale }: PastEventCardProps) {
             {downloadsCount > 0 ? (
               <div className="flex shrink-0 items-center gap-1 rounded-[8px] border border-primary-red-pink-light-active bg-primary-red-pink-light px-2 py-1 text-primary-pink">
                 <PaperclipIcon className="size-4" />
-                <span className="font-lp-text-s-semibold">{downloadsCount}</span>
+                <span className="font-lp-text-s-semibold">
+                  {downloadsCount}
+                </span>
               </div>
             ) : null}
           </div>
