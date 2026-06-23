@@ -1,4 +1,29 @@
 {
+  "EventDetailPage": {
+    "breadcrumb": {
+      "home": "Beranda",
+      "events": "Acara"
+    },
+    "speakersTitle": "Pembicara",
+    "agendaTitle": "Agenda Acara",
+    "showingRange": "Menampilkan {start}-{end} dari {total}",
+    "previousSpeakers": "Pembicara sebelumnya",
+    "nextSpeakers": "Pembicara berikutnya",
+    "previousPastEvents": "Acara sebelumnya",
+    "nextPastEvents": "Acara berikutnya",
+    "aboutThisEvent": "Tentang acara ini",
+    "upcomingEvent": "Acara Mendatang",
+    "featuredEventCta": "Lihat Detail Acara",
+    "eventDurationDay": "Hari Acara",
+    "eventDurationDays": "Hari Acara",
+    "documents": "Dokumen",
+    "links": "Tautan",
+    "watchOnYoutube": "Tonton {title} di YouTube",
+    "watchPreviewOnYoutube": "Tonton video pratinjau untuk {title} di YouTube",
+    "youtubeThumbnailAlt": "Thumbnail video YouTube untuk {title}",
+    "galleryImageAlt": "Gambar {title} {index}",
+    "fileFallback": "BERKAS"
+  },
   "HomePage": {
     "Hero": {
       "title1": "Bersama,",
@@ -165,9 +190,9 @@
         "mat3Title": "Materi Sesi 2 - 5",
         "mat3Speaker": "Tim Epistem",
         "mat3Type": "PDF"
-      }         
+      }
     },
-    
+
     "pressRelease": {
       "label": "SIARAN PERS",
       "title": "Teknologi Pemetaan yang Menautkan Insan,",
@@ -178,7 +203,8 @@
       "body2": "Mengusung tema “Bangkit Datanya, Lestari Bentang Lahannya”, lokakarya ini menjadi momentum penting untuk menandai kebangkitan kedaulatan data nasional melalui kolaborasi lintas lembaga yang melibatkan praktisi, pemerintah, dan komunitas lokal. Dengan pendekatan partisipatif, kegiatan ini bertujuan memperkenalkan platform Luma, membangun jejaring kolaboratif nasional untuk pemetaan penggunaan dan tutupan lahan, serta menginisiasi “rembuk peta” guna memperkuat sinergi dalam mendukung agenda penanganan perubahan iklim di Indonesia.",
       "body3": "Pengembangan Luma merupakan bagian dari kerja sama antara International Institute for Applied Systems Analysis (IIASA), Pusat Riset Ekologi - Badan Riset dan Inovasi Nasional (PREBRIN), Centre for International Forestry Research and World Agroforestry (CIFOR-ICRAF), dan World Resources Institute (WRI) Indonesia. Inisiatif ini didorong oleh keyakinan bahwa solusi iklim berbasis alam yang tangguh lahir dari ketersediaan teknologi pemetaan tepat guna yang inklusif dan dapat dimanfaatkan langsung oleh para pengelola bentang lahan di lapangan.",
       "body4": "Dalam pidato kuncinya, Kepala Organisasi Riset Hayati dan Lingkungan, BRIN, Andes Hamuraby Rozak, menyampaikan “tantangan kita saat ini bukan hanya melindungi bentang lahan. Tetapi memastikan bahwa keputusan yang kita ambil benar-benar berbasis pengetahuan yang akurat, terbuka, dan dapat dipercaya. Karena sesungguhnya, kita tidak bisa menjaga apa yang tidak bisa kita lihat. Dan kita tidak bisa mengambil keputusan yang baik, tanpa pengetahuan dan data yang baik.”",
-      "body5": "”Pelestarian bentang lahan memerlukan data peta dengan kekayaan informasi konstekstual. Di sisi lain, kendala teknis maupun biaya yang tinggi untuk menghasilkan data peta tersebut sudah merupakan tantangan klasik. Luma diharapkan membuka jalan untuk mengatasi kendalakendala tersebut,” ujar Senior Research Scholar, IIASA, Ping Yowargana",       "quote1Text": "Tantangan kita saat ini bukan hanya melindungi bentang lahan. Tetapi memastikan bahwa keputusan yang kita ambil benar-benar berbasis pengetahuan yang akurat, terbuka, dan dapat dipercaya. Karena sesungguhnya, kita tidak bisa menjaga apa yang tidak bisa kita lihat. Dan kita tidak bisa mengambil keputusan yang baik, tanpa pengetahuan dan data yang baik.",
+      "body5": "”Pelestarian bentang lahan memerlukan data peta dengan kekayaan informasi konstekstual. Di sisi lain, kendala teknis maupun biaya yang tinggi untuk menghasilkan data peta tersebut sudah merupakan tantangan klasik. Luma diharapkan membuka jalan untuk mengatasi kendalakendala tersebut,” ujar Senior Research Scholar, IIASA, Ping Yowargana",
+      "quote1Text": "Tantangan kita saat ini bukan hanya melindungi bentang lahan. Tetapi memastikan bahwa keputusan yang kita ambil benar-benar berbasis pengetahuan yang akurat, terbuka, dan dapat dipercaya. Karena sesungguhnya, kita tidak bisa menjaga apa yang tidak bisa kita lihat. Dan kita tidak bisa mengambil keputusan yang baik, tanpa pengetahuan dan data yang baik.",
       "quote1Author": "Andes Hamuraby Rozak",
       "quote1Role": "Kepala Organisasi Riset Hayati dan Lingkungan, BRIN",
       "quote2Text": "Pelestarian bentang lahan memerlukan data peta dengan kekayaan informasi kontekstual. Di sisi lain, kendala teknis maupun biaya yang tinggi untuk menghasilkan data peta tersebut sudah merupakan tantangan klasik. Luma diharapkan membuka jalan untuk mengatasi kendala-kendala tersebut.",
@@ -189,12 +215,12 @@
       "body8": "Melalui pendekatan tersebut, berbagai pihak dapat berkontribusi dalam memperbarui data penggunaan dan tutupan lahan secara lebih cepat, fleksibel, dan interoperable (saling terhubung/ terintegrasi). Inisiatif ini juga diharapkan dapat mendukung target Indonesia dalam dokumen Nationally Determined Contribution (NDC) dan strategi operasional FOLU Net Sink 2030, sekaligus menjaga keseimbangan antara penyerapan karbon, pelestarian keanekaragaman hayati, dan peningkatan kesejahteraan masyarakat.",
       "body9": "Lokakarya peluncuran Luma ini menghadirkan berbagai sesi utama, mulai dari paparan strategis mengenai pengelolaan bentang lahan partisipatif, pengenalan filosofi pengembangan teknologi Epistem, demonstrasi langsung penggunaan Luma, hingga diskusi mengenai pelaksanaan rembuk peta nasional. Kegiatan ini juga akan menampilkan pengalaman komunitas praktisi dari berbagai daerah yang telah memanfaatkan Luma dalam kegiatan pemetaan di wilayah masing-masing.",
       "body10": "Selain memperkenalkan Luma, lokakarya ini menjadi ruang bersama untuk menghimpun masukan terkait pengembangan fitur dan desain Luma agar semakin relevan bagi kebutuhan berbagai kalangan pengguna. Peserta juga diajak memahami konsep pemetaan modular dan pengembangan data referensi bersama sebagai fondasi pengelolaan bentang lahan yang kolaboratif dan berkelanjutan.",
-      "body11": "Melalui peluncuran Luma dan rangkaian rembuk peta nasional, Epistem berharap dapat memperkuat gerakan bersama dalam memetakan alam Indonesia secara partisipatif sekaligus menautkan insan yang terlibat dalam menjaga keberlanjutan bentang lahan Indonesia untuk generasi mendatang.",  
+      "body11": "Melalui peluncuran Luma dan rangkaian rembuk peta nasional, Epistem berharap dapat memperkuat gerakan bersama dalam memetakan alam Indonesia secara partisipatif sekaligus menautkan insan yang terlibat dalam menjaga keberlanjutan bentang lahan Indonesia untuk generasi mendatang.",
       "contactLabel": "KONTAK MEDIA",
       "contactTeam": "Tim Epistem",
       "contactEmail": "D.Rachmawati@cifor-icraf.org",
       "readMore": "Baca Selengkapnya",
-      "collapse": "Sembunyikan"      
+      "collapse": "Sembunyikan"
     },
     "speakers": {
       "label": "NARASUMBER",
@@ -211,7 +237,7 @@
       "sp7Role": "Land Use Planning for Multiple Ecosystem Service Researcher, CIFOR-ICRAF Indonesia",
       "sp8Role": "Researcher, IIASA",
       "sp9Role": "Geoinformatics Specialist, CIFOR-ICRAF Indonesia",
-      "sp10Role": "Economy and Knowledge Management Research Assistant, CIFOR-ICRAF Indonesia"      
+      "sp10Role": "Economy and Knowledge Management Research Assistant, CIFOR-ICRAF Indonesia"
     },
     "agenda": {
       "label": "JADWAL",

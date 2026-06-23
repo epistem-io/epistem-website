@@ -27,13 +27,13 @@ export const Section1 = () => {
       captionKey: "item1Caption",
       descriptionKey: "item1Description",
       buttonComponent: (
-        <Button asChild>
-            <Link href={`${process.env.NEXT_PUBLIC_LUMA_URL}`} className="px-5 py-1 lg:py-3 h-auto rounded-md">
-              <p className="font-aptos text-[13px] lg:text-[13.5px] xl:text-lg font-semibold lg:font-bold text-text-icons-on-color">
-                {t("buttonCaption1")}
-              </p>
-            </Link>
-        </Button>        
+        <Link href={`${process.env.NEXT_PUBLIC_LUMA_URL}`}>
+          <Button className="px-5 py-1 lg:py-3 h-auto rounded-md">
+            <p className="font-aptos text-[13px] lg:text-[13.5px] xl:text-lg font-semibold lg:font-bold text-text-icons-on-color">
+              {t("buttonCaption1")}
+            </p>
+          </Button>
+        </Link>
       ),
     },
     {
@@ -82,10 +82,13 @@ export const Section1 = () => {
       buttonComponent: (
         <div className="flex flex-col lg:flex-row items-center gap-4">
           <Button asChild>
-            <Link href="https://github.com/epistem-io" className="px-5 py-1 lg:py-3 h-auto rounded-md">
-            <p className="font-aptos text-[13px] lg:text-[13.5px] xl:text-lg font-semibold lg:font-bold text-text-icons-on-color">
-              {t("buttonCaption4")}
-            </p>
+            <Link
+              href="https://github.com/epistem-io"
+              className="px-5 py-1 lg:py-3 h-auto rounded-md"
+            >
+              <p className="font-aptos text-[13px] lg:text-[13.5px] xl:text-lg font-semibold lg:font-bold text-text-icons-on-color">
+                {t("buttonCaption4")}
+              </p>
             </Link>
           </Button>
           <Button

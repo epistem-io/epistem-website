@@ -192,6 +192,7 @@ export interface Event {
   id: number;
   title: string;
   slug: string;
+  featured?: boolean | null;
   excerpt?: string | null;
   content: {
     root: {
@@ -208,8 +209,10 @@ export interface Event {
     };
     [k: string]: unknown;
   };
-  eventDate: string;
-  location: string;
+  startDate: string;
+  endDate: string;
+  locationGeneral: string;
+  locationDetail: string;
   heroImage: number | Media;
   downloads?:
     | {
@@ -218,8 +221,29 @@ export interface Event {
         id?: string | null;
       }[]
     | null;
-  relatedEvents?: (number | Event)[] | null;
-  featured?: boolean | null;
+  speakers?:
+    | {
+        profilePhoto: number | Media;
+        name: string;
+        title: string;
+        id?: string | null;
+      }[]
+    | null;
+  agendas?:
+    | {
+        title: string;
+        description: string;
+        time: string;
+        id?: string | null;
+      }[]
+    | null;
+  images?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  previewYoutubeUrl?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -371,10 +395,13 @@ export interface DocumentsSelect<T extends boolean = true> {
 export interface EventsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  featured?: T;
   excerpt?: T;
   content?: T;
-  eventDate?: T;
-  location?: T;
+  startDate?: T;
+  endDate?: T;
+  locationGeneral?: T;
+  locationDetail?: T;
   heroImage?: T;
   downloads?:
     | T
@@ -383,8 +410,29 @@ export interface EventsSelect<T extends boolean = true> {
         file?: T;
         id?: T;
       };
-  relatedEvents?: T;
-  featured?: T;
+  speakers?:
+    | T
+    | {
+        profilePhoto?: T;
+        name?: T;
+        title?: T;
+        id?: T;
+      };
+  agendas?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        time?: T;
+        id?: T;
+      };
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  previewYoutubeUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

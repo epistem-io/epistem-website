@@ -8,7 +8,14 @@ import { Section4 } from "./components/section-4";
 import { Events } from "./components/events";
 import { ContactUs } from "./components/contact-us";
 
-export default function Page() {
+type Props = {
+  params: Promise<{
+    locale: "en" | "id";
+  }>;
+};
+
+export default async function Page({ params }: Props) {
+  const { locale } = await params;
   return (
     <div className="flex flex-col min-h-screen items-center justify-start">
       <Hero />
@@ -16,7 +23,7 @@ export default function Page() {
       <Section2 />
       <Section3 />
       <Section4 />
-      <Events />
+      <Events locale={locale} />
       <ContactUs />
     </div>
   );
