@@ -1,4 +1,4 @@
-import { ArrowRightIcon, CalendarDaysIcon, MapPinIcon } from "lucide-react";
+import { CalendarDaysIcon, MapPinIcon } from "lucide-react";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
@@ -13,23 +13,39 @@ type HighlightEventProps = {
   locale: "en" | "id";
 };
 
-// const copy = {
-//   en: {
-//     eyebrow: "Upcoming Event",
-//     cta: "See Event Detail",
-//     day: "Day Event",
-//     days: "Days Event",
-//   },
-//   id: {
-//     eyebrow: "Acara Mendatang",
-//     cta: "Lihat Detail Acara",
-//     day: "Hari Acara",
-//     days: "Hari Acara",
-//   },
-// } as const;
+type HighlightEventCopy = {
+  upcomingEvent: string;
+  featuredEventCta: string;
+  eventDurationDay: string;
+  eventDurationDays: string;
+};
+
+type HighlightEventViewProps = HighlightEventProps & {
+  copy: HighlightEventCopy;
+};
 
 export async function HighlightEvent({ event, locale }: HighlightEventProps) {
   const t = await getTranslations("EventDetailPage");
+
+  return (
+    <HighlightEventView
+      event={event}
+      locale={locale}
+      copy={{
+        upcomingEvent: t("upcomingEvent"),
+        featuredEventCta: t("featuredEventCta"),
+        eventDurationDay: t("eventDurationDay"),
+        eventDurationDays: t("eventDurationDays"),
+      }}
+    />
+  );
+}
+
+export function HighlightEventView({
+  event,
+  locale,
+  copy,
+}: HighlightEventViewProps) {
   const heroImage =
     typeof event.heroImage === "object" && event.heroImage?.url
       ? event.heroImage.url
@@ -45,8 +61,8 @@ export async function HighlightEvent({ event, locale }: HighlightEventProps) {
     event.startDate,
     event.endDate,
     locale,
-    t("eventDurationDay"),
-    t("eventDurationDays"),
+    copy.eventDurationDay,
+    copy.eventDurationDays,
   );
 
   return (
@@ -54,7 +70,7 @@ export async function HighlightEvent({ event, locale }: HighlightEventProps) {
       <div className="flex flex-col gap-3 md:gap-6 lg:flex-row lg:items-stretch">
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="font-lp-text-xs-semibold text-primary-pink md:font-lp-text-xl-bold">
-            {t("upcomingEvent")}
+            {copy.upcomingEvent}
           </p>
 
           <div className="mt-3 flex flex-1 flex-col md:mt-4">
@@ -96,8 +112,7 @@ export async function HighlightEvent({ event, locale }: HighlightEventProps) {
                   className="gap-1.5 md:gap-2"
                 >
                   <span className="font-aptos text-[13px] font-semibold leading-[18px] md:font-text-button-semibold-large">
-                    {t("featuredEventCta")}
-                    {/* {copy[locale].cta} */}
+                    {copy.featuredEventCta}
                   </span>
                   {/* <ArrowRightIcon className="hidden size-4 md:block" /> */}
                 </Link>

@@ -1,14 +1,13 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
 import { ArrowRightIcon, MapPinIcon } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { SectionHead } from "./section-head";
-import { HighlightEvent } from "@/components/events/highlight-event";
-import { getFeaturedEvent } from "@/lib/events";
-import { Event } from "@/payload-types";
+import { HighlightEventView } from "@/components/events/highlight-event";
 import { PastEvents } from "@/components/events/past-events";
+import { Link } from "@/i18n/navigation";
+import type { Event } from "@/payload-types";
 
 interface Props {
   locale: "en" | "id";
@@ -18,6 +17,7 @@ interface Props {
 
 export const EventsSection = ({ locale, featuredEvent, events }: Props) => {
   const t = useTranslations("HomePage.Events");
+  const tEventDetail = useTranslations("EventDetailPage");
 
   return (
     // <section className="base-container flex w-full flex-col items-center px-2 py-6 lg:py-[60px]">
@@ -26,12 +26,21 @@ export const EventsSection = ({ locale, featuredEvent, events }: Props) => {
 
       {featuredEvent ? (
         <div className="mt-10 md:mt-10 lg:mt-12 xl:mt-12 pt-0 md:pt-0 lg:pt-0 w-full ">
-          <HighlightEvent event={featuredEvent} locale={locale} />
+          <HighlightEventView
+            event={featuredEvent}
+            locale={locale}
+            copy={{
+              upcomingEvent: tEventDetail("upcomingEvent"),
+              featuredEventCta: tEventDetail("featuredEventCta"),
+              eventDurationDay: tEventDetail("eventDurationDay"),
+              eventDurationDays: tEventDetail("eventDurationDays"),
+            }}
+          />
         </div>
       ) : null}
 
       {events ? (
-        <div className="mt-6">
+        <div className="mt-6 w-full">
           <PastEvents
             events={events}
             locale={locale}

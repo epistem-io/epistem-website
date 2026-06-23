@@ -43,7 +43,8 @@ const MOBILE_PAGE_SIZE = 3;
 const TABLET_PAGE_SIZE = 4;
 const DESKTOP_PAGE_SIZE = 6;
 
-const HOME_PAGE_SIZE = 3;
+const MOBILE_EVENTS_PAGE_SIZE = 3;
+const MOBILE_HOME_PAGE_SIZE = 1;
 
 export function PastEvents({
   events,
@@ -62,7 +63,18 @@ export function PastEvents({
 
     const syncPageSize = () => {
       if (isOverview) {
-        setPageSize(HOME_PAGE_SIZE);
+        if (desktopMediaQuery.matches) {
+          setPageSize(MOBILE_EVENTS_PAGE_SIZE);
+          return;
+        }
+
+        if (tabletMediaQuery.matches) {
+          setPageSize(MOBILE_HOME_PAGE_SIZE);
+          return;
+        }
+
+        setPageSize(MOBILE_HOME_PAGE_SIZE);
+
         return;
       }
 
@@ -72,7 +84,7 @@ export function PastEvents({
       }
 
       if (tabletMediaQuery.matches) {
-        setPageSize(TABLET_PAGE_SIZE);
+        setPageSize(MOBILE_PAGE_SIZE);
         return;
       }
 
@@ -102,7 +114,7 @@ export function PastEvents({
   }
 
   return (
-    <section className="flex flex-col gap-9">
+    <section className="flex flex-col gap-3 md:gap-9">
       <div className="flex items-end justify-between gap-3">
         {showTitle && (
           <h2 className="font-lp-headline-xs-bold text-custom-text-grey-dark">
@@ -144,7 +156,7 @@ export function PastEvents({
       </div>
 
       <div
-        className={cn("grid grid-cols-1 gap-7 md:grid-cols-2 xl:grid-cols-3")}
+        className={cn("grid grid-cols-1 gap-7 lg:grid-cols-3 xl:grid-cols-3")}
       >
         {visibleEvents.map((event) => (
           <PastEventCard
