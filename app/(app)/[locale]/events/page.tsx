@@ -70,11 +70,11 @@ export default async function EventsPage({ params }: Props) {
             </BreadcrumbList>
           </Breadcrumb>
 
-          <h1 className="text-center md:text-center mt-2 md:mt-8 max-w-[862px] font-lp-headline-xxs-bold md:font-lp-headline-xl-bold text-text-icons-base-main md:text-balance mb-3">
+          <h1 className="md:text-left mt-2 md:mt-8 max-w-[862px] font-lp-headline-xxs-bold md:font-lp-headline-xl-bold text-text-icons-base-main md:text-balance mb-3">
             {t("title")}
           </h1>
 
-          <span className="text-custom-text-grey-dark font-lp-body-m-regular md:font-lp-body-xl-regular text-center md:text-center">
+          <span className="text-custom-text-grey-dark font-lp-body-m-regular md:font-lp-body-xl-regular md:text-left">
             {/* Workshops, launches, and community gatherings driving open LULC{" "}
             <br />
             mapping in Southeast Asia. */}

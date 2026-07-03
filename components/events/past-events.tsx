@@ -238,7 +238,7 @@ function PastEventCard({
         )}
       >
         <div className="flex items-start justify-between gap-3 md:gap-4">
-          <p className="shrink-0 text-[10px] font-bold leading-6 font-pjs text-text-icons-base-second md:font-lp-text-l-semibold">
+          <p className="min-w-0 truncate text-[10px] font-bold leading-6 font-pjs text-text-icons-base-second md:font-lp-text-l-semibold">
             {formatEventDateRange(event.startDate, event.endDate, locale)}
           </p>
 
@@ -246,8 +246,7 @@ function PastEventCard({
             href={`/events/${event.slug}`}
             className="flex shrink-0 items-center gap-1.5 text-primary-pink transition-colors hover:text-primary-pink-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2 md:gap-2"
           >
-            <span className="shrink-0 text-right text-[10px] font-bold leading-6 font-pjs md:font-lp-text-l-semibold">
-              {/* {copy[locale].cta} */}
+            <span className="whitespace-nowrap text-right text-[10px] font-bold leading-6 font-pjs md:font-lp-text-l-semibold">
               {ctaCopy}
             </span>
             <ArrowRightIcon className="size-3.5 md:size-5" />
