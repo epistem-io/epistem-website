@@ -109,6 +109,13 @@ function renderNode(node: LexicalNode, index: number): ReactNode {
     case "text":
       return renderFormattedText(node.text ?? "", node.format, index);
 
+    case "quote":
+      return (
+        <blockquote className="mt-6 space-y-3 rounded-2xl border-l-[6px] border-primary-pink bg-primary-red-pink-light px-6 py-5 text-primary-pink first:mt-0 [&_em]:not-italic [&_p]:mt-0">
+          {renderChildren(node.children ?? [])}
+        </blockquote>
+      );
+
     default: {
       if (node.children?.length) {
         return renderChildren(node.children);

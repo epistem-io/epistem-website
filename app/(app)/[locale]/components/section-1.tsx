@@ -91,14 +91,14 @@ export const Section1 = () => {
               </p>
             </Link>
           </Button>
-          <Button
+          {/* <Button
             className="px-5 py-1 lg:py-3 h-auto rounded-md bg-[#DFE2E8] opacity-100! hover:cursor-not-allowed!"
             disabled
           >
             <p className="font-aptos text-[13px] lg:text-[13.5px] xl:text-lg font-semibold lg:font-bold text-[#979AA0]">
               {t("buttonCaption5")}
             </p>
-          </Button>
+          </Button> */}
         </div>
       ),
     },

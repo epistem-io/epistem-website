@@ -199,9 +199,9 @@ export default async function EventDetailPage({ params }: Props) {
                 )}
 
                 <div className="space-y-6 pt-0">
-                  <h2 className="font-lp-text-s-semibold md:font-lp-headline-xs-bold text-text-icons-base-main">
+                  {/* <h2 className="font-lp-text-s-semibold md:font-lp-headline-xs-bold text-text-icons-base-main">
                     {t("aboutThisEvent")}
-                  </h2>
+                  </h2> */}
                   <EventRichText content={event.content} />
                 </div>
 
