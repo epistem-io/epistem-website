@@ -33,7 +33,7 @@ export const Section5 = () => {
 
   return (
     <div className="base-container flex flex-col items-center justify-start w-full px-2 max-lg:mt-8 lg:my-15 xl:my-20">
-      <SectionHead title="Our Stories" caption="Quotes from communities, partners, and dialogues each one a thread back into the story maps that ground them." />
+      <SectionHead title="Our Stories" caption="Voices from the people shaping better mapping and better landscapes." />
 
       <div className="w-full relative mt-8 lg:mt-12">
         <div
