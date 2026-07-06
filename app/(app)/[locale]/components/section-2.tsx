@@ -56,13 +56,17 @@ export const Section2 = () => {
               </p>
             </div>
             <div className="">
-              <Button asChild variant={"primary"} size={"lg"}>
-                  <Link href={`${process.env.NEXT_PUBLIC_LUMA_URL}`} className="h-auto py-1 lg:py-3 px-5 rounded-md lg:rounded-[16px]">
-                    <p className="font-text-xs-semibold lg:text-[13.5px] xl:font-text-xl-semibold text-text-icons-on-color">
-                      {t("item1ButtonCaption")}
-                    </p>
-                  </Link>
-              </Button>
+              <Link href={`${process.env.NEXT_PUBLIC_LUMA_URL}`}>
+                <Button
+                  variant={"primary"}
+                  size={"lg"}
+                  className="h-auto py-1 lg:py-3 px-5 rounded-md lg:rounded-[16px]"
+                >
+                  <p className="font-text-xs-semibold lg:text-[13.5px] xl:font-text-xl-semibold text-text-icons-on-color">
+                    {t("item1ButtonCaption")}
+                  </p>
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </div>

@@ -1,20 +1,56 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
 import { ArrowRightIcon, MapPinIcon } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { SectionHead } from "./section-head";
+import { HighlightEventView } from "@/components/events/highlight-event";
+import { PastEvents } from "@/components/events/past-events";
+import { Link } from "@/i18n/navigation";
+import type { Event } from "@/payload-types";
 
-export const Events = () => {
+interface Props {
+  locale: "en" | "id";
+  featuredEvent: Event | null;
+  events: Event[];
+}
+
+export const EventsSection = ({ locale, featuredEvent, events }: Props) => {
   const t = useTranslations("HomePage.Events");
+  const tEventDetail = useTranslations("EventDetailPage");
 
   return (
     // <section className="base-container flex w-full flex-col items-center px-2 py-6 lg:py-[60px]">
     <section className="base-container flex flex-col items-center justify-start w-full px-2 max-lg:mt-8 lg:my-15 xl:my-20">
       <SectionHead title={t("title")} caption={t("caption")} />
 
-      <div className="mt-3 flex w-full max-w-[1320px] lg:mt-12">
+      {featuredEvent ? (
+        <div className="mt-10 md:mt-10 lg:mt-12 xl:mt-12 pt-0 md:pt-0 lg:pt-0 w-full ">
+          <HighlightEventView
+            event={featuredEvent}
+            locale={locale}
+            copy={{
+              upcomingEvent: tEventDetail("upcomingEvent"),
+              featuredEventCta: tEventDetail("featuredEventCta"),
+              eventDurationDay: tEventDetail("eventDurationDay"),
+              eventDurationDays: tEventDetail("eventDurationDays"),
+            }}
+          />
+        </div>
+      ) : null}
+
+      {events ? (
+        <div className="mt-6 w-full">
+          <PastEvents
+            events={events}
+            locale={locale}
+            isOverview={true}
+            showTitle={featuredEvent !== null}
+          />
+        </div>
+      ) : null}
+
+      <div className="hidden mt-3 flex w-full max-w-[1320px] lg:mt-12">
         {/* unnamed classname: blog-base */}
         <article className="flex w-full flex-col overflow-hidden rounded-[12px] bg-[#FFF6F9] lg:min-h-[300px] lg:flex-row lg:rounded-[20px]">
           {/* unnamed classname: event-image-container */}
@@ -37,6 +73,7 @@ export const Events = () => {
                 </p>
                 <Link
                   href="/event/luma-launch"
+                  // href={`/events/${event.slug}`}
                   className="flex items-center gap-1.5 text-primary-pink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2 hover:underline"
                 >
                   <span className="shrink-0 font-pjs text-right text-[10px] font-bold leading-6 lg:font-lp-text-l-semibold">

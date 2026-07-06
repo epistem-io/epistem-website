@@ -69,6 +69,9 @@
 
   --color-gray-700: #323539;
   --color-gray-dark: rgba(81, 81, 81, 1);
+
+  --color-custom-text-grey-mid: rgba(104, 114, 125, 1);
+  --color-custom-text-grey-dark: rgba(81, 81, 81, 1);
 }
 
 :root {
@@ -154,6 +157,27 @@
 }
 
 /* ---break--- */
+
+@utility font-lp-body-m-regular {
+  font-family: var(--font-inter);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@utility font-lp-body-l-semibold {
+  font-family: var(--font-inter);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: normal;
+}
+
+@utility font-lp-body-xl-regular {
+  font-family: var(--font-inter);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+}
 
 @utility font-lp-display-m-semibold {
   font-family: var(--font-pjs);
@@ -366,9 +390,19 @@
   letter-spacing: 0.1px;
 }
 
+@utility font-text-button-semibold-small {
+  font-family: var(--font-inter);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+}
+
 .base-container {
   max-width: 1440px;
   padding: 0 60px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media screen and (max-width: 768px) {

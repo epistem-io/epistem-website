@@ -67,7 +67,7 @@ export const Footer = () => {
                 <p className="text-[10px] lg:text-sm font-inter font-bold text-black">
                   Initiated by:
                 </p>
-                <div className="flex flex-row gap-x-13 lg:gap-x-15 max-lg:justify-between">
+                <div className="flex flex-row items-center gap-x-13 lg:gap-x-15 max-lg:justify-between">
                   <Image
                     src="/images/iiasa-logo.webp"
                     alt="iiasa logo"
@@ -76,11 +76,18 @@ export const Footer = () => {
                     className="w-14 lg:w-17"
                   />
                   <div className="">
-                    <Image
+                    {/* <Image
                       src="/images/cifor-logo.webp"
                       alt="cifor logo"
                       width={678}
                       height={285}
+                      className="w-50 lg:w-56 h-auto"
+                    /> */}
+                    <Image
+                      src="/images/landscape-alliance-logo.webp"
+                      alt="landscape logo"
+                      width={854}
+                      height={216}
                       className="w-50 lg:w-56 h-auto"
                     />
                   </div>

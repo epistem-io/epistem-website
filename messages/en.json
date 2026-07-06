@@ -1,4 +1,29 @@
 {
+  "EventDetailPage": {
+    "breadcrumb": {
+      "home": "Home",
+      "events": "Events"
+    },
+    "speakersTitle": "Speakers",
+    "agendaTitle": "Event Agenda",
+    "showingRange": "Showing {start}-{end} of {total}",
+    "previousSpeakers": "Previous speakers",
+    "nextSpeakers": "Next speakers",
+    "previousPastEvents": "Previous past events",
+    "nextPastEvents": "Next past events",
+    "aboutThisEvent": "About this event",
+    "upcomingEvent": "Upcoming Event",
+    "featuredEventCta": "See Event Detail",
+    "eventDurationDay": "Day Event",
+    "eventDurationDays": "Days Event",
+    "documents": "Documents",
+    "links": "Links",
+    "watchOnYoutube": "Watch {title} on YouTube",
+    "watchPreviewOnYoutube": "Watch preview video for {title} on YouTube",
+    "youtubeThumbnailAlt": "YouTube video thumbnail for {title}",
+    "galleryImageAlt": "{title} image {index}",
+    "fileFallback": "FILE"
+  },
   "HomePage": {
     "Hero": {
       "title1": "Together,",
@@ -167,8 +192,8 @@
         "mat3Type": "PDF"
       }
     },
-    
-"pressRelease": {
+
+    "pressRelease": {
       "label": "PRESS RELEASE",
       "title": "Mapping Technology That Connects People,",
       "titleHighlight": "Epistem Launches the Luma Mapping Platform",
