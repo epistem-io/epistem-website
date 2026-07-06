@@ -8,7 +8,7 @@ import { SectionHead } from "./section-head";
 import storyArray from "@/data/stories.json";
 
 const QuoteIcon = () => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0">
     <path d="M16 6C17.0609 6 18.0783 6.42143 18.8284 7.17157C19.5786 7.92172 20 8.93913 20 10V22C20 23.0609 19.5786 24.0783 18.8284 24.8284C18.0783 25.5786 17.0609 26 16 26C15.4696 26 14.9609 26.2107 14.5858 26.5858C14.2107 26.9609 14 27.4696 14 28V30C14 31.0609 14.4214 32.0783 15.1716 32.8284C15.9217 33.5786 16.9391 34 18 34C18.5304 34 19.0391 34.2107 19.4142 34.5858C19.7893 34.9609 20 35.4696 20 36V40C20 40.5304 19.7893 41.0391 19.4142 41.4142C19.0391 41.7893 18.5304 42 18 42C14.8174 42 11.7652 40.7357 9.51472 38.4853C7.26428 36.2348 6 33.1826 6 30V10C6 8.93913 6.42143 7.92172 7.17157 7.17157C7.92172 6.42143 8.93913 6 10 6H16Z" stroke="#CC4778" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M38 6C39.0609 6 40.0783 6.42143 40.8284 7.17157C41.5786 7.92172 42 8.93913 42 10V22C42 23.0609 41.5786 24.0783 40.8284 24.8284C40.0783 25.5786 39.0609 26 38 26C37.4696 26 36.9609 26.2107 36.5858 26.5858C36.2107 26.9609 36 27.4696 36 28V30C36 31.0609 36.4214 32.0783 37.1716 32.8284C37.9217 33.5786 38.9391 34 40 34C40.5304 34 41.0391 34.2107 41.4142 34.5858C41.7893 34.9609 42 35.4696 42 36V40C42 40.5304 41.7893 41.0391 41.4142 41.4142C41.0391 41.7893 40.5304 42 40 42C36.8174 42 33.7652 40.7357 31.5147 38.4853C29.2643 36.2348 28 33.1826 28 30V10C28 8.93913 28.4214 7.92172 29.1716 7.17157C29.9217 6.42143 30.9391 6 32 6H38Z" stroke="#CC4778" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
@@ -38,19 +38,21 @@ export const Section5 = () => {
       <div className="w-full relative mt-8 lg:mt-12">
         <div
           ref={trackRef}
-          className="flex flex-row gap-4 lg:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+          className="flex flex-col lg:flex-row gap-4 lg:gap-6 lg:overflow-x-auto lg:scroll-smooth lg:snap-x lg:snap-mandatory lg:pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           {storyArray.map((item, index) => (
             <article
               data-story-card
               key={`story-${index}`}
-              className="snap-start shrink-0 w-[82%] sm:w-[calc(50%-8px)] lg:w-[calc(33.333%-16px)] flex flex-col rounded-[20px] bg-gradient-to-br from-primary-red-pink-light to-[#F7E3EB] p-5 lg:p-7 min-h-[280px] lg:min-h-[360px]"
+              className="lg:snap-start shrink-0 w-full lg:w-[calc(33.333%-16px)] flex flex-col rounded-[20px] bg-gradient-to-br from-primary-red-pink-light to-[#F7E3EB] p-5 lg:p-7 lg:min-h-[360px]"
             >
-              <QuoteIcon />
+              <div className="flex flex-row lg:flex-col items-start gap-4 lg:gap-0 grow">
+                <QuoteIcon />
 
-              <p className="mt-5 lg:mt-7 font-pjs text-sm lg:font-lp-text-l-regular xl:font-lp-text-xl-regular text-text-icons-base-main text-justify leading-relaxed grow">
-                {item.quote[locale]}
-              </p>
+                <p className="lg:mt-7 font-pjs text-sm lg:font-lp-text-l-regular xl:font-lp-text-xl-regular text-text-icons-base-main text-justify leading-relaxed grow">
+                  {item.quote[locale]}
+                </p>
+              </div>
 
               <hr className="my-4 lg:my-5 border-0 border-t border-primary-pink/25" />
 
@@ -78,7 +80,7 @@ export const Section5 = () => {
           ))}
         </div>
 
-        <div className="flex flex-row items-center justify-end gap-3 mt-6">
+        <div className="hidden lg:flex flex-row items-center justify-end gap-3 mt-6">
           <button
             type="button"
             aria-label={t("previous")}
