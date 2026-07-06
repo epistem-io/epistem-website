@@ -58,7 +58,7 @@ export function PastEvents({
   const format = useFormatter();
 
   useEffect(() => {
-    const desktopMediaQuery = window.matchMedia("(min-width: 1280px)");
+    const desktopMediaQuery = window.matchMedia("(min-width: 1024px)");
     const tabletMediaQuery = window.matchMedia("(min-width: 768px)");
 
     const syncPageSize = () => {
