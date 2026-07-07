@@ -17,23 +17,28 @@ const pop: Variants = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-type Cap = { pos: "left" | "right-top" | "right-bottom"; title: string; body: string };
+type Cap = { pos: "left-top" | "left" | "right-top" | "right-bottom"; title: string; body: string };
 
 const CAPS: Cap[] = [
   {
+    pos: "left-top",
+    title: "Guided Mapping in Minutes",
+    body: "Map Smarter, Not Harder. Map land use and land cover in a few guided steps. Luma helps users turn satellite imagery into usable maps through a simple browser-based workflow, without requiring advanced technical setup."
+  },
+  {
     pos: "left",
-    title: "Gotong royong data lapangan",
-    body: "Lorem Ipsum dor alor simit lorem Ipsum dor alor simit lorem Ipsum dor alor simit lorem Ipsum dor alor simit",
+    title: "Mapping, the Gotong Royong Way",
+    body: "Every map you build adds to a shared pool others can draw from, and vice versa. Luma is built so one person's mapping data can be reused by someone else, even on a different project, turning isolated data collection into a growing, crowdsourced resource for landscape monitoring worldwide.",
   },
   {
     pos: "right-top",
-    title: "Opensource Database",
-    body: "Restoration/deforestation monitoring",
+    title: "Transparent Analysis",
+    body: "Every map Luma produces is backed by a transparent, auditable methodology. Choose your classification scheme, validate against ground-truth or reference data, and generate accuracy assessments automatically, so your results hold up to scrutiny, replication, and peer review.",
   },
   {
     pos: "right-bottom",
-    title: "Time series analysis",
-    body: "Lorem Ipsum dor alor simit lorem Ipsum dor alor simit lorem Ipsum dor alor simit lorem Ipsum dor alor simit",
+    title: "Track Change Over Time (coming soon)",
+    body: "Land doesn't stay static, and your maps shouldn't either. Luma is extending its workflow to support time-series analysis: you'll be able to compare maps across dates, detect change, and monitor how landscapes evolve, all within the same platform you already use to build them.",
   },
 ];
 

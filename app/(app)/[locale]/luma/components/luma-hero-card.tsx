@@ -41,13 +41,13 @@ function LumaCardMedia({
 const CARDS: { eyebrow: string; title: string; caption?: string; body: ReactNode }[] = [
   {
     eyebrow: "Generate LULC Map",
-    title: "Satelite mosaic",
+    title: "Turn satellite imagery into a classified map ",
     caption: "Choose area, period, and imagery",
     body: <LumaCardMedia src="/images/card-5.png" alt="Satellite mosaic preview" />,
   },
   {
-    eyebrow: "Analyze Map",
-    title: "Read the story in the pixels",
+    eyebrow: "Change Analysis",
+    title: "Track change over time",
     body: (
       <>
         <LumaCardMedia src="/images/card-1.png" alt="Change analysis chart" />
@@ -61,7 +61,7 @@ const CARDS: { eyebrow: string; title: string; caption?: string; body: ReactNode
   {
     eyebrow: "Generate LULC Map",
     title: "Classified landscape, ready to explore",
-    caption: "Classified landscape, ready to explore",
+    caption: "See the class composition across your area",
     body: <LumaCardMedia src="/images/card-3.png" alt="Classified landscape map" />,
   },
   {
@@ -70,8 +70,8 @@ const CARDS: { eyebrow: string; title: string; caption?: string; body: ReactNode
     body: (
       <>
         <LumaCardMedia src="/images/card-2.png" alt="Community validation map" />
-        <p style={{ fontSize: 13, fontWeight: 700, color: textDark, margin: "12px 0 0" }}>
-          Community Validation
+        <p className="luma-card__community-note" style={{ color: textDark }}>
+          Crowdsource ground truth, validate together
         </p>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <span style={{ fontSize: 12, color: "#777" }}>Public or private campaign</span>
@@ -87,7 +87,7 @@ const CARDS: { eyebrow: string; title: string; caption?: string; body: ReactNode
   {
     eyebrow: "Generate LULC Map",
     title: "Validate training data quality",
-    caption: "Review accuracy before publishing",
+    caption: "Catch low class separability before you publish",
     body: <LumaCardMedia src="/images/card-4.png" alt="Class separability warning" fit="contain" />,
   },
 ];
@@ -108,6 +108,13 @@ export function LumaHeroCards({ className = "" }: { className?: string }) {
 
   const CARD_WIDTH = vw < 480 ? 240 : vw < 768 ? 270 : 300;
   const STEP = vw < 480 ? 196 : vw < 768 ? 224 : 250;
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((a) => (a + 1) % count);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [count]);
 
   // pindah aktif secara melingkar (tak terbatas)
   function go(dir: number) {

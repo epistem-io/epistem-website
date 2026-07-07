@@ -29,7 +29,7 @@
   background:
     linear-gradient(180deg, rgba(253, 242, 246, 0.45) 0%, rgba(255, 255, 255, 0.55) 65%, #ffffff 100%),
     url("/images/hero-image.webp");
-  background-size: cover, auto 100%; /* gradient=cover, image zoomed out */
+  background-size: cover, cover; /* gradient + image both fill the box (no white gaps on zoom) */
   background-position: center top, center 65px;
   background-repeat: no-repeat, no-repeat;
 }
@@ -149,6 +149,17 @@
   font-size: 13px;
   color: var(--luma-pink);
   margin: 14px 0 0;
+}
+.luma-card__community-note {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 12px 0 0;
+  width: 180px;
+}
+@media (max-width: 480px) {
+  .luma-card__community-note {
+    width: 100px;
+  }
 }
 .luma-card__media {
   margin-top: 14px;
@@ -476,6 +487,13 @@
   line-height: 1.6;
   color: #6b6b6b;
   margin: 0;
+  text-align: justify;
+}
+
+.luma-cap__card--left-top {
+  top:7%;
+  left: -2%;
+  width: 372px;
 }
 
 .luma-cap__card--left {
@@ -485,7 +503,7 @@
 }
 .luma-cap__card--right-top {
   right: -10%;
-  top: 40%;
+  top: 25%;
   width: 410px;
 }
 .luma-cap__card--right-bottom {

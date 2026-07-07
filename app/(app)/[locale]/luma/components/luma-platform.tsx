@@ -23,26 +23,26 @@ const TABS: Tab[] = [
     id: "generate",
     label: "Generate LULC Map",
     icon: <Layers size={18} />,
-    heading: "Turn raw satellite data into a classified land cover map",
+    heading: "From Satellite Data to Decision-Ready Maps",
     description:
-      "Define your area of interest, choose your classification scheme, train your model, and let LUMA produce a publication-ready LULC map, powered by Random Forest classification on cloud-free Sentinel-2 composites.",
+      "Luma simplifies land use and land cover mapping into a guided workflow. From selecting or drawing your geographic area and reviewing the generated composite imagery, to creating a classification scheme, preparing sample data, setting model parameters, and assessing map quality, Luma supports the entire process from start to finish.",
     image: "/images/generate-lulc-map.webp",
   },
   {
     id: "analyze",
-    label: "Analyze Map",
+    label: "Change Analysis",
     icon: <Search size={18} />,
-    heading: "Read the story your map is telling",
+    heading: "Compare land cover across time and reveal meaningful landscape change ",
     description:
-      "Once a LULC map exists, yours or one you upload, Analyze Map turns pixels into insight. Run time-series comparisons to detect change, or use Zonal Statistics to quantify what's inside any boundary you care about.",
+      "Luma makes it easier to detect and interpret changes in land cover over time. With time-series analysis and change detection workflows, you can explore landscape dynamics, monitor transitions, and support evidence-based decision-making.",
   },
   {
     id: "share",
-    label: "Share Map",
+    label: "Collaborative Mapping",
     icon: <Share2 size={18} />,
-    heading: "Turn your map into a participatory campaign",
+    heading: "Turn individual mapping efforts into outputs that others can review, use, and adapt",
     description:
-      "Publish a map as a public or private campaign and invite others to contribute. Define questions, set feedback locations, and collect ground truth from the community closing the loop between mapping and validation.",
+      "Luma is designed to make land use and land cover mapping more collaborative and accessible. It goes beyond a single user or a single project by supporting workflows that make it easier to share results, build on reference data, and strengthen collective landscape monitoring.",
   },
 ];
 

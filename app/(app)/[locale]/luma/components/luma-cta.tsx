@@ -22,14 +22,13 @@ export function LumaCta() {
         viewport={{ once: true, amount: 0.3 }}
       >
         <motion.h2 className="luma-cta__title" variants={fadeInUp}>
-          Your Landscape,
+          Map past trends,
           <br />
-          <span>classified by you.</span>
+          <span>plan future action.</span>
         </motion.h2>
 
         <motion.p className="luma-cta__subtitle" variants={fadeInUp}>
-          Generate your first LULC map today. No coding, no licenses, just satellite data and your
-          decisions.
+          Intuitive no-coding interface for creating, analysing, and collectively acting on customizable land use and land cover map data. 
         </motion.p>
 
         <motion.div className="luma-cta__actions" variants={fadeInUp}>
