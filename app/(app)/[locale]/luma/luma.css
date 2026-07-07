@@ -1,0 +1,659 @@
+/* ==========================================================================
+   Luma landing page — consolidated styles
+   All styles for the /luma route live here. Colors are exposed as CSS custom
+   properties so components stay free of inline <style> blocks.
+   ========================================================================== */
+
+:root {
+  --luma-pink: #cc4778;
+  --luma-text-dark: #1a1d1a;
+  --luma-text-secondary: #555;
+}
+
+/* ── Page wrapper ───────────────────────────────────────────────────────── */
+/* Cegah scroll horizontal dari elemen yang sedikit melewati tepi layar */
+.luma-page-wrapper {
+  overflow-x: clip;
+}
+
+/* Base font reset untuk halaman ini agar Plus Jakarta Sans diterapkan menyeluruh */
+.luma-page-wrapper * {
+  font-family: var(--font-pjs), "Plus Jakarta Sans", sans-serif;
+}
+
+/* ── Hero ───────────────────────────────────────────────────────────────── */
+.luma-hero-bg {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(253, 242, 246, 0.45) 0%, rgba(255, 255, 255, 0.55) 65%, #ffffff 100%),
+    url("/images/hero-image.webp");
+  background-size: cover, auto 100%; /* gradient=cover, image zoomed out */
+  background-position: center top, center 65px;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.luma-hero-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 110px 24px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.luma-hero-title {
+  font-size: clamp(56px, 12vw, 112px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--luma-pink);
+  margin: 0;
+}
+
+.luma-hero-subtitle {
+  font-size: clamp(18px, 3.2vw, 30px);
+  font-weight: 400;
+  color: var(--luma-pink);
+  margin: 12px 0 0;
+}
+
+.luma-hero-cta {
+  margin-top: 40px;
+  border: none;
+  cursor: pointer;
+  background: var(--luma-pink);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 16px 34px;
+  border-radius: 999px;
+  box-shadow: 0 10px 24px rgba(204, 71, 120, 0.28);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.luma-hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(204, 71, 120, 0.36);
+}
+
+/* ── Carousel kartu preview tak terbatas (loop kiri/kanan) ──────────────── */
+.luma-carousel {
+  margin-top: 64px;
+  width: 100%;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+  /* cegah scrollbar horizontal, tapi kartu tepi tetap tampil penuh di layar lebar */
+  overflow-x: hidden;
+}
+
+.luma-carousel__stage {
+  position: relative;
+  min-height: 520px;
+  cursor: grab;
+  touch-action: pan-y;
+}
+.luma-carousel__stage:active {
+  cursor: grabbing;
+}
+
+.luma-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 20px 45px rgba(120, 40, 70, 0.14);
+  padding: 20px;
+  text-align: left;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* indikator titik */
+.luma-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.luma-carousel__dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: rgba(204, 71, 120, 0.28);
+  cursor: pointer;
+  transition: width 0.25s ease, background 0.25s ease;
+}
+.luma-carousel__dot.is-active {
+  width: 22px;
+  background: var(--luma-pink);
+}
+
+.luma-card__eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--luma-pink);
+  margin: 0 0 6px;
+}
+.luma-card__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--luma-text-dark);
+  line-height: 1.25;
+  margin: 0;
+}
+.luma-card__caption {
+  font-size: 13px;
+  color: var(--luma-pink);
+  margin: 14px 0 0;
+}
+.luma-card__media {
+  margin-top: 14px;
+  border-radius: 10px;
+  height: 128px;
+  background-size: cover;
+  background-position: center;
+}
+
+/* tag pills */
+.luma-pill {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--luma-pink);
+  border: 1px solid rgba(204, 71, 120, 0.4);
+  border-radius: 999px;
+  padding: 5px 12px;
+  margin: 4px 6px 0 0;
+}
+.luma-stat {
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--luma-pink);
+  margin: 8px 0;
+}
+
+.luma-alert {
+  margin-top: 12px;
+  background: rgba(253, 240, 245, 0.7);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 11px;
+  color: var(--luma-text-dark);
+}
+.luma-avatars {
+  display: flex;
+  gap: -6px;
+}
+.luma-avatars span {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: #7a1f45;
+  border: 2px solid #fff;
+  margin-left: -8px;
+}
+
+@media (max-width: 480px) {
+  .luma-carousel__stage {
+    min-height: 460px;
+  }
+}
+
+/* Pembungkus konten di tengah (max-width) */
+.luma-hero-section {
+  padding: 120px 24px 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 992px) {
+  .luma-hero-section {
+    padding: 160px 24px 120px;
+  }
+}
+
+.luma-section {
+  padding: 100px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.luma-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-top: 56px;
+}
+
+@media (min-width: 768px) {
+  .luma-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .luma-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Platform section ───────────────────────────────────────────────────── */
+.luma-plat {
+  max-width: 1280px;
+  margin: 40px auto;
+  padding: 56px clamp(24px, 4vw, 64px);
+  background: linear-gradient(180deg, #fdeef4 0%, #fbe6ee 100%);
+  border-radius: 28px;
+}
+
+.luma-plat__eyebrow {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--luma-pink);
+  margin: 0 0 12px;
+}
+.luma-plat__title {
+  text-align: center;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--luma-text-dark);
+  margin: 0 0 40px;
+  line-height: 1.1;
+}
+
+/* Tab bar */
+.luma-plat__tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: rgba(204, 71, 120, 0.1);
+  border-radius: 16px;
+  padding: 8px;
+  margin-bottom: 48px;
+}
+.luma-plat__tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: rgba(120, 40, 70, 0.55);
+  font-size: clamp(14px, 1.4vw, 17px);
+  font-weight: 600;
+  padding: 14px 18px;
+  border-radius: 11px;
+  transition: color 0.2s ease;
+}
+.luma-plat__tab:hover {
+  color: var(--luma-pink);
+}
+.luma-plat__tab.is-active {
+  color: #fff;
+  background: var(--luma-pink);
+  box-shadow: 0 10px 22px rgba(204, 71, 120, 0.3);
+}
+
+/* Layout tab dengan gambar (dua kolom) */
+.luma-plat__body {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+.luma-plat__heading {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--luma-pink);
+  margin: 0 0 20px;
+}
+.luma-plat__desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--luma-text-secondary);
+  margin: 0;
+  text-align: justify;
+}
+.luma-plat__img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  display: block;
+}
+
+/* Layout tab "Coming Soon" (satu kolom, tengah) */
+.luma-plat__soon {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 8px 0 12px;
+}
+.luma-plat__soon .luma-plat__desc {
+  text-align: center;
+}
+.luma-plat__soon-label {
+  margin: 28px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--luma-pink);
+}
+
+@media (max-width: 900px) {
+  .luma-plat__body {
+    grid-template-columns: 1fr;
+  }
+}
+/* Tab menumpuk vertikal (label tetap terbaca) di layar sempit */
+@media (max-width: 680px) {
+  .luma-plat__tabs {
+    grid-template-columns: 1fr;
+  }
+  .luma-plat__tab {
+    justify-content: flex-start;
+    padding: 13px 16px;
+  }
+}
+@media (max-width: 600px) {
+  .luma-plat {
+    margin: 24px 12px;
+    padding: 40px 20px;
+    border-radius: 22px;
+  }
+  .luma-plat__desc {
+    text-align: left;
+  }
+}
+
+/* ── Capabilities section ───────────────────────────────────────────────── */
+.luma-cap {
+  max-width: 1080px;
+  margin: 40px auto;
+  padding: 40px 24px 60px;
+}
+.luma-cap__eyebrow {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--luma-pink);
+  margin: 0 0 10px;
+}
+.luma-cap__title {
+  text-align: center;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--luma-text-dark);
+  margin: 0 0 24px;
+}
+
+/* Panggung dengan cincin & lingkaran pusat */
+.luma-cap__stage {
+  position: relative;
+  height: 560px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Pusat: cincin + lingkaran inti dikelompokkan agar selalu konsentris */
+.luma-cap__hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 640px;
+  height: 640px;
+}
+
+.luma-cap__rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.luma-cap__core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* pusatkan via margin, bukan transform, agar tak bentrok dengan animasi scale motion */
+  margin-top: -130px;
+  margin-left: -130px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: clamp(40px, 5vw, 50px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  background: radial-gradient(circle at 50% 35%, #d85a8a 0%, #c73f72 55%, #b23063 100%);
+  box-shadow: 0 30px 60px rgba(178, 48, 99, 0.35),
+    0 0 70px 42px rgba(255, 255, 255, 0.9);
+  z-index: 3;
+}
+
+.luma-cap__card {
+  position: absolute;
+  width: 260px;
+  background: rgba(204, 71, 120, 0.06);
+  border-radius: 16px;
+  padding: 20px 22px;
+  z-index: 4;
+  transition: background-color 0.25s ease;
+}
+.luma-cap__card:hover {
+  background: #efc6d5;
+}
+.luma-cap__card h3 {
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--luma-text-dark);
+  margin: 0 0 8px;
+}
+.luma-cap__card p {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #6b6b6b;
+  margin: 0;
+}
+
+.luma-cap__card--left {
+  left: -5%;
+  top: 56%;
+  width: 372px;
+}
+.luma-cap__card--right-top {
+  right: -10%;
+  top: 40%;
+  width: 410px;
+}
+.luma-cap__card--right-bottom {
+  right: -10%;
+  top: 71%;
+  width: 485px;
+}
+
+@media (max-width: 1024px) {
+  .luma-cap__stage {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .luma-cap__hub {
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+  }
+  .luma-cap__rings {
+    display: none;
+  }
+  .luma-cap__core {
+    position: static;
+    margin: 0;
+    width: 220px;
+    height: 220px;
+  }
+  .luma-cap__card,
+  .luma-cap__card--left,
+  .luma-cap__card--right-top,
+  .luma-cap__card--right-bottom {
+    position: static;
+    width: 100%;
+    max-width: 440px;
+  }
+}
+
+/* ── CTA section (sebelum footer) ───────────────────────────────────────── */
+.luma-cta {
+  background: linear-gradient(180deg, #ffffff 0%, #fdeef4 100%);
+  padding: clamp(80px, 12vw, 150px) 24px;
+}
+.luma-cta__inner {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.luma-cta__title {
+  font-size: clamp(44px, 8vw, 84px);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--luma-text-dark);
+  margin: 0;
+}
+.luma-cta__title span {
+  color: var(--luma-pink);
+}
+.luma-cta__subtitle {
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.6;
+  color: var(--luma-text-dark);
+  max-width: 560px;
+  margin: 24px 0 0;
+}
+.luma-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 56px;
+}
+.luma-cta__btn {
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 16px 44px;
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.luma-cta__btn--primary {
+  background: var(--luma-pink);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(204, 71, 120, 0.28);
+}
+.luma-cta__btn--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(204, 71, 120, 0.36);
+}
+.luma-cta__btn--ghost {
+  background: transparent;
+  color: var(--luma-pink);
+  border: 1.5px solid var(--luma-pink);
+}
+.luma-cta__btn--ghost:hover {
+  background: rgba(204, 71, 120, 0.08);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .luma-cta__actions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+  }
+  .luma-cta__btn {
+    width: 100%;
+  }
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+.luma-footer {
+  background: var(--luma-pink);
+  color: #fff;
+}
+.luma-footer__inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 22px clamp(24px, 5vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.luma-footer__copy {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 0;
+}
+.luma-footer__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+}
+.luma-footer__links a {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
+}
+.luma-footer__links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .luma-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px clamp(20px, 5vw, 24px) 28px;
+  }
+  .luma-footer__links {
+    flex-wrap: wrap;
+    gap: 20px 28px;
+  }
+  .luma-footer__links a {
+    padding: 2px 0;
+  }
+}

@@ -4,10 +4,6 @@ import { useState, type ReactNode } from "react";
 import { AnimatePresence, motion, type Variants } from "motion/react";
 import { Layers, Search, Share2 } from "lucide-react";
 
-const accentPink = "#cc4778";
-const textDark = "#1A1D1A";
-const textSecondary = "#555";
-
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
@@ -56,127 +52,6 @@ export function LumaPlatform() {
 
   return (
     <section className="luma-plat">
-      <style>{`
-        .luma-plat {
-          max-width: 1280px;
-          margin: 40px auto;
-          padding: 56px clamp(24px, 4vw, 64px);
-          background: linear-gradient(180deg, #fdeef4 0%, #fbe6ee 100%);
-          border-radius: 28px;
-        }
-
-        .luma-plat__eyebrow {
-          text-align: center;
-          font-size: 13px;
-          font-weight: 700;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: ${accentPink};
-          margin: 0 0 12px;
-        }
-        .luma-plat__title {
-          text-align: center;
-          font-size: clamp(28px, 4vw, 44px);
-          font-weight: 500;
-          letter-spacing: -0.02em;
-          color: ${textDark};
-          margin: 0 0 40px;
-          line-height: 1.1;
-        }
-
-        /* Tab bar */
-        .luma-plat__tabs {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 8px;
-          background: rgba(204, 71, 120, 0.10);
-          border-radius: 16px;
-          padding: 8px;
-          margin-bottom: 48px;
-        }
-        .luma-plat__tab {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          border: none;
-          cursor: pointer;
-          background: transparent;
-          color: rgba(120, 40, 70, 0.55);
-          font-size: clamp(14px, 1.4vw, 17px);
-          font-weight: 600;
-          padding: 14px 18px;
-          border-radius: 11px;
-          transition: color 0.2s ease;
-        }
-        .luma-plat__tab:hover { color: ${accentPink}; }
-        .luma-plat__tab.is-active {
-          color: #fff;
-          background: ${accentPink};
-          box-shadow: 0 10px 22px rgba(204, 71, 120, 0.30);
-        }
-
-        /* Layout tab dengan gambar (dua kolom) */
-        .luma-plat__body {
-          display: grid;
-          grid-template-columns: 0.85fr 1.15fr;
-          gap: clamp(32px, 5vw, 72px);
-          align-items: start;
-        }
-        .luma-plat__heading {
-          font-size: clamp(22px, 2.4vw, 30px);
-          font-weight: 700;
-          line-height: 1.2;
-          color: ${accentPink};
-          margin: 0 0 20px;
-        }
-        .luma-plat__desc {
-          font-size: 16px;
-          line-height: 1.7;
-          color: ${textSecondary};
-          margin: 0;
-          text-align: justify;
-        }
-        .luma-plat__img {
-          width: 100%;
-          height: auto;
-          border-radius: 18px;
-          display: block;
-        }
-
-        /* Layout tab "Coming Soon" (satu kolom, tengah) */
-        .luma-plat__soon {
-          max-width: 720px;
-          margin: 0 auto;
-          text-align: center;
-          padding: 8px 0 12px;
-        }
-        .luma-plat__soon .luma-plat__desc { text-align: center; }
-        .luma-plat__soon-label {
-          margin: 28px 0 0;
-          font-size: 20px;
-          font-weight: 600;
-          color: ${accentPink};
-        }
-
-        @media (max-width: 900px) {
-          .luma-plat__body { grid-template-columns: 1fr; }
-        }
-        /* Tab menumpuk vertikal (label tetap terbaca) di layar sempit */
-        @media (max-width: 680px) {
-          .luma-plat__tabs { grid-template-columns: 1fr; }
-          .luma-plat__tab { justify-content: flex-start; padding: 13px 16px; }
-        }
-        @media (max-width: 600px) {
-          .luma-plat {
-            margin: 24px 12px;
-            padding: 40px 20px;
-            border-radius: 22px;
-          }
-          .luma-plat__desc { text-align: left; }
-        }
-      `}</style>
-
       <p className="luma-plat__eyebrow">The Platform</p>
       <h2 className="luma-plat__title">Three modules, one mapping workflow</h2>
 
