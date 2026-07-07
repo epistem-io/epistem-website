@@ -4,9 +4,6 @@ import {useTranslations} from "next-intl";
 import {motion, type Variants} from "motion/react";
 import { LumaHeroCards } from "./luma-hero-card";
 
-const accentPink = "#cc4778";
-const textDark = "#1A1D1A";
-
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
