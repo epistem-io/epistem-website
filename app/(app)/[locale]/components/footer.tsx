@@ -3,6 +3,7 @@
 import Image from "next/image";
 // import { useRef, useState } from "react";
 // import { useInView } from "motion/react";
+import { usePathname } from "@/i18n/navigation";
 
 export const Footer = () => {
   // const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +15,10 @@ export const Footer = () => {
   // const imageIsInView = useInView(imageComp, { once: true });
   // const imageMobileIsInView = useInView(imageMobile, { once: true });
   // const textIsInView = useInView(textComp, { once: true });
-
+  const pathname = usePathname();
+  if (pathname === "/luma") {
+    return null;
+  }
   return (
     <>
       <div className="w-full py-6 lg:py-17 px-1 lg:px-28 bg-primary-pink-light-hover">

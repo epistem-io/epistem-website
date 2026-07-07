@@ -18,6 +18,11 @@ export const NavBar = () => {
 
   const [open, setOpen] = useState(true);
 
+  // The Luma page renders its own dedicated navbar (LumaNavBar).
+  if (pathname === "/luma") {
+    return null;
+  }
+
   const handleMouseOver = () => {
     // setOpen(true);
   };
