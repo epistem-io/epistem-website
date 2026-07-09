@@ -23,7 +23,7 @@ const CAPS: Cap[] = [
   {
     pos: "left-top",
     title: "Guided Mapping in Minutes",
-    body: "Map Smarter, Not Harder. Map land use and land cover in a few guided steps. Luma helps users turn satellite imagery into usable maps through a simple browser-based workflow, without requiring advanced technical setup."
+    body: "Map smarter, not harder. Map land use and land cover in a few guided steps. Luma helps users turn satellite imagery into usable maps through a simple browser-based workflow, without requiring advanced technical setup."
   },
   {
     pos: "left",

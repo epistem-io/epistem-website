@@ -53,7 +53,7 @@ export function LumaPlatform() {
   return (
     <section className="luma-plat">
       <p className="luma-plat__eyebrow">The Platform</p>
-      <h2 className="luma-plat__title">Three modules, one mapping workflow</h2>
+      <h2 className="luma-plat__title">Three features, one mapping workflow</h2>
 
       <div className="luma-plat__tabs" role="tablist" aria-label="Platform modules">
         {TABS.map((t, i) => (
