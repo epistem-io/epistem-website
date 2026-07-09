@@ -129,7 +129,9 @@ export const LumaNavBar = () => {
               <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                 {/* Luma — active */}
                 <Link
-                  href="/"
+                  href={`${process.env.NEXT_PUBLIC_LUMA_URL}` || "/"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   onClick={() => setMenuOpen(false)}
                   className="relative flex items-start justify-start rounded-2xl border-2 border-transparent hover:border-primary-pink
                     bg-[#FCEBF1] p-5 lg:p-6 aspect-[46/18] overflow-hidden transition-shadow hover:shadow-[0_0_24px_4px_#EFC6D5]"
@@ -157,7 +159,7 @@ export const LumaNavBar = () => {
 
                 {/* Rona */}
                 <Link
-                  href="/"
+                  href="#"
                   onClick={() => setMenuOpen(false)}
                   className="relative flex items-start justify-start rounded-2xl border-2 border-transparent hover:border-primary-pink
                     bg-[#FCEBF1] p-5 lg:p-6 aspect-[46/18] overflow-hidden transition-shadow hover:shadow-[0_0_24px_4px_#EFC6D5]"
@@ -167,7 +169,7 @@ export const LumaNavBar = () => {
                       Rona
                     </h3>
                     <p className="mt-1 font-inter text-sm lg:text-base text-gray-800">
-                      Reference Observation Network App
+                      Repository for Open-source Land use Analysis
                     </p>
                     <p className="mt-3 font-inter text-[12px] lg:text-xs text-gray-500">
                       Validate map accuracy through community-driven ground truth

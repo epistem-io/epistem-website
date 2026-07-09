@@ -34,9 +34,12 @@ export function LumaHero() {
             <h1 className="luma-hero-title">Luma</h1>
             <p className="luma-hero-subtitle">Land Use Mapping for All</p>
             {/* TODO: tambahkan key "Hero.cta" di messages/en.json & id.json */}
-            <button type="button" className="luma-hero-cta">
+            <a
+              href={process.env.NEXT_PUBLIC_LUMA_URL || "/"}
+              className="luma-hero-cta"
+            >
               Start Mapping
-            </button>
+            </a>
           </motion.div>
 
           <LumaHeroCards className="mt-[60px]" />

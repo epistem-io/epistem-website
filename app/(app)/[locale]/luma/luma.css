@@ -61,6 +61,8 @@
 }
 
 .luma-hero-cta {
+  display: inline-block;
+  text-decoration: none;
   margin-top: 40px;
   border: none;
   cursor: pointer;
@@ -584,6 +586,9 @@
   margin-top: 56px;
 }
 .luma-cta__btn {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
   border: none;
   cursor: pointer;
   font-size: 17px;

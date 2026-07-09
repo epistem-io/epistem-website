@@ -32,9 +32,12 @@ export function LumaCta() {
         </motion.p>
 
         <motion.div className="luma-cta__actions" variants={fadeInUp}>
-          <button type="button" className="luma-cta__btn luma-cta__btn--primary">
+          <a
+            href={process.env.NEXT_PUBLIC_LUMA_URL || "/"}
+            className="luma-cta__btn luma-cta__btn--primary"
+          >
             Start Mapping
-          </button>
+          </a>
           <button type="button" className="luma-cta__btn luma-cta__btn--ghost">
             Sign In
           </button>

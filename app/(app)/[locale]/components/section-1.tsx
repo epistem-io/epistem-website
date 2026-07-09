@@ -27,7 +27,7 @@ export const Section1 = () => {
       captionKey: "item1Caption",
       descriptionKey: "item1Description",
       buttonComponent: (
-        <Link href={`${process.env.NEXT_PUBLIC_LUMA_URL}`}>
+        <Link href="/luma">
           <Button className="px-5 py-1 lg:py-3 h-auto rounded-md">
             <p className="font-aptos text-[13px] lg:text-[13.5px] xl:text-lg font-semibold lg:font-bold text-text-icons-on-color">
               {t("buttonCaption1")}
