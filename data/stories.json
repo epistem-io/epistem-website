@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Herlan Kagami",
+    "url": "https://storymaps.arcgis.com/collections/797034ec6606463bb749fcc0c1527c98?item=1",
+    "role": {
+      "en": "South Sumatra Plantation Office",
+      "id": "Dinas Perkebunan Provinsi Sumatera Selatan"
+    },
+    "quote": {
+      "en": "“Luma gives us new hope to strengthen spatial data capacity and turn tabular information into clearer evidence for better decisions.”",
+      "id": "“Luma memberi kami harapan baru untuk memperkuat kapasitas data spasial dan mengubah data tabular menjadi bukti yang lebih jelas untuk pengambilan keputusan yang lebih baik.”"
+    }
+  },
+  {
+    "name": "Norman Riwu Kaho",
+    "url": "https://storymaps.arcgis.com/collections/797034ec6606463bb749fcc0c1527c98?item=3",
+    "role": {
+      "en": "Faculty Lecturer, Universitas Nusa Cendana, Nusa Tenggara Timur",
+      "id": "Dosen, Universitas Nusa Cendana, Nusa Tenggara Timur"
+    },
+    "quote": {
+      "en": "“Technology plus local context equals accuracy, and Luma helps make spatial analysis more inclusive and accessible for more users.”",
+      "id": "“Teknologi ditambah konteks lokal menghasilkan akurasi, dan Luma membantu menjadikan analisis spasial lebih inklusif dan mudah diakses oleh lebih banyak pengguna.”"
+    }
+  },
+  {
+    "name": "Nurfadhilah Yusuf",
+    "url": "https://storymaps.arcgis.com/collections/797034ec6606463bb749fcc0c1527c98?item=2",
+    "role": {
+      "en": "Teacher, SMK Kehutanan Negeri Makassar, Sulawesi Selatan",
+      "id": "Guru, SMK Kehutanan Negeri Makassar, Sulawesi Selatan"
+    },
+    "quote": {
+      "en": "“Luma makes participatory mapping simpler and more practical, especially for learning and field-based spatial analysis.”",
+      "id": "“Luma membuat pemetaan partisipatif lebih sederhana dan lebih praktis, terutama untuk pembelajaran dan analisis spasial berbasis lapangan.”"
+    }
+  }
+]
