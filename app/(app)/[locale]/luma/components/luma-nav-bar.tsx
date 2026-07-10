@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import Link from "next/link";
+import { getLumaUrl } from "@/lib/luma";
 
 export const LumaNavBar = () => {
   const locale = useLocale();
@@ -129,7 +130,7 @@ export const LumaNavBar = () => {
               <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                 {/* Luma — active */}
                 <Link
-                  href={`${process.env.NEXT_PUBLIC_LUMA_URL}` || "/"}
+                  href={getLumaUrl(locale)}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMenuOpen(false)}

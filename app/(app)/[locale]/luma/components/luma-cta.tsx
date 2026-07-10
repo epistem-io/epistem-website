@@ -1,6 +1,8 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
+import { useLocale } from "next-intl";
+import { getLumaUrl } from "@/lib/luma";
 
 const container: Variants = {
   hidden: {},
@@ -12,6 +14,7 @@ const fadeInUp: Variants = {
 };
 
 export function LumaCta() {
+  const locale = useLocale();
   return (
     <section className="luma-cta">
       <motion.div
@@ -33,7 +36,7 @@ export function LumaCta() {
 
         <motion.div className="luma-cta__actions" variants={fadeInUp}>
           <a
-            href={process.env.NEXT_PUBLIC_LUMA_URL || "/"}
+            href={getLumaUrl(locale)}
             className="luma-cta__btn luma-cta__btn--primary"
           >
             Start Mapping

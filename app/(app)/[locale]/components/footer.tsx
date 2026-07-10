@@ -52,14 +52,14 @@ export const Footer = () => {
                     className="block lg:hidden w-45 lg:w-62 h-auto object-contain"
                   />
                   <Image
-                    src="/images/bundes-logo.webp"
+                    src="/images/bundes-new-logo.webp"
                     alt="bundes logo"
                     width={277}
                     height={169}
                     className="hidden lg:block w-34 lg:w-62 h-auto object-contain"
                   />
                   <Image
-                    src="/images/iki-logo.webp"
+                    src="/images/iki-new-logo.webp"
                     alt="iki logo"
                     width={900}
                     height={208}
