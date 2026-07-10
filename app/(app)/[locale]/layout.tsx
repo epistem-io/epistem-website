@@ -102,7 +102,7 @@ const aptos = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Epistem Landscape Monitoring Technology",
+  title: "Inclusive LULC Data Generation",
   description:
     "Evolving Participatory Information System for Nature-based Climate Solutions. Data Empowerment: The Epistem initiative aims to develop an open-source landscape monitoring technology that can address multiple thematic requirements of diverse actors and stakeholders of nature-based climate solutions.",
 };

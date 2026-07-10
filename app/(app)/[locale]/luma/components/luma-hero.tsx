@@ -1,8 +1,9 @@
 "use client";
 
-import {useTranslations} from "next-intl";
+import {useLocale, useTranslations} from "next-intl";
 import {motion, type Variants} from "motion/react";
 import { LumaHeroCards } from "./luma-hero-card";
+import { getLumaUrl } from "@/lib/luma";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -21,6 +22,7 @@ const cardIn: Variants = {
 
 export function LumaHero() {
   const t = useTranslations("LumaHero");
+  const locale = useLocale();
 
   return (
     <>
@@ -35,7 +37,7 @@ export function LumaHero() {
             <p className="luma-hero-subtitle">Land Use Mapping for All</p>
             {/* TODO: tambahkan key "Hero.cta" di messages/en.json & id.json */}
             <a
-              href={process.env.NEXT_PUBLIC_LUMA_URL || "/"}
+              href={getLumaUrl(locale)}
               className="luma-hero-cta"
             >
               Start Mapping
