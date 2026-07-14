@@ -5,6 +5,7 @@ import "./globals.css";
 import { NavBar } from "./components/nav-bar";
 import { Footer } from "./components/footer";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 
@@ -117,11 +118,15 @@ const aptos = localFont({
   variable: "--font-aptos",
 });
 
-export const metadata: Metadata = {
-  title: "Inclusive LULC Data Generation",
-  description:
-    "Evolving Participatory Information System for Nature-based Climate Solutions. Data Empowerment: The Epistem initiative aims to develop an open-source landscape monitoring technology that can address multiple thematic requirements of diverse actors and stakeholders of nature-based climate solutions.",
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Metadata.home" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 export default async function TestLayout({ children, params }: Props) {
   const { locale } = await params;

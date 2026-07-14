@@ -55,6 +55,7 @@ export function PastEvents({
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(MOBILE_PAGE_SIZE);
   const t = useTranslations("EventDetailPage");
+  const tPastEvents = useTranslations("PastEvents");
   const format = useFormatter();
 
   useEffect(() => {
@@ -174,7 +175,7 @@ export function PastEvents({
           href={`/events`}
           className="flex shrink-0 items-center gap-2 text-primary-pink transition-colors hover:text-primary-pink-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2 ml-auto"
         >
-          <span className="font-lp-text-l-semibold">See all events</span>
+          <span className="font-lp-text-l-semibold">{tPastEvents("seeAllEvents")}</span>
           <ArrowRightIcon className="size-5" />
         </Link>
       )}

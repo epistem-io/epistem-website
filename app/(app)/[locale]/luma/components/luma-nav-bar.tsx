@@ -7,40 +7,14 @@ import { ChevronUp } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import Link from "next/link";
 import { getLumaUrl } from "@/lib/luma";
 
-// Hardcoded until the Tolgee keys for the navbar can be pushed.
-const COPY = {
-  en: {
-    platformTitle: "Epistem Platform",
-    lumaTitle: "Luma",
-    lumaSubtitle: "Land Use Mapping for All",
-    lumaDescription:
-      "Generate, analyze, and share high-precision LULC maps from satellite data, no coding required.",
-    ronaTitle: "Rona",
-    ronaSubtitle: "Repository for Open-source Land use Analysis",
-    ronaDescription:
-      "High-quality, standardized reference data for thematically diverse LULC mapping.",
-  },
-  id: {
-    platformTitle: "Platform Epistem",
-    lumaTitle: "Luma",
-    lumaSubtitle: "Pemetaan Lahan untuk Semua",
-    lumaDescription:
-      "Hasilkan, analisis, dan bagikan peta LULC berpresisi tinggi dari data satelit tanpa perlu coding.",
-    ronaTitle: "Rona",
-    ronaSubtitle: "Repositori Solusi Analisis Lahan Sumber Terbuka",
-    ronaDescription:
-      "Data referensi terstandar berkualitas tinggi untuk pemetaan LULC yang beragam",
-  },
-} as const;
-
 export const LumaNavBar = () => {
   const locale = useLocale();
-  const t = COPY[locale as keyof typeof COPY] ?? COPY.en;
+  const t = useTranslations("LumaNavBar");
   const router = useRouter();
   const pathname = usePathname();
 
@@ -59,7 +33,7 @@ export const LumaNavBar = () => {
             <Link href="/">
               <Image
                 src="/images/epistem-logos.webp"
-                alt="epistem logo"
+                alt={t("logoAlt")}
                 width={500}
                 height={216}
                 className="h-9 lg:h-16 w-auto pt-1.25 pr-1.25"
@@ -73,10 +47,11 @@ export const LumaNavBar = () => {
               variant="ghost"
               onClick={() => setMenuOpen((prev) => !prev)}
               aria-expanded={menuOpen}
+              aria-label={t("toggleMenu")}
               className="flex flex-row items-center gap-x-2 p-1 hover:bg-transparent"
             >
               <span className="text-lg lg:text-2xl font-medium text-primary-pink" style={{ fontFamily: 'var(--font-degular-display)' }}>
-                Luma
+                {t("brand")}
               </span>
               <motion.span
                 animate={{ rotate: menuOpen ? 180 : 0 }}
@@ -151,7 +126,7 @@ export const LumaNavBar = () => {
           <div className="absolute left-0 top-full w-full px-4 lg:px-6 py-6 lg:py-8 z-20">
             <div className="mx-auto max-w-6xl rounded-3xl bg-white p-6 lg:p-8 shadow-2xl">
               <h2 className="text-center font-inter text-lg lg:text-xl font-semibold text-gray-700 tracking-wide">
-                {t.platformTitle}
+                {t("platformTitle")}
               </h2>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
@@ -166,18 +141,18 @@ export const LumaNavBar = () => {
                 >
                   <div className="relative z-10 max-w-[55%]">
                     <h3 className="font-inter text-3xl lg:text-4xl font-semibold text-primary-pink">
-                      {t.lumaTitle}
+                      {t("lumaTitle")}
                     </h3>
                     <p className="mt-1 font-inter text-xs lg:text-sm text-gray-800">
-                      {t.lumaSubtitle}
+                      {t("lumaSubtitle")}
                     </p>
                     <p className="mt-3 font-inter text-[12px] lg:text-xs text-gray-500">
-                      {t.lumaDescription}
+                      {t("lumaDescription")}
                     </p>
                   </div>
                   <Image
                     src="/images/luma-card.svg"
-                    alt="Luma land use map"
+                    alt={t("lumaCardAlt")}
                     width={420}
                     height={340}
                     className="absolute right-0 bottom-0 w-[140px] h-[87px] sm:w-[200px] sm:h-[124px] lg:w-[254px] lg:h-[157px] object-contain object-right-bottom"
@@ -193,18 +168,18 @@ export const LumaNavBar = () => {
                 >
                   <div className="relative z-10 max-w-[55%]">
                     <h3 className="font-inter text-3xl lg:text-4xl font-semibold text-primary-pink">
-                      {t.ronaTitle}
+                      {t("ronaTitle")}
                     </h3>
                     <p className="mt-1 font-inter text-sm lg:text-base text-gray-800">
-                      {t.ronaSubtitle}
+                      {t("ronaSubtitle")}
                     </p>
                     <p className="mt-3 font-inter text-[12px] lg:text-xs text-gray-500">
-                      {t.ronaDescription}
+                      {t("ronaDescription")}
                     </p>
                   </div>
                   <Image
                     src="/images/rona-card.svg"
-                    alt="Rona reference observation network"
+                    alt={t("ronaCardAlt")}
                     width={420}
                     height={340}
                     className="absolute right-0 bottom-0 w-[140px] h-[87px] sm:w-[200px] sm:h-[124px] lg:w-[254px] lg:h-[157px] object-contain object-right-bottom"

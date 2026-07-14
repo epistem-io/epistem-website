@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { motion, type PanInfo } from "motion/react";
-import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 const textDark = "#1A1D1A";
 
@@ -38,125 +38,49 @@ function LumaCardMedia({
   );
 }
 
-// ── Teks tiap kartu (hardcode sampai key Tolgee bisa di-push) ─
-type CardCopy = {
-  mosaicEyebrow: string;
-  mosaicTitle: string;
-  mosaicCaption: string;
-  mosaicAlt: string;
-  changeEyebrow: string;
-  changeTitle: string;
-  changeAlt: string;
-  changePill1: string;
-  changePill2: string;
-  classifiedEyebrow: string;
-  classifiedTitle: string;
-  classifiedCaption: string;
-  classifiedAlt: string;
-  shareEyebrow: string;
-  shareTitle: string;
-  shareAlt: string;
-  shareNote: string;
-  shareCampaign: string;
-  qualityEyebrow: string;
-  qualityTitle: string;
-  qualityCaption: string;
-  qualityAlt: string;
-};
-
-const COPY: Record<"en" | "id", CardCopy> = {
-  en: {
-    mosaicEyebrow: "Generate LULC Map",
-    mosaicTitle: "Turn satellite imagery into a classified map",
-    mosaicCaption: "Choose area, period, and imagery",
-    mosaicAlt: "Satellite mosaic preview",
-    changeEyebrow: "Change Analysis",
-    changeTitle: "Track change over time",
-    changeAlt: "Change analysis chart",
-    changePill1: "Time series",
-    changePill2: "Zonal statistics",
-    classifiedEyebrow: "Generate LULC Map",
-    classifiedTitle: "Classified landscape, ready to explore",
-    classifiedCaption: "See the class composition across your area",
-    classifiedAlt: "Classified landscape map",
-    shareEyebrow: "Share Map",
-    shareTitle: "Turn insight into participation",
-    shareAlt: "Community validation map",
-    shareNote: "Crowdsource ground truth, validate together",
-    shareCampaign: "Public or private campaign",
-    qualityEyebrow: "Generate LULC Map",
-    qualityTitle: "Validate training data quality",
-    qualityCaption: "Catch low class separability before you publish",
-    qualityAlt: "Class separability warning",
-  },
-  id: {
-    mosaicEyebrow: "Buat Peta",
-    mosaicTitle: "Gunakan citra satelit untuk memetakan LULC",
-    mosaicCaption: "Tentukan area, periode, dan kelas LULC",
-    mosaicAlt: "Pratinjau mosaik citra satelit",
-    changeEyebrow: "Identifikasi Perubahan",
-    changeTitle: "Memantau perubahan lanskap dari waktu ke waktu",
-    changeAlt: "Grafik analisis perubahan",
-    changePill1: "Time series",
-    changePill2: "Zonal statistics",
-    classifiedEyebrow: "Buat Peta",
-    classifiedTitle: "Memberikan dasar bagi aksi konservasi melalui klasifikasi",
-    classifiedCaption: "Menargetkan kelas spesifik untuk intervensi di wilayah Anda",
-    classifiedAlt: "Peta lanskap terklasifikasi",
-    shareEyebrow: "Pemetaan Kolaboratif",
-    shareTitle: "Ubah partisipasi menjadi wawasan lanskap",
-    shareAlt: "Peta validasi komunitas",
-    shareNote: "Konsultasi publik peta LULC",
-    shareCampaign: "Kampanye publik",
-    qualityEyebrow: "Buat Peta",
-    qualityTitle: "Keandalan dan transparansi data",
-    qualityCaption:
-      "Metode ilmiah untuk mendemonstrasikan dan meningkatkan kualitas peta",
-    qualityAlt: "Peringatan keterpisahan kelas",
-  },
-};
-
 // ── Isi tiap kartu ───────────────────────────────────────────
+type Translator = (key: string) => string;
+
 type Card = { eyebrow: string; title: string; caption?: string; body: ReactNode };
 
-function buildCards(t: CardCopy): Card[] {
+function buildCards(t: Translator): Card[] {
   return [
     {
-      eyebrow: t.mosaicEyebrow,
-      title: t.mosaicTitle,
-      caption: t.mosaicCaption,
-      body: <LumaCardMedia src="/images/card-5.png" alt={t.mosaicAlt} />,
+      eyebrow: t("mosaicEyebrow"),
+      title: t("mosaicTitle"),
+      caption: t("mosaicCaption"),
+      body: <LumaCardMedia src="/images/card-5.png" alt={t("mosaicAlt")} />,
     },
     {
-      eyebrow: t.changeEyebrow,
-      title: t.changeTitle,
+      eyebrow: t("changeEyebrow"),
+      title: t("changeTitle"),
       body: (
         <>
-          <LumaCardMedia src="/images/card-1.png" alt={t.changeAlt} />
+          <LumaCardMedia src="/images/card-1.png" alt={t("changeAlt")} />
           <div>
-            <span className="luma-pill">{t.changePill1}</span>
-            <span className="luma-pill">{t.changePill2}</span>
+            <span className="luma-pill">{t("changePill1")}</span>
+            <span className="luma-pill">{t("changePill2")}</span>
           </div>
         </>
       ),
     },
     {
-      eyebrow: t.classifiedEyebrow,
-      title: t.classifiedTitle,
-      caption: t.classifiedCaption,
-      body: <LumaCardMedia src="/images/card-3.png" alt={t.classifiedAlt} />,
+      eyebrow: t("classifiedEyebrow"),
+      title: t("classifiedTitle"),
+      caption: t("classifiedCaption"),
+      body: <LumaCardMedia src="/images/card-3.png" alt={t("classifiedAlt")} />,
     },
     {
-      eyebrow: t.shareEyebrow,
-      title: t.shareTitle,
+      eyebrow: t("shareEyebrow"),
+      title: t("shareTitle"),
       body: (
         <>
-          <LumaCardMedia src="/images/card-2.png" alt={t.shareAlt} />
+          <LumaCardMedia src="/images/card-2.png" alt={t("shareAlt")} />
           <p className="luma-card__community-note" style={{ color: textDark }}>
-            {t.shareNote}
+            {t("shareNote")}
           </p>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ fontSize: 12, color: "#777" }}>{t.shareCampaign}</span>
+            <span style={{ fontSize: 12, color: "#777" }}>{t("shareCampaign")}</span>
             <div className="luma-avatars">
               <span>AT</span>
               <span>MI</span>
@@ -167,18 +91,18 @@ function buildCards(t: CardCopy): Card[] {
       ),
     },
     {
-      eyebrow: t.qualityEyebrow,
-      title: t.qualityTitle,
-      caption: t.qualityCaption,
-      body: <LumaCardMedia src="/images/card-4.png" alt={t.qualityAlt} fit="contain" />,
+      eyebrow: t("qualityEyebrow"),
+      title: t("qualityTitle"),
+      caption: t("qualityCaption"),
+      body: <LumaCardMedia src="/images/card-4.png" alt={t("qualityAlt")} fit="contain" />,
     },
   ];
 }
 
 // ── Carousel kartu tak terbatas (loop kiri/kanan) ────────────
 export function LumaHeroCards({ className = "" }: { className?: string }) {
-  const locale = useLocale();
-  const CARDS = buildCards(COPY[locale as keyof typeof COPY] ?? COPY.en);
+  const t = useTranslations("LumaHeroCards");
+  const CARDS = buildCards(t);
   const count = CARDS.length;
   const [active, setActive] = useState(Math.floor(count / 2)); // mulai dari tengah
 
