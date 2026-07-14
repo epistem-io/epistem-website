@@ -24,8 +24,8 @@ const COPY = {
     signIn: "Sign In",
   },
   id: {
-    titleLine1: "Petakan penggunaan lahan,",
-    titleLine2: "rencanakan solusi pelestarian",
+    titleLine1: "Petakan lahan,",
+    titleLine2: "rencanakan pelestarian",
     subtitle:
       "Aplikasi intuitif untuk membuat, menganalisis, dan beraksi bersama menggunakan data tata guna lahan yang sesuai kebutuhan.",
     startMapping: "Mulai Memetakan",

@@ -588,7 +588,7 @@
   padding: clamp(80px, 12vw, 150px) 24px;
 }
 .luma-cta__inner {
-  max-width: 820px;
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
   display: flex;
