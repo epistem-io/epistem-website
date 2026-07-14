@@ -98,7 +98,7 @@ export function LumaCapabilities() {
 
         {CAPS.map((cap, i) => (
           <motion.div
-            key={cap.title}
+            key={cap.pos}
             className={`luma-cap__card luma-cap__card--${cap.pos}`}
             variants={fadeInUp}
           >
