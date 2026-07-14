@@ -70,8 +70,8 @@
   color: #fff;
   font-size: 17px;
   font-weight: 600;
-  padding: 16px 34px;
-  border-radius: 999px;
+  padding: 9px 68px;
+  border-radius: 12px;
   box-shadow: 0 10px 24px rgba(204, 71, 120, 0.28);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -265,7 +265,7 @@
   max-width: 1280px;
   margin: 40px auto;
   padding: 56px clamp(24px, 4vw, 64px);
-  background: linear-gradient(180deg, #fdeef4 0%, #fbe6ee 100%);
+  background: linear-gradient(180deg, #fdeef4 0%, #FAEDF2 100%);
   border-radius: 28px;
 }
 
@@ -281,7 +281,7 @@
 .luma-plat__title {
   text-align: center;
   font-size: clamp(28px, 4vw, 44px);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--luma-text-dark);
   margin: 0 0 40px;
@@ -293,7 +293,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  background: rgba(204, 71, 120, 0.1);
+  background: #EFC6D5;
   border-radius: 16px;
   padding: 8px;
   margin-bottom: 48px;
@@ -338,6 +338,7 @@
 }
 .luma-plat__desc {
   font-size: 16px;
+  font-weight: 600;
   line-height: 1.7;
   color: var(--luma-text-secondary);
   margin: 0;
@@ -364,7 +365,8 @@
   margin: 28px 0 0;
   font-size: 20px;
   font-weight: 600;
-  color: var(--luma-pink);
+  color: #C890A4;
+  font-style: italic;
 }
 
 @media (max-width: 900px) {
@@ -414,7 +416,7 @@
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--luma-text-dark);
-  margin: 0 0 24px;
+  margin: 0 0 96px;
 }
 
 /* Panggung dengan cincin & lingkaran pusat */

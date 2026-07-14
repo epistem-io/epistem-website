@@ -35,6 +35,22 @@ const pjs = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
+const degularDisplay = localFont({
+  src: [
+    {
+      path: "../../../public/fonts/DegularDisplayDemo-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../public/fonts/DegularDisplayDemo-Medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+  ],
+  variable: "--font-degular-display",
+});
+
 const aptos = localFont({
   src: [
     {
@@ -116,7 +132,7 @@ export default async function TestLayout({ children, params }: Props) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${pjs.variable} ${aptos.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${pjs.variable} ${aptos.variable} ${degularDisplay.variable} antialiased`}
       >
         <NextIntlClientProvider>
           <NavBar />
