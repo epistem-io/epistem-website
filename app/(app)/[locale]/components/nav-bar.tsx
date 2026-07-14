@@ -152,7 +152,7 @@ export const NavBar = () => {
                 onClick={() => setMenuOpen(false)}
                 className="rounded-xl px-4 py-3 font-inter text-base font-medium text-gray-800 transition-colors hover:bg-primary-pink-light-hover hover:text-primary-pink"
               >
-                Event
+                Events
               </Link>
               <a
                 href={STORYMAP_URL}

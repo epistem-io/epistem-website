@@ -33,8 +33,8 @@ export function LumaHero() {
             animate="visible"
             variants={fadeInUp}
           >
-            <h1 className="luma-hero-title">Luma</h1>
-            <p className="luma-hero-subtitle">Land Use Mapping for All</p>
+            <h1 className="luma-hero-title" style={{ fontFamily: 'var(--font-degular-display)' }}>Luma</h1>
+            <p className="luma-hero-subtitle" style={{ fontFamily: 'var(--font-degular-display)' }}>Land Use Mapping for All</p>
             {/* TODO: tambahkan key "Hero.cta" di messages/en.json & id.json */}
             <a
               href={getLumaUrl(locale)}

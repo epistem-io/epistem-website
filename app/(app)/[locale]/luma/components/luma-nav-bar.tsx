@@ -25,7 +25,7 @@ export const LumaNavBar = () => {
 
   return (
     <div className="fixed w-full block left-1/2 -translate-x-1/2 z-50">
-      <div className="relative z-30 bg-[#F6DFE5] shadow px-5 py-3">
+      <div className="relative z-30 bg-[#f7e6eb] px-5 py-3">
         <div className="flex flex-row items-center justify-between w-full">
           {/* Left: logo */}
           <div className="flex flex-row items-center gap-x-2">
@@ -48,11 +48,11 @@ export const LumaNavBar = () => {
               aria-expanded={menuOpen}
               className="flex flex-row items-center gap-x-2 p-1 hover:bg-transparent"
             >
-              <span className="font-inter text-lg lg:text-2xl font-regular text-primary-pink">
+              <span className="text-lg lg:text-2xl font-medium text-primary-pink" style={{ fontFamily: 'var(--font-degular-display)' }}>
                 Luma
               </span>
               <motion.span
-                animate={{ rotate: menuOpen ? 0 : 180 }}
+                animate={{ rotate: menuOpen ? 180 : 0 }}
                 transition={{ duration: 0.2 }}
                 className="flex"
               >
