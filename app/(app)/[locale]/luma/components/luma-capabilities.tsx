@@ -2,6 +2,7 @@
 
 import { type ReactNode, useState } from "react";
 import { AnimatePresence, motion, type Variants } from "motion/react";
+import { useTranslations } from "next-intl";
 
 const accentPink = "#cc4778";
 
@@ -18,30 +19,34 @@ const pop: Variants = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
+type Translator = (key: string) => string;
+
 type Cap = { pos: "left-top" | "left" | "right-top" | "right-bottom"; title: ReactNode; body: string };
 
-const CAPS: Cap[] = [
-  {
-    pos: "left-top",
-    title: "Guided Mapping in Minutes",
-    body: "Map smarter, not harder. Map land use and land cover in a few guided steps. Luma helps users turn satellite imagery into usable maps through a simple browser-based workflow, without requiring advanced technical setup."
-  },
-  {
-    pos: "left",
-    title: "Mapping, the Gotong Royong Way",
-    body: "Every map you build adds to a shared pool others can draw from, and vice versa. Luma is built so one person's mapping data can be reused by someone else, even on a different project, turning isolated data collection into a growing, crowdsourced resource for landscape monitoring worldwide.",
-  },
-  {
-    pos: "right-top",
-    title: "Transparent Analysis",
-    body: "Every map Luma produces is backed by a transparent, auditable methodology. Choose your classification scheme, validate against ground-truth or reference data, and generate accuracy assessments automatically, so your results hold up to scrutiny, replication, and peer review.",
-  },
-  {
-    pos: "right-bottom",
-    title: <>Track Change Over Time <em>(coming soon)</em></>,
-    body: "Land doesn't stay static, and your maps shouldn't either. Luma is extending its workflow to support time-series analysis: you'll be able to compare maps across dates, detect change, and monitor how landscapes evolve, all within the same platform you already use to build them.",
-  },
-];
+function buildCaps(t: Translator): Cap[] {
+  return [
+    {
+      pos: "left-top",
+      title: t("barrierTitle"),
+      body: t("barrierBody"),
+    },
+    {
+      pos: "left",
+      title: t("gotongRoyongTitle"),
+      body: t("gotongRoyongBody"),
+    },
+    {
+      pos: "right-top",
+      title: t("transparentTitle"),
+      body: t("transparentBody"),
+    },
+    {
+      pos: "right-bottom",
+      title: t("inclusivityTitle"),
+      body: t("inclusivityBody"),
+    },
+  ];
+}
 
 function Chevron({ expanded }: { expanded: boolean }) {
   return (
@@ -60,6 +65,9 @@ function Chevron({ expanded }: { expanded: boolean }) {
 }
 
 export function LumaCapabilities() {
+  const t = useTranslations("LumaCapabilities");
+  const CAPS = buildCaps(t);
+
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const toggle = (i: number) => {
@@ -68,8 +76,8 @@ export function LumaCapabilities() {
 
   return (
     <section className="luma-cap">
-      <p className="luma-cap__eyebrow">Capabilities</p>
-      <h2 className="luma-cap__title">Key Engine Capabilities</h2>
+      <p className="luma-cap__eyebrow">{t("eyebrow")}</p>
+      <h2 className="luma-cap__title">{t("title")}</h2>
 
       <motion.div
         className="luma-cap__stage"
@@ -92,7 +100,7 @@ export function LumaCapabilities() {
           </svg>
 
           <motion.div className="luma-cap__core" variants={pop}>
-            Luma
+            {t("core")}
           </motion.div>
         </div>
 

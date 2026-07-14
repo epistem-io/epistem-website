@@ -21,8 +21,8 @@ const cardIn: Variants = {
 };
 
 export function LumaHero() {
-  const t = useTranslations("LumaHero");
   const locale = useLocale();
+  const t = useTranslations("LumaHero");
 
   return (
     <>
@@ -33,14 +33,13 @@ export function LumaHero() {
             animate="visible"
             variants={fadeInUp}
           >
-            <h1 className="luma-hero-title" style={{ fontFamily: 'var(--font-degular-display)' }}>Luma</h1>
-            <p className="luma-hero-subtitle" style={{ fontFamily: 'var(--font-degular-display)' }}>Land Use Mapping for All</p>
-            {/* TODO: tambahkan key "Hero.cta" di messages/en.json & id.json */}
+            <h1 className="luma-hero-title" style={{ fontFamily: 'var(--font-degular-display)' }}>{t("title")}</h1>
+            <p className="luma-hero-subtitle" style={{ fontFamily: 'var(--font-degular-display)' }}>{t("subtitle")}</p>
             <a
               href={getLumaUrl(locale)}
               className="luma-hero-cta"
             >
-              Start Mapping
+              {t("cta")}
             </a>
           </motion.div>
 

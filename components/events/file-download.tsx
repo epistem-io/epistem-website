@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import { cn } from "@/lib/utils";
 
@@ -17,7 +18,8 @@ export function FileDownload({
   filetype = "PDF",
   compact = false,
 }: FileDownloadProps) {
-  const sizeLabel = formatFileSize(filesize);
+  const t = useTranslations("FileDownload");
+  const sizeLabel = formatFileSize(filesize, t("unknownSize"));
 
   return (
     <div
@@ -35,7 +37,7 @@ export function FileDownload({
         </div> */}
         <Image
           src="/images/file.webp"
-          alt="file"
+          alt={t("fileAlt")}
           width={90}
           height={90}
           className="h-15 w-auto"
@@ -65,20 +67,20 @@ export function FileDownload({
         )}
       >
         <span className="inline-flex h-9 shrink-0 items-center justify-center rounded-xl border border-primary-pink px-4 font-text-button-semibold-small text-primary-pink">
-          Download
+          {t("download")}
         </span>
       </a>
     </div>
   );
 }
 
-function formatFileSize(filesize?: number | null) {
+function formatFileSize(filesize: number | null | undefined, unknownLabel: string) {
   if (
     typeof filesize !== "number" ||
     !Number.isFinite(filesize) ||
     filesize <= 0
   ) {
-    return "Unknown size";
+    return unknownLabel;
   }
 
   const megabyte = 1024 * 1024;

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { ChevronLeftIcon, ChevronRightIcon, XIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   type KeyboardEvent as ReactKeyboardEvent,
   type MouseEvent as ReactMouseEvent,
@@ -25,6 +26,7 @@ export function EventImageCarousel({
   title,
   images,
 }: EventImageCarouselProps) {
+  const t = useTranslations("EventImageCarousel");
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [touchStartX, setTouchStartX] = useState<number | null>(null);
@@ -131,7 +133,7 @@ export function EventImageCarousel({
         onTouchEnd={handleTouchEnd}
       >
         <p id={carouselLabelId} className="sr-only">
-          {title} image gallery
+          {t("galleryLabel", { title })}
         </p>
 
         <div className="relative">
@@ -140,7 +142,7 @@ export function EventImageCarousel({
             className="group relative block w-full overflow-hidden rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2"
             onClick={() => setIsLightboxOpen(true)}
             onKeyDown={handleImageKeyDown}
-            aria-label={`Open ${activeImage.alt} in fullscreen`}
+            aria-label={t("openFullscreen", { alt: activeImage.alt })}
           >
             <div className="relative aspect-[778/406] overflow-hidden rounded-xl bg-[#F5F5F5]">
               <Image
@@ -174,7 +176,7 @@ export function EventImageCarousel({
           <div
             className="flex gap-3 overflow-x-auto pb-1"
             role="tablist"
-            aria-label={`${title} image thumbnails`}
+            aria-label={t("thumbnailsLabel", { title })}
           >
             {images.map((image, index) => {
               const isActive = index === safeActiveIndex;
@@ -185,7 +187,7 @@ export function EventImageCarousel({
                   type="button"
                   role="tab"
                   aria-selected={isActive}
-                  aria-label={`Show image ${index + 1} of ${images.length}`}
+                  aria-label={t("showImage", { index: index + 1, total: images.length })}
                   className={cn(
                     "relative h-[98px] w-[146px] shrink-0 overflow-hidden rounded-xl bg-[#F5F5F5] transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2",
                     isActive ? "opacity-100" : "opacity-45 hover:opacity-70",
@@ -211,14 +213,14 @@ export function EventImageCarousel({
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 sm:p-6"
           role="dialog"
           aria-modal="true"
-          aria-label={`${title} fullscreen image viewer`}
+          aria-label={t("fullscreenViewer", { title })}
           onClick={() => setIsLightboxOpen(false)}
         >
           <button
             type="button"
             className="absolute right-4 top-4 inline-flex size-11 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 sm:right-6 sm:top-6"
             onClick={() => setIsLightboxOpen(false)}
-            aria-label="Close fullscreen gallery"
+            aria-label={t("closeGallery")}
           >
             <XIcon className="size-5" />
           </button>
@@ -287,6 +289,7 @@ function CarouselArrow({
   className,
   lightbox = false,
 }: CarouselArrowProps) {
+  const t = useTranslations("EventImageCarousel");
   const isPrevious = direction === "previous";
   const Icon = isPrevious ? ChevronLeftIcon : ChevronRightIcon;
 
@@ -294,7 +297,7 @@ function CarouselArrow({
     <button
       type="button"
       onClick={onClick}
-      aria-label={isPrevious ? "Show previous image" : "Show next image"}
+      aria-label={isPrevious ? t("previousImage") : t("nextImage")}
       className={cn(
         "inline-flex size-11 items-center justify-center rounded-full bg-white/60 text-text-icons-base-main shadow-[0_4px_12px_rgba(0,0,0,0.08)] backdrop-blur-[2px] transition hover:bg-white/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2",
         lightbox &&

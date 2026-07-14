@@ -3,11 +3,14 @@
 import { useState, type ReactNode } from "react";
 import { AnimatePresence, motion, type Variants } from "motion/react";
 import { Layers, Search, Share2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
+
+type Translator = (key: string) => string;
 
 type Tab = {
   id: string;
@@ -18,55 +21,57 @@ type Tab = {
   image?: string; // jika ada → tampilkan gambar; jika tidak → "Coming Soon"
 };
 
-const TABS: Tab[] = [
-  {
-    id: "generate",
-    label: "Generate LULC Map",
-    icon: <Layers size={18} />,
-    heading: "From Satellite Data to Decision-Ready Maps",
-    description:
-      "Luma simplifies land use and land cover mapping into a guided workflow. From selecting or drawing your geographic area and reviewing the generated composite imagery, to creating a classification scheme, preparing sample data, setting model parameters, and assessing map quality, Luma supports the entire process from start to finish.",
-    image: "/images/generate-lulc-map.webp",
-  },
-  {
-    id: "analyze",
-    label: "Change Analysis",
-    icon: <Search size={18} />,
-    heading: "Compare land cover across time and reveal meaningful landscape change ",
-    description:
-      "Luma makes it easier to detect and interpret changes in land cover over time. With time-series analysis and change detection workflows, you can explore landscape dynamics, monitor transitions, and support evidence-based decision-making.",
-  },
-  {
-    id: "share",
-    label: "Collaborative Mapping",
-    icon: <Share2 size={18} />,
-    heading: "Turn individual mapping efforts into outputs that others can review, use, and adapt",
-    description:
-      "Luma is designed to make land use and land cover mapping more collaborative and accessible. It goes beyond a single user or a single project by supporting workflows that make it easier to share results, build on reference data, and strengthen collective landscape monitoring.",
-  },
-];
+function buildTabs(t: Translator): Tab[] {
+  return [
+    {
+      id: "generate",
+      label: t("generateLabel"),
+      icon: <Layers size={18} />,
+      heading: t("generateHeading"),
+      description: t("generateDescription"),
+      image: "/images/generate-lulc-map.webp",
+    },
+    {
+      id: "analyze",
+      label: t("analyzeLabel"),
+      icon: <Search size={18} />,
+      heading: t("analyzeHeading"),
+      description: t("analyzeDescription"),
+    },
+    {
+      id: "share",
+      label: t("shareLabel"),
+      icon: <Share2 size={18} />,
+      heading: t("shareHeading"),
+      description: t("shareDescription"),
+    },
+  ];
+}
 
 export function LumaPlatform() {
+  const t = useTranslations("LumaPlatform");
+  const TABS = buildTabs(t);
+
   const [active, setActive] = useState(0);
   const tab = TABS[active];
 
   return (
     <section className="luma-plat">
-      <p className="luma-plat__eyebrow">The Platform</p>
-      <h2 className="luma-plat__title">Three features, one mapping workflow</h2>
+      <p className="luma-plat__eyebrow">{t("eyebrow")}</p>
+      <h2 className="luma-plat__title">{t("title")}</h2>
 
-      <div className="luma-plat__tabs" role="tablist" aria-label="Platform modules">
-        {TABS.map((t, i) => (
+      <div className="luma-plat__tabs" role="tablist" aria-label={t("tablistLabel")}>
+        {TABS.map((item, i) => (
           <button
-            key={t.id}
+            key={item.id}
             type="button"
             role="tab"
             aria-selected={i === active}
             className={`luma-plat__tab ${i === active ? "is-active" : ""}`}
             onClick={() => setActive(i)}
           >
-            {t.icon}
-            <span className="luma-plat__tab-label">{t.label}</span>
+            {item.icon}
+            <span className="luma-plat__tab-label">{item.label}</span>
           </button>
         ))}
       </div>
@@ -100,7 +105,7 @@ export function LumaPlatform() {
           >
             <h3 className="luma-plat__heading">{tab.heading}</h3>
             <p className="luma-plat__desc">{tab.description}</p>
-            <p className="luma-plat__soon-label">Coming Soon</p>
+            <p className="luma-plat__soon-label">{t("comingSoon")}</p>
           </motion.div>
         )}
       </AnimatePresence>
