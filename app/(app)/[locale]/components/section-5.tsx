@@ -39,7 +39,7 @@ export const Section5 = () => {
         }
         caption={
           {
-            en: "Voices from the people shaping better mapping and better landscapes.",
+            en: "Voices from the people shaping better landscapes through mapping.",
             id: "Suara dari para pihak yang membentuk bentang lahan yang lebih baik melalui pemetaan.",
           }[locale]
         }

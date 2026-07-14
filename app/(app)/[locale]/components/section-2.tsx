@@ -58,7 +58,7 @@ export const Section2 = () => {
               </p>
             </div>
             <div className="">
-              <Link href={getLumaUrl(locale)}>
+              <Link href="/luma">
                 <Button
                   variant={"primary"}
                   size={"lg"}
