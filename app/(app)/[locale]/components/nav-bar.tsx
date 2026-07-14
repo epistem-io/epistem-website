@@ -14,8 +14,29 @@ import Link from "next/link";
 const STORYMAP_URL =
   "https://storymaps.arcgis.com/collections/797034ec6606463bb749fcc0c1527c98";
 
+// Hardcoded until the Tolgee keys for the navbar can be pushed.
+const COPY = {
+  en: {
+    logoAlt: "epistem logo",
+    toggleMenu: "Toggle navigation menu",
+    home: "Home",
+    luma: "Luma",
+    events: "Events",
+    storymap: "Storymap",
+  },
+  id: {
+    logoAlt: "logo epistem",
+    toggleMenu: "Buka/tutup menu navigasi",
+    home: "Beranda",
+    luma: "Luma",
+    events: "Acara",
+    storymap: "Peta Cerita",
+  },
+} as const;
+
 export const NavBar = () => {
   const locale = useLocale();
+  const t = COPY[locale as keyof typeof COPY] ?? COPY.en;
   const router = useRouter();
   const pathname = usePathname();
 
@@ -39,7 +60,7 @@ export const NavBar = () => {
             <Link href="/">
               <Image
                 src="/images/epistem-logos.webp"
-                alt="epistem logo"
+                alt={t.logoAlt}
                 width={500}
                 height={216}
                 className="h-9 lg:h-16 w-auto pt-1.25 pr-1.25"
@@ -93,7 +114,7 @@ export const NavBar = () => {
               size="icon"
               onClick={() => setMenuOpen((prev) => !prev)}
               aria-expanded={menuOpen}
-              aria-label="Toggle navigation menu"
+              aria-label={t.toggleMenu}
               className="ml-1 p-1 hover:bg-transparent"
             >
               {menuOpen ? (
@@ -138,21 +159,21 @@ export const NavBar = () => {
                 onClick={() => setMenuOpen(false)}
                 className="rounded-xl px-4 py-3 font-inter text-base font-medium text-gray-800 transition-colors hover:bg-primary-pink-light-hover hover:text-primary-pink"
               >
-                Home
+                {t.home}
               </Link>
               <Link
                 href="/luma"
                 onClick={() => setMenuOpen(false)}
                 className="rounded-xl px-4 py-3 font-inter text-base font-medium text-gray-800 transition-colors hover:bg-primary-pink-light-hover hover:text-primary-pink"
               >
-                Luma
+                {t.luma}
               </Link>
               <Link
                 href="/events"
                 onClick={() => setMenuOpen(false)}
                 className="rounded-xl px-4 py-3 font-inter text-base font-medium text-gray-800 transition-colors hover:bg-primary-pink-light-hover hover:text-primary-pink"
               >
-                Events
+                {t.events}
               </Link>
               <a
                 href={STORYMAP_URL}
@@ -161,7 +182,7 @@ export const NavBar = () => {
                 onClick={() => setMenuOpen(false)}
                 className="rounded-xl px-4 py-3 font-inter text-base font-medium text-gray-800 transition-colors hover:bg-primary-pink-light-hover hover:text-primary-pink"
               >
-                Storymap
+                {t.storymap}
               </a>
             </div>
           </motion.div>

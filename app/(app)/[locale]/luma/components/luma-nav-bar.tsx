@@ -12,8 +12,35 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import Link from "next/link";
 import { getLumaUrl } from "@/lib/luma";
 
+// Hardcoded until the Tolgee keys for the navbar can be pushed.
+const COPY = {
+  en: {
+    platformTitle: "Epistem Platform",
+    lumaTitle: "Luma",
+    lumaSubtitle: "Land Use Mapping for All",
+    lumaDescription:
+      "Generate, analyze, and share high-precision LULC maps from satellite data, no coding required.",
+    ronaTitle: "Rona",
+    ronaSubtitle: "Repository for Open-source Land use Analysis",
+    ronaDescription:
+      "High-quality, standardized reference data for thematically diverse LULC mapping.",
+  },
+  id: {
+    platformTitle: "Platform Epistem",
+    lumaTitle: "Luma",
+    lumaSubtitle: "Pemetaan Lahan untuk Semua",
+    lumaDescription:
+      "Hasilkan, analisis, dan bagikan peta LULC berpresisi tinggi dari data satelit tanpa perlu coding.",
+    ronaTitle: "Rona",
+    ronaSubtitle: "Repositori Solusi Analisis Lahan Sumber Terbuka",
+    ronaDescription:
+      "Data referensi terstandar berkualitas tinggi untuk pemetaan LULC yang beragam",
+  },
+} as const;
+
 export const LumaNavBar = () => {
   const locale = useLocale();
+  const t = COPY[locale as keyof typeof COPY] ?? COPY.en;
   const router = useRouter();
   const pathname = usePathname();
 
@@ -124,7 +151,7 @@ export const LumaNavBar = () => {
           <div className="absolute left-0 top-full w-full px-4 lg:px-6 py-6 lg:py-8 z-20">
             <div className="mx-auto max-w-6xl rounded-3xl bg-white p-6 lg:p-8 shadow-2xl">
               <h2 className="text-center font-inter text-lg lg:text-xl font-semibold text-gray-700 tracking-wide">
-                Epistem Platform
+                {t.platformTitle}
               </h2>
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
@@ -139,14 +166,13 @@ export const LumaNavBar = () => {
                 >
                   <div className="relative z-10 max-w-[55%]">
                     <h3 className="font-inter text-3xl lg:text-4xl font-semibold text-primary-pink">
-                      Luma
+                      {t.lumaTitle}
                     </h3>
                     <p className="mt-1 font-inter text-xs lg:text-sm text-gray-800">
-                      Land Use Mapping for All
+                      {t.lumaSubtitle}
                     </p>
                     <p className="mt-3 font-inter text-[12px] lg:text-xs text-gray-500">
-                      Generate, analyze, and share high-precision LULC maps from
-                      satellite data, no coding required.
+                      {t.lumaDescription}
                     </p>
                   </div>
                   <Image
@@ -167,14 +193,13 @@ export const LumaNavBar = () => {
                 >
                   <div className="relative z-10 max-w-[55%]">
                     <h3 className="font-inter text-3xl lg:text-4xl font-semibold text-primary-pink">
-                      Rona
+                      {t.ronaTitle}
                     </h3>
                     <p className="mt-1 font-inter text-sm lg:text-base text-gray-800">
-                      Repository for Open-source Land use Analysis
+                      {t.ronaSubtitle}
                     </p>
                     <p className="mt-3 font-inter text-[12px] lg:text-xs text-gray-500">
-                      Validate map accuracy through community-driven ground truth
-                      and thematic accuracy assessment.
+                      {t.ronaDescription}
                     </p>
                   </div>
                   <Image
