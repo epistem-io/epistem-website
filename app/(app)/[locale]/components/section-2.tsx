@@ -11,12 +11,14 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
 import { cn } from "@/lib/utils";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { SectionHead } from "./section-head";
 import { Link } from "@/i18n/navigation";
+import { getLumaUrl } from "@/lib/luma";
 
 export const Section2 = () => {
   const t = useTranslations("HomePage.Section2");
+  const locale = useLocale();
 
   const featureArray = [
     {
@@ -56,7 +58,7 @@ export const Section2 = () => {
               </p>
             </div>
             <div className="">
-              <Link href={`${process.env.NEXT_PUBLIC_LUMA_URL}`}>
+              <Link href="/luma">
                 <Button
                   variant={"primary"}
                   size={"lg"}

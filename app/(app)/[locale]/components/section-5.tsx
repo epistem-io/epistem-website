@@ -33,7 +33,7 @@ export const Section5 = () => {
 
   return (
     <div className="base-container flex flex-col items-center justify-start w-full px-2 max-lg:mt-8 lg:my-15 xl:my-20">
-      <SectionHead title="Our Stories" caption="Voices from the people shaping better mapping and better landscapes." />
+      <SectionHead title={t("title")} caption={t("caption")} />
 
       <div className="w-full relative mt-8 lg:mt-12">
         <div
@@ -72,7 +72,7 @@ export const Section5 = () => {
                   className="shrink-0 rounded-full border-transparent bg-white text-primary-pink hover:bg-white hover:text-primary-pink-active shadow-sm font-pjs text-xs lg:text-sm font-bold h-auto px-4 py-2"
                 >
                   <a href={item.url} target="_blank" rel="noreferrer">
-                    See more
+                    {t("seeMore")}
                   </a>
                 </Button>
               </div>

@@ -2,6 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { motion, type PanInfo } from "motion/react";
+import { useTranslations } from "next-intl";
 
 const textDark = "#1A1D1A";
 
@@ -38,62 +39,70 @@ function LumaCardMedia({
 }
 
 // ── Isi tiap kartu ───────────────────────────────────────────
-const CARDS: { eyebrow: string; title: string; caption?: string; body: ReactNode }[] = [
-  {
-    eyebrow: "Generate LULC Map",
-    title: "Turn satellite imagery into a classified map ",
-    caption: "Choose area, period, and imagery",
-    body: <LumaCardMedia src="/images/card-5.png" alt="Satellite mosaic preview" />,
-  },
-  {
-    eyebrow: "Change Analysis",
-    title: "Track change over time",
-    body: (
-      <>
-        <LumaCardMedia src="/images/card-1.png" alt="Change analysis chart" />
-        <div>
-          <span className="luma-pill">Time series</span>
-          <span className="luma-pill">Zonal statistics</span>
-        </div>
-      </>
-    ),
-  },
-  {
-    eyebrow: "Generate LULC Map",
-    title: "Classified landscape, ready to explore",
-    caption: "See the class composition across your area",
-    body: <LumaCardMedia src="/images/card-3.png" alt="Classified landscape map" />,
-  },
-  {
-    eyebrow: "Share Map",
-    title: "Turn insight into participation",
-    body: (
-      <>
-        <LumaCardMedia src="/images/card-2.png" alt="Community validation map" />
-        <p className="luma-card__community-note" style={{ color: textDark }}>
-          Crowdsource ground truth, validate together
-        </p>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={{ fontSize: 12, color: "#777" }}>Public or private campaign</span>
-          <div className="luma-avatars">
-            <span>AT</span>
-            <span>MI</span>
-            <span>OL</span>
+type Translator = (key: string) => string;
+
+type Card = { eyebrow: string; title: string; caption?: string; body: ReactNode };
+
+function buildCards(t: Translator): Card[] {
+  return [
+    {
+      eyebrow: t("mosaicEyebrow"),
+      title: t("mosaicTitle"),
+      caption: t("mosaicCaption"),
+      body: <LumaCardMedia src="/images/card-5.png" alt={t("mosaicAlt")} />,
+    },
+    {
+      eyebrow: t("changeEyebrow"),
+      title: t("changeTitle"),
+      body: (
+        <>
+          <LumaCardMedia src="/images/card-1.png" alt={t("changeAlt")} />
+          <div>
+            <span className="luma-pill">{t("changePill1")}</span>
+            <span className="luma-pill">{t("changePill2")}</span>
           </div>
-        </div>
-      </>
-    ),
-  },
-  {
-    eyebrow: "Generate LULC Map",
-    title: "Validate training data quality",
-    caption: "Catch low class separability before you publish",
-    body: <LumaCardMedia src="/images/card-4.png" alt="Class separability warning" fit="contain" />,
-  },
-];
+        </>
+      ),
+    },
+    {
+      eyebrow: t("classifiedEyebrow"),
+      title: t("classifiedTitle"),
+      caption: t("classifiedCaption"),
+      body: <LumaCardMedia src="/images/card-3.png" alt={t("classifiedAlt")} />,
+    },
+    {
+      eyebrow: t("shareEyebrow"),
+      title: t("shareTitle"),
+      body: (
+        <>
+          <LumaCardMedia src="/images/card-2.png" alt={t("shareAlt")} />
+          <p className="luma-card__community-note" style={{ color: textDark }}>
+            {t("shareNote")}
+          </p>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: 12, color: "#777" }}>{t("shareCampaign")}</span>
+            <div className="luma-avatars">
+              <span>AT</span>
+              <span>MI</span>
+              <span>OL</span>
+            </div>
+          </div>
+        </>
+      ),
+    },
+    {
+      eyebrow: t("qualityEyebrow"),
+      title: t("qualityTitle"),
+      caption: t("qualityCaption"),
+      body: <LumaCardMedia src="/images/card-4.png" alt={t("qualityAlt")} fit="contain" />,
+    },
+  ];
+}
 
 // ── Carousel kartu tak terbatas (loop kiri/kanan) ────────────
 export function LumaHeroCards({ className = "" }: { className?: string }) {
+  const t = useTranslations("LumaHeroCards");
+  const CARDS = buildCards(t);
   const count = CARDS.length;
   const [active, setActive] = useState(Math.floor(count / 2)); // mulai dari tengah
 

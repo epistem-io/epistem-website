@@ -1,6 +1,8 @@
 "use client";
 
 import { motion, type Variants } from "motion/react";
+import { useLocale, useTranslations } from "next-intl";
+import { getLumaUrl } from "@/lib/luma";
 
 const container: Variants = {
   hidden: {},
@@ -12,6 +14,8 @@ const fadeInUp: Variants = {
 };
 
 export function LumaCta() {
+  const locale = useLocale();
+  const t = useTranslations("LumaCta");
   return (
     <section className="luma-cta">
       <motion.div
@@ -22,24 +26,24 @@ export function LumaCta() {
         viewport={{ once: true, amount: 0.3 }}
       >
         <motion.h2 className="luma-cta__title" variants={fadeInUp}>
-          Map past trends,
+          {t("titleLine1")}
           <br />
-          <span>plan future action.</span>
+          <span>{t("titleLine2")}</span>
         </motion.h2>
 
         <motion.p className="luma-cta__subtitle" variants={fadeInUp}>
-          Intuitive no-coding interface for creating, analysing, and collectively acting on customizable land use and land cover map data. 
+          {t("subtitle")}
         </motion.p>
 
         <motion.div className="luma-cta__actions" variants={fadeInUp}>
           <a
-            href={process.env.NEXT_PUBLIC_LUMA_URL || "/"}
+            href={getLumaUrl(locale)}
             className="luma-cta__btn luma-cta__btn--primary"
           >
-            Start Mapping
+            {t("startMapping")}
           </a>
           <button type="button" className="luma-cta__btn luma-cta__btn--ghost">
-            Sign In
+            {t("signIn")}
           </button>
         </motion.div>
       </motion.div>

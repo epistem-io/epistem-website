@@ -4,8 +4,10 @@ import Image from "next/image";
 // import { useRef, useState } from "react";
 // import { useInView } from "motion/react";
 import { usePathname } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export const Footer = () => {
+  const t = useTranslations("Footer");
   // const [isOpen, setIsOpen] = useState(false);
 
   // const imageComp = useRef(null);
@@ -26,7 +28,7 @@ export const Footer = () => {
           <div className="flex flex-col w-full gap-y-2.5 lg:gap-y-10">
             <Image
               src="/images/restore-logo.webp"
-              alt="restore-log"
+              alt={t("restoreLogAlt")}
               width={982}
               height={254}
               className="hidden lg:block w-37 lg:w-50 lg:mr-auto"
@@ -35,32 +37,32 @@ export const Footer = () => {
               <div className="">
                 <Image
                   src="/images/restore-logo.webp"
-                  alt="restore-log"
+                  alt={t("restoreLogAlt")}
                   width={982}
                   height={254}
                   className="block lg:hidden w-37 lg:w-50 lg:mr-auto"
                 />
                 <p className="block lg:hidden font-inter text-black text-[10px] font-bold mb-2.5 text-left mt-3">
-                  Supported by:
+                  {t("supportedBy")}
                 </p>
                 <div className="flex flex-row gap-x-5 lg:gap-x-15 gap-y-5 max-lg:items-start">
                   <Image
                     src="/images/bundes.webp"
-                    alt="bundes mobile logo"
+                    alt={t("bundesMobileLogoAlt")}
                     width={300}
                     height={144}
                     className="block lg:hidden w-45 lg:w-62 h-auto object-contain"
                   />
                   <Image
-                    src="/images/bundes-logo.webp"
-                    alt="bundes logo"
+                    src="/images/bundes-new-logo.webp"
+                    alt={t("bundesLogoAlt")}
                     width={277}
                     height={169}
                     className="hidden lg:block w-34 lg:w-62 h-auto object-contain"
                   />
                   <Image
-                    src="/images/iki-logo.webp"
-                    alt="iki logo"
+                    src="/images/iki-new-logo.webp"
+                    alt={t("ikiLogoAlt")}
                     width={900}
                     height={208}
                     className="w-full max-w-34 lg:w-70 h-auto object-contain"
@@ -69,12 +71,12 @@ export const Footer = () => {
               </div>
               <div className="space-y-3.5 lg:space-y-5 max-lg:mt-9">
                 <p className="text-[10px] lg:text-sm font-inter font-bold text-black">
-                  Initiated by:
+                  {t("initiatedBy")}
                 </p>
                 <div className="flex flex-row items-center gap-x-13 lg:gap-x-15 max-lg:justify-between">
                   <Image
                     src="/images/iiasa-logo.webp"
-                    alt="iiasa logo"
+                    alt={t("iiasaLogoAlt")}
                     width={201}
                     height={282}
                     className="w-14 lg:w-17"
@@ -89,7 +91,7 @@ export const Footer = () => {
                     /> */}
                     <Image
                       src="/images/landscape-alliance-logo.webp"
-                      alt="landscape logo"
+                      alt={t("landscapeLogoAlt")}
                       width={854}
                       height={216}
                       className="w-50 lg:w-56 h-auto"
@@ -99,7 +101,7 @@ export const Footer = () => {
 
                 <Image
                   src="/images/wri-logo.webp"
-                  alt="wri logo"
+                  alt={t("wriLogoAlt")}
                   width={1024}
                   height={207}
                   className="w-57 lg:w-70 max-lg:mx-auto max-lg:mt-1.5"
