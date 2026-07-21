@@ -109,10 +109,13 @@ export function LumaCapabilities() {
             key={cap.pos}
             className={`luma-cap__card luma-cap__card--${cap.pos}`}
             variants={fadeInUp}
+            onMouseEnter={() => setExpandedIndex(i)}
+            onMouseLeave={() => setExpandedIndex(null)}
           >
             <button
               className="luma-cap__card-header"
               onClick={() => toggle(i)}
+              onFocus={() => setExpandedIndex(i)}
               aria-expanded={expandedIndex === i}
             >
               <h3>{cap.title}</h3>
