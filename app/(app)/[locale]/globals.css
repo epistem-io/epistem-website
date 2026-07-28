@@ -411,3 +411,7 @@
     max-width: 768px;
   }
 }
+
+.bg-footer {
+  background: linear-gradient(17.75deg, #FFFFFF 40.47%, #FAEDF2 72.59%);
+}

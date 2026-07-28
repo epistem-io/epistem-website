@@ -23,7 +23,7 @@ export const Footer = () => {
   }
   return (
     <>
-      <div className="w-full py-6 lg:pt-20 lg:pb-30 px-1 lg:px-28 bg-[linear-gradient(6deg,#FFFFFF_10.47%,#FAEDF2_120.59%)]">
+      <div className="w-full py-6 lg:pt-20 lg:pb-30 px-1 lg:px-28 bg-footer">
         <div className="flex flex-col items-center justify-start w-full max-w-335.5 px-2">
           <div className="flex flex-col w-full gap-y-2.5 lg:gap-y-10">
             <Image
@@ -111,7 +111,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="h-10 w-full bg-primary-red-pink-light-active"></div>
+      <div className="h-10 w-full bg-primary-pink"></div>
     </>
   );
 };
