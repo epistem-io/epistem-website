@@ -23,7 +23,7 @@ export const Footer = () => {
   }
   return (
     <>
-      <div className="w-full py-6 lg:py-17 px-1 lg:px-28 bg-primary-pink-light-hover">
+      <div className="w-full py-6 lg:pt-20 lg:pb-30 px-1 lg:px-28 bg-footer">
         <div className="flex flex-col items-center justify-start w-full max-w-335.5 px-2">
           <div className="flex flex-col w-full gap-y-2.5 lg:gap-y-10">
             <Image
@@ -45,7 +45,7 @@ export const Footer = () => {
                 <p className="block lg:hidden font-inter text-black text-[10px] font-bold mb-2.5 text-left mt-3">
                   {t("supportedBy")}
                 </p>
-                <div className="flex flex-row gap-x-5 lg:gap-x-15 gap-y-5 max-lg:items-start">
+                <div className="flex flex-row gap-x-5 lg:gap-x-15 gap-y-5 max-lg:items-start lg:items-center">
                   <Image
                     src="/images/bundes.webp"
                     alt={t("bundesMobileLogoAlt")}
@@ -65,7 +65,7 @@ export const Footer = () => {
                     alt={t("ikiLogoAlt")}
                     width={900}
                     height={208}
-                    className="w-full max-w-34 lg:w-70 h-auto object-contain"
+                    className="w-full max-w-34 h-auto lg:max-w-none lg:w-68.75 lg:h-17.5 lg:self-start object-contain mt-5"
                   />
                 </div>
               </div>
@@ -111,7 +111,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="h-10 w-full bg-primary-red-pink-light-active"></div>
+      <div className="h-10 w-full bg-primary-pink"></div>
     </>
   );
 };

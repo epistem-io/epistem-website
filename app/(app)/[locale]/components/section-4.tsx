@@ -177,15 +177,6 @@ export const Section4 = () => {
                       {t("item7Title")}
                     </p>
                     <p className="">{t("item7Description")}</p>
-                    <ul className="list-disc pl-7">
-                      {t.rich("item8Description", {
-                        li: (chunks) => (
-                          <li>
-                            <p>{chunks}</p>
-                          </li>
-                        ),
-                      })}
-                    </ul>
                   </div>
                 </div>
               )}
