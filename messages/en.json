@@ -11,6 +11,8 @@
     "nextSpeakers": "Next speakers",
     "previousPastEvents": "Previous past events",
     "nextPastEvents": "Next past events",
+    "previousFeaturedEvents": "Previous featured events",
+    "nextFeaturedEvents": "Next featured events",
     "aboutThisEvent": "About this event",
     "upcomingEvent": "Upcoming Event",
     "featuredEventCta": "See Event Detail",

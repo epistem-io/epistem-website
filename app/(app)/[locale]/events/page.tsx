@@ -5,10 +5,10 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { HighlightEvent } from "@/components/events/highlight-event";
+import { HighlightEvents } from "@/components/events/highlight-event";
 import { PastEvents } from "@/components/events/past-events";
 import { Link } from "@/i18n/navigation";
-import { getFeaturedEvent, getPastEvents } from "@/lib/events";
+import { getFeaturedEvents, getPastEvents } from "@/lib/events";
 import { getTranslations } from "next-intl/server";
 import { ChevronLeftIcon } from "lucide-react";
 
@@ -20,7 +20,7 @@ type Props = {
 
 export default async function EventsPage({ params }: Props) {
   const { locale } = await params;
-  const featuredEvent = await getFeaturedEvent(locale);
+  const featuredEvents = await getFeaturedEvents(locale);
   const pastEvents = await getPastEvents(locale);
 
   const t = await getTranslations("EventsListPage");
@@ -86,8 +86,8 @@ export default async function EventsPage({ params }: Props) {
       </div>
       <div className="bg-white py-3 md:py-20">
         <div className="base-container flex w-full flex-col gap-3 md:gap-16">
-          {featuredEvent ? (
-            <HighlightEvent event={featuredEvent} locale={locale} />
+          {featuredEvents.length > 0 ? (
+            <HighlightEvents events={featuredEvents} locale={locale} />
           ) : null}
 
           <PastEvents events={pastEvents} locale={locale} />

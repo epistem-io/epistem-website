@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
+import { HighlightEventsCarousel } from "@/components/events/highlight-events-carousel";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import type { Event } from "@/payload-types";
@@ -13,7 +14,7 @@ type HighlightEventProps = {
   locale: "en" | "id";
 };
 
-type HighlightEventCopy = {
+export type HighlightEventCopy = {
   upcomingEvent: string;
   featuredEventCta: string;
   eventDurationDay: string;
@@ -24,18 +25,29 @@ type HighlightEventViewProps = HighlightEventProps & {
   copy: HighlightEventCopy;
 };
 
-export async function HighlightEvent({ event, locale }: HighlightEventProps) {
+type HighlightEventsProps = {
+  events: Event[];
+  locale: "en" | "id";
+};
+
+export async function HighlightEvents({ events, locale }: HighlightEventsProps) {
   const t = await getTranslations("EventDetailPage");
 
   return (
-    <HighlightEventView
-      event={event}
+    <HighlightEventsCarousel
+      events={events}
       locale={locale}
       copy={{
         upcomingEvent: t("upcomingEvent"),
         featuredEventCta: t("featuredEventCta"),
         eventDurationDay: t("eventDurationDay"),
         eventDurationDays: t("eventDurationDays"),
+        previousFeaturedEvents: t.has("previousFeaturedEvents")
+          ? t("previousFeaturedEvents")
+          : t("previousPastEvents"),
+        nextFeaturedEvents: t.has("nextFeaturedEvents")
+          ? t("nextFeaturedEvents")
+          : t("nextPastEvents"),
       }}
     />
   );
@@ -66,31 +78,32 @@ export function HighlightEventView({
   );
 
   return (
-    <article className="overflow-hidden rounded-[12px] bg-primary-red-pink-light p-3 md:rounded-[20px] md:p-6">
-      <div className="flex flex-col gap-3 md:gap-6 lg:flex-row lg:items-stretch">
+    <article className="overflow-hidden rounded-[12px] bg-primary-red-pink-light p-3 md:rounded-[20px] md:p-6 lg:h-full lg:min-h-[376px]">
+      <div className="flex flex-col gap-3 md:gap-6 lg:h-full lg:flex-row lg:items-stretch">
         <div className="flex min-w-0 flex-1 flex-col">
           <p className="font-lp-text-xs-semibold text-primary-pink md:font-lp-text-xl-bold">
             {copy.upcomingEvent}
           </p>
 
           <div className="mt-3 flex flex-1 flex-col md:mt-4">
-            <h2 className="text-custom-text-grey-dark [font-family:var(--font-pjs)] text-[18px] font-semibold leading-[26px] md:font-lp-headline-l-semibold md:text-[36px] md:leading-[44px]">
+            <h2 className="text-custom-text-grey-dark [font-family:var(--font-pjs)] text-[18px] font-semibold leading-[26px] md:font-lp-headline-l-semibold md:text-[36px] md:leading-[44px] lg:line-clamp-2">
               {event.title}
             </h2>
 
             {description ? (
-              <p className="mt-2 line-clamp-2 text-[12px] leading-[18px] text-text-icons-base-main md:mt-6 md:max-w-[650px] md:line-clamp-none md:font-lp-text-xl-regular">
+              <p className="mt-2 line-clamp-2 text-[12px] leading-[18px] text-text-icons-base-main md:mt-6 md:max-w-[650px] md:line-clamp-none md:font-lp-text-xl-regular lg:mt-4 lg:line-clamp-3">
                 {description}
               </p>
             ) : null}
 
-            <div className="mt-4 grid grid-cols-2 gap-2.5 md:mt-6 md:gap-5">
+            <div className="mt-4 grid grid-cols-2 gap-2.5 md:mt-6 md:gap-5 lg:mt-auto lg:flex lg:flex-nowrap lg:items-center lg:gap-3 lg:pt-4">
               <MetadataChip
                 icon={
                   <CalendarDaysIcon className="size-[18px] text-primary-pink md:size-6" />
                 }
                 title={dateTitle}
                 subtitle={dateSubtitle}
+                className="lg:w-[265px]"
               />
               <MetadataChip
                 icon={
@@ -98,37 +111,37 @@ export function HighlightEventView({
                 }
                 title={event.locationGeneral}
                 subtitle={event.locationDetail}
+                className="lg:w-[250px]"
               />
-            </div>
-
-            <div className="mt-4 md:mt-6">
-              <Button
-                asChild
-                variant="primary"
-                className="h-auto rounded-[8px] px-2 py-1 shadow-[0px_1px_2px_0px_rgba(16,24,40,0.04)] md:px-5 md:py-3"
-              >
-                <Link
-                  href={`/events/${event.slug}`}
-                  className="gap-1.5 md:gap-2"
+              <div className="col-span-2 mt-1.5 md:mt-1 lg:mt-0 lg:shrink-0 max-lg:w-[230px] lg:w-[225px]">
+                <Button
+                  asChild
+                  variant="primary"
+                  className="h-auto rounded-[8px] px-2 py-1 shadow-[0px_1px_2px_0px_rgba(16,24,40,0.04)] md:px-5 md:py-3 lg:w-full lg:rounded-[10px]"
                 >
-                  <span className="font-aptos text-[13px] font-semibold leading-[18px] md:font-text-button-semibold-large">
-                    {copy.featuredEventCta}
-                  </span>
-                  {/* <ArrowRightIcon className="hidden size-4 md:block" /> */}
-                </Link>
-              </Button>
+                  <Link
+                    href={`/events/${event.slug}`}
+                    className="gap-1.5 md:gap-2"
+                  >
+                    <span className="font-aptos text-[13px] font-semibold leading-[18px] md:font-text-button-semibold-large">
+                      {copy.featuredEventCta}
+                    </span>
+                    {/* <ArrowRightIcon className="hidden size-4 md:block" /> */}
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="relative h-[300px] overflow-hidden rounded-[12px] md:h-[240px] lg:order-2 lg:h-auto lg:w-[480px] lg:shrink-0">
+        <div className="relative h-[300px] overflow-hidden rounded-[12px] md:h-[240px] lg:order-2 lg:h-auto lg:w-[360px] lg:shrink-0">
           <Image
             src={heroImage}
             alt={event.title}
             fill
             priority
             className="object-cover"
-            sizes="(max-width: 767px) 100vw, (max-width: 1024px) 100vw, 480px"
+            sizes="(max-width: 767px) 100vw, (max-width: 1024px) 100vw, 360px"
           />
         </div>
       </div>
@@ -140,11 +153,17 @@ type MetadataChipProps = {
   icon: ReactNode;
   title: string;
   subtitle?: string | null;
+  className?: string;
 };
 
-function MetadataChip({ icon, title, subtitle }: MetadataChipProps) {
+function MetadataChip({ icon, title, subtitle, className }: MetadataChipProps) {
   return (
-    <div className="min-w-0 rounded-[8px] border border-primary-red-pink-light-active bg-[#fff6f9] p-2 md:rounded-[16px] md:p-4">
+    <div
+      className={cn(
+        "min-w-0 rounded-[8px] border border-primary-red-pink-light-active bg-[#fff6f9] p-2 md:rounded-[16px] md:p-4",
+        className,
+      )}
+    >
       <div className="flex items-start gap-2 md:items-center md:gap-3">
         <div className="shrink-0">{icon}</div>
         <div className="min-w-0">
@@ -203,6 +222,21 @@ function formatFeaturedEventDateRange(
     });
 
     return `${start.getUTCDate()}-${end.getUTCDate()} ${monthYear}`;
+  }
+
+  const sameYear = start.getUTCFullYear() === end.getUTCFullYear();
+
+  if (sameYear) {
+    const startLabel = start.toLocaleDateString(normalizedLocale, {
+      day: "numeric",
+      month: "short",
+    });
+    const endLabel = end.toLocaleDateString(normalizedLocale, {
+      day: "numeric",
+      month: "short",
+    });
+
+    return `${startLabel} - ${endLabel} ${start.getUTCFullYear()}`;
   }
 
   return `${start.toLocaleDateString(normalizedLocale, {

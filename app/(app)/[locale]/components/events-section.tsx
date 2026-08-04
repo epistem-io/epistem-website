@@ -4,18 +4,18 @@ import { ArrowRightIcon, MapPinIcon } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { SectionHead } from "./section-head";
-import { HighlightEventView } from "@/components/events/highlight-event";
+import { HighlightEventsCarousel } from "@/components/events/highlight-events-carousel";
 import { PastEvents } from "@/components/events/past-events";
 import { Link } from "@/i18n/navigation";
 import type { Event } from "@/payload-types";
 
 interface Props {
   locale: "en" | "id";
-  featuredEvent: Event | null;
+  featuredEvents: Event[];
   events: Event[];
 }
 
-export const EventsSection = ({ locale, featuredEvent, events }: Props) => {
+export const EventsSection = ({ locale, featuredEvents, events }: Props) => {
   const t = useTranslations("HomePage.Events");
   const tEventDetail = useTranslations("EventDetailPage");
 
@@ -24,16 +24,22 @@ export const EventsSection = ({ locale, featuredEvent, events }: Props) => {
     <section className="base-container flex flex-col items-center justify-start w-full px-2 max-lg:mt-8 lg:my-15 xl:my-20">
       <SectionHead title={t("title")} caption={t("caption")} />
 
-      {featuredEvent ? (
+      {featuredEvents.length > 0 ? (
         <div className="mt-10 md:mt-10 lg:mt-12 xl:mt-12 pt-0 md:pt-0 lg:pt-0 w-full ">
-          <HighlightEventView
-            event={featuredEvent}
+          <HighlightEventsCarousel
+            events={featuredEvents}
             locale={locale}
             copy={{
               upcomingEvent: tEventDetail("upcomingEvent"),
               featuredEventCta: tEventDetail("featuredEventCta"),
               eventDurationDay: tEventDetail("eventDurationDay"),
               eventDurationDays: tEventDetail("eventDurationDays"),
+              previousFeaturedEvents: tEventDetail.has("previousFeaturedEvents")
+                ? tEventDetail("previousFeaturedEvents")
+                : tEventDetail("previousPastEvents"),
+              nextFeaturedEvents: tEventDetail.has("nextFeaturedEvents")
+                ? tEventDetail("nextFeaturedEvents")
+                : tEventDetail("nextPastEvents"),
             }}
           />
         </div>
@@ -45,7 +51,7 @@ export const EventsSection = ({ locale, featuredEvent, events }: Props) => {
             events={events}
             locale={locale}
             isOverview={true}
-            showTitle={featuredEvent !== null}
+            showTitle={featuredEvents.length > 0}
           />
         </div>
       ) : null}

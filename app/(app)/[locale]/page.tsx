@@ -18,7 +18,7 @@ type Props = {
 export default async function Page({ params }: Props) {
   const { locale } = await params;
   return (
-    <div className="flex flex-col min-h-screen items-center justify-start">
+    <div className="flex flex-col min-h-screen items-center justify-start overflow-x-clip">
       <Hero />
       <Section1 />
       <Section2 />
