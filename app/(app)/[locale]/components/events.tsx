@@ -1,4 +1,4 @@
-import { getFeaturedEvent, getPastEvents } from "@/lib/events";
+import { getFeaturedEvents, getPastEvents } from "@/lib/events";
 import { EventsSection } from "./events-section";
 import { Suspense } from "react";
 
@@ -8,13 +8,13 @@ type Props = {
 
 export const Events = async ({ locale }: Props) => {
   // const { locale } = await params;
-  const featuredEvent = await getFeaturedEvent(locale);
+  const featuredEvents = await getFeaturedEvents(locale);
   const pastEvents = await getPastEvents(locale);
 
   return (
     <Suspense>
       <EventsSection
-        featuredEvent={featuredEvent}
+        featuredEvents={featuredEvents}
         events={pastEvents}
         locale={locale}
       />

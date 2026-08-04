@@ -18,7 +18,7 @@ export async function getEventBySlug(slug: string, locale: "en" | "id") {
   return result.docs[0] || null;
 }
 
-export async function getFeaturedEvent(locale: "en" | "id") {
+export async function getFeaturedEvents(locale: "en" | "id") {
   const payload = await getPayloadClient();
 
   const result = await payload.find({
@@ -37,13 +37,13 @@ export async function getFeaturedEvent(locale: "en" | "id") {
         },
       ],
     },
-    sort: "startDate",
-    limit: 1,
+    sort: "-startDate",
+    limit: 10,
     locale,
     depth: 2,
   });
 
-  return result.docs[0] || null;
+  return result.docs;
 }
 
 export async function getPastEvents(locale: "en" | "id") {

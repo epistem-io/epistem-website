@@ -11,6 +11,8 @@
     "nextSpeakers": "Pembicara berikutnya",
     "previousPastEvents": "Acara sebelumnya",
     "nextPastEvents": "Acara berikutnya",
+    "previousFeaturedEvents": "Acara unggulan sebelumnya",
+    "nextFeaturedEvents": "Acara unggulan berikutnya",
     "aboutThisEvent": "Tentang acara ini",
     "upcomingEvent": "Acara Mendatang",
     "featuredEventCta": "Lihat Detail Acara",
