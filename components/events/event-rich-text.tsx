@@ -90,12 +90,16 @@ function renderNode(node: LexicalNode, index: number): ReactNode {
     case "listitem":
       return <li>{renderChildren(node.children ?? [])}</li>;
 
-    case "link": {
-      const href = typeof node.url === "string" ? node.url : "#";
+    case "link":
+    case "autolink": {
+      const { href, newTab } = getLinkAttributes(node);
 
       return (
         <a
           href={href}
+          {...(newTab
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
           className="font-semibold text-primary-pink underline underline-offset-4 transition-colors hover:text-primary-pink/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-pink focus-visible:ring-offset-2"
         >
           {renderChildren(node.children ?? [])}
@@ -128,6 +132,49 @@ function renderNode(node: LexicalNode, index: number): ReactNode {
       return null;
     }
   }
+}
+
+type LexicalLinkFields = {
+  linkType?: string;
+  url?: string;
+  newTab?: boolean;
+  doc?: {
+    relationTo?: string;
+    value?: unknown;
+  };
+};
+
+// Payload's Lexical LinkFeature stores link data on `node.fields`; plain
+// Lexical link nodes keep the url on the node itself.
+function getLinkAttributes(node: LexicalNode) {
+  const fields: LexicalLinkFields =
+    typeof node.fields === "object" && node.fields !== null ? node.fields : {};
+  const newTab = fields.newTab === true;
+
+  if (fields.linkType === "internal" && fields.doc) {
+    const { relationTo, value } = fields.doc;
+    const doc =
+      typeof value === "object" && value !== null
+        ? (value as { slug?: unknown; url?: unknown })
+        : null;
+
+    if (relationTo === "events" && typeof doc?.slug === "string") {
+      return { href: `/events/${doc.slug}`, newTab };
+    }
+
+    if (typeof doc?.url === "string") {
+      return { href: doc.url, newTab };
+    }
+  }
+
+  const url =
+    typeof fields.url === "string" && fields.url
+      ? fields.url
+      : typeof node.url === "string"
+        ? node.url
+        : "";
+
+  return { href: url || "#", newTab };
 }
 
 function renderFormattedText(
