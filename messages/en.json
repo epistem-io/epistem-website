@@ -123,6 +123,17 @@
     "SetPassword": {
       "title": "Set Password",
       "description": "Create a secure password to finalize your registration and access your account.",
+      "invitedDescription": "{inviter} shared a Luma project with you. Finish setting up your account to open it.",
+      "emailLabel": "Email",
+      "emailHint": "This is the address the link was sent to and can't be changed here.",
+      "nameLabel": "Name",
+      "namePlaceholder": "Your full name",
+      "organizationLabel": "Organization (optional)",
+      "organizationPlaceholder": "Organization name",
+      "loading": "Checking your link...",
+      "invalidTitle": "This link is no longer valid",
+      "invalidMessage": "It may have expired or already been used. Request a new verification email, or ask the sender to share the project again.",
+      "redirecting": "Opening Luma...",
       "passwordLabel": "Password",
       "confirmPasswordLabel": "Confirm password",
       "submit": "Create Account",
@@ -142,7 +153,9 @@
         "number": "Password must include at least one number.",
         "specialCharacter": "Password must include at least one special character.",
         "confirmRequired": "Please confirm your password.",
-        "passwordMismatch": "Passwords do not match."
+        "passwordMismatch": "Passwords do not match.",
+        "nameRequired": "Please enter your name.",
+        "tooLong": "Must be 256 characters or fewer."
       }
     }
   },
