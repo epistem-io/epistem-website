@@ -123,6 +123,17 @@
     "SetPassword": {
       "title": "Atur Kata Sandi",
       "description": "Buat kata sandi yang aman untuk menyelesaikan pendaftaran dan mengakses akun Anda.",
+      "invitedDescription": "{inviter} membagikan proyek Luma kepada Anda. Selesaikan pengaturan akun untuk membukanya.",
+      "emailLabel": "Email",
+      "emailHint": "Ini adalah alamat tujuan tautan dikirim dan tidak dapat diubah di sini.",
+      "nameLabel": "Nama",
+      "namePlaceholder": "Nama lengkap Anda",
+      "organizationLabel": "Organisasi (opsional)",
+      "organizationPlaceholder": "Nama organisasi",
+      "loading": "Memeriksa tautan Anda...",
+      "invalidTitle": "Tautan ini sudah tidak berlaku",
+      "invalidMessage": "Tautan mungkin kedaluwarsa atau sudah digunakan. Minta email verifikasi baru, atau minta pengirim membagikan proyek lagi.",
+      "redirecting": "Membuka Luma...",
       "passwordLabel": "Kata sandi",
       "confirmPasswordLabel": "Konfirmasi kata sandi",
       "submit": "Buat Akun",
@@ -142,7 +153,9 @@
         "number": "Kata sandi harus memuat setidaknya satu angka.",
         "specialCharacter": "Kata sandi harus memuat setidaknya satu karakter khusus.",
         "confirmRequired": "Mohon konfirmasi kata sandi Anda.",
-        "passwordMismatch": "Konfirmasi kata sandi tidak cocok."
+        "passwordMismatch": "Konfirmasi kata sandi tidak cocok.",
+        "nameRequired": "Mohon masukkan nama Anda.",
+        "tooLong": "Maksimal 256 karakter."
       }
     }
   },
