@@ -1,0 +1,160 @@
+// Styles for the custom "agenda by day" field on the Events collection
+// (components/admin/agenda-by-day.tsx). Uses Payload's own theme variables so
+// it follows the admin light/dark theme.
+.agenda-by-day {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--base) / 2);
+    margin-bottom: calc(var(--base) / 2);
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__summary {
+    color: var(--theme-elevation-500);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  &__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 2px;
+    border-bottom: 1px solid var(--theme-elevation-100);
+    margin-bottom: var(--base);
+  }
+
+  &__tab {
+    appearance: none;
+    background: none;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    padding: calc(var(--base) * 0.4) calc(var(--base) * 0.6);
+    color: var(--theme-elevation-500);
+    font: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    &:hover {
+      color: var(--theme-text);
+    }
+
+    &--active {
+      color: var(--theme-text);
+      font-weight: 600;
+      border-bottom-color: var(--theme-text);
+    }
+
+    &--warning {
+      color: var(--theme-error-500);
+      margin-left: auto;
+
+      &.agenda-by-day__tab--active {
+        border-bottom-color: var(--theme-error-500);
+      }
+    }
+  }
+
+  &__tab-date {
+    color: var(--theme-elevation-400);
+    font-weight: 400;
+  }
+
+  &__count {
+    background: var(--theme-elevation-100);
+    color: var(--theme-text);
+    border-radius: 10px;
+    padding: 0 6px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+
+    &--warning {
+      background: var(--theme-error-100);
+      color: var(--theme-error-500);
+    }
+  }
+
+  &__item {
+    border: 1px solid var(--theme-elevation-150);
+    border-radius: var(--style-radius-m);
+    background: var(--theme-elevation-0);
+    padding: var(--base);
+    margin-bottom: calc(var(--base) / 2);
+
+    &--has-errors {
+      border-color: var(--theme-error-500);
+    }
+  }
+
+  &__item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: calc(var(--base) / 2);
+    margin-bottom: calc(var(--base) / 2);
+  }
+
+  &__item-position {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--theme-elevation-500);
+    font-size: 13px;
+  }
+
+  &__item-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    .btn {
+      margin: 0;
+    }
+  }
+
+  &__day {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: 6px;
+  }
+
+  &__day-label {
+    color: var(--theme-elevation-500);
+    font-size: 13px;
+  }
+
+  &__day-select {
+    height: 30px;
+    border: 1px solid var(--theme-elevation-150);
+    border-radius: var(--style-radius-s);
+    background: var(--theme-input-bg);
+    color: var(--theme-text);
+    padding: 0 8px;
+    font: inherit;
+    font-size: 13px;
+  }
+
+  &__fields {
+    margin-top: 0;
+  }
+
+  &__empty {
+    color: var(--theme-elevation-500);
+    margin: 0 0 calc(var(--base) / 2);
+  }
+
+  &__add-row {
+    margin-top: calc(var(--base) / 2);
+  }
+}
