@@ -1,5 +1,11 @@
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import type { CollectionConfig, DateFieldValidation } from "payload";
+import type {
+  CollectionConfig,
+  DateFieldValidation,
+  NumberFieldValidation,
+} from "payload";
+
+import { getEventDays, normalizeAgendaDay } from "../lib/event-days";
 
 const isValidYouTubeUrl = (value: string | null | undefined) => {
   if (!value) {
@@ -44,6 +50,27 @@ const validateEndDate: DateFieldValidation = (value, { siblingData }) => {
   }
 
   return end >= start || "End date must be on or after the start date.";
+};
+
+// `data` is the whole event document, so the agenda day can be checked
+// against the event's own date range. Items beyond the range only appear when
+// the dates were shortened after the agenda was written.
+const validateAgendaDay: NumberFieldValidation = (value, { data }) => {
+  const event = data as { startDate?: string | Date; endDate?: string | Date };
+  const days = getEventDays(event?.startDate, event?.endDate);
+
+  if (days.length === 0) {
+    return true;
+  }
+
+  const day = normalizeAgendaDay(value);
+
+  return (
+    day <= days.length ||
+    `This agenda item is on day ${day}, but the event only has ${days.length} ${
+      days.length === 1 ? "day" : "days"
+    }. Move it to another day or remove it.`
+  );
 };
 
 export const Events: CollectionConfig = {
@@ -162,6 +189,13 @@ export const Events: CollectionConfig = {
     {
       name: "agendas",
       type: "array",
+      admin: {
+        components: {
+          // Replaces the default array UI with one tab per event day. The
+          // tabs are derived from startDate/endDate, see lib/event-days.ts.
+          Field: "/components/admin/agenda-by-day#AgendaByDayField",
+        },
+      },
       fields: [
         {
           name: "title",
@@ -179,6 +213,16 @@ export const Events: CollectionConfig = {
           name: "time",
           type: "text",
           required: true,
+        },
+        {
+          // 1-based day of the event this item belongs to. Edited through the
+          // day dropdown in the custom field, never as a bare number input.
+          name: "day",
+          type: "number",
+          required: true,
+          defaultValue: 1,
+          min: 1,
+          validate: validateAgendaDay,
         },
       ],
     },

@@ -3,7 +3,11 @@ import { notFound } from "next/navigation";
 import { ChevronLeftIcon, MapPinIcon, PlayIcon } from "lucide-react";
 
 import { EventImageCarousel } from "@/components/events/event-image-carousel";
-import { AgendaSection } from "@/components/events/agenda-section";
+import {
+  AgendaSection,
+  type AgendaDay,
+  type AgendaItem,
+} from "@/components/events/agenda-section";
 import { EventRichText } from "@/components/events/event-rich-text";
 import { FileDownload } from "@/components/events/file-download";
 import { SpeakersSection } from "@/components/events/speakers-section";
@@ -22,6 +26,12 @@ import {
   formatEventLocation,
 } from "@/lib/event-formatting";
 import type { Document, Media } from "@/payload-types";
+import {
+  formatEventDayLabel,
+  getEventDays,
+  groupAgendaByDay,
+  normalizeAgendaDay,
+} from "@/lib/event-days";
 import { getTranslations } from "next-intl/server";
 
 type Props = {
@@ -87,7 +97,7 @@ export default async function EventDetailPage({ params }: Props) {
           title: string;
         } => Boolean(speaker),
       ) ?? [];
-  const agendas =
+  const agendaItems =
     event.agendas
       ?.map((agenda) => getAgendaItem(agenda))
       .filter(
@@ -97,8 +107,15 @@ export default async function EventDetailPage({ params }: Props) {
           title: string;
           description: string;
           time: string;
+          day: number;
         } => Boolean(agenda),
       ) ?? [];
+  const agendaDays = getAgendaDays(
+    agendaItems,
+    event.startDate,
+    event.endDate,
+    locale,
+  );
 
   return (
     <main className="relative overflow-hidden bg-white pb-20 pt-20 md:pt-[120px]">
@@ -207,7 +224,7 @@ export default async function EventDetailPage({ params }: Props) {
 
                 <SpeakersSection speakers={speakers} />
 
-                <AgendaSection agendas={agendas} />
+                <AgendaSection days={agendaDays} />
               </div>
             </div>
 
@@ -445,6 +462,7 @@ function getAgendaItem(agenda: {
   title: string | null | undefined;
   description: string | null | undefined;
   time: string | null | undefined;
+  day?: number | null;
 }) {
   const title = agenda.title?.trim();
   const description = agenda.description?.trim();
@@ -458,5 +476,38 @@ function getAgendaItem(agenda: {
     title,
     description,
     time,
+    day: normalizeAgendaDay(agenda.day),
   };
+}
+
+/**
+ * Buckets agenda items into one group per event day, labelled with the
+ * locale-formatted date. Items whose day falls outside the event dates (only
+ * possible if the dates were shortened after publishing) are appended to the
+ * last day so they never silently disappear.
+ */
+function getAgendaDays(
+  items: Array<AgendaItem & { day: number }>,
+  startDate: string,
+  endDate: string,
+  locale: "en" | "id",
+): AgendaDay[] {
+  const eventDays = getEventDays(startDate, endDate);
+
+  if (eventDays.length === 0) {
+    return [{ key: "day-1", label: "", items }];
+  }
+
+  const { byDay, outOfRange } = groupAgendaByDay(items, eventDays);
+  const dayLocale = locale === "id" ? "id-ID" : "en-US";
+
+  const days = byDay.map(({ day, items: dayItems }) => ({
+    key: `day-${day.index}`,
+    label: formatEventDayLabel(day.date, dayLocale),
+    items: dayItems,
+  }));
+
+  days[days.length - 1].items.push(...outOfRange);
+
+  return days;
 }
