@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { HighlightEventsCarousel } from "@/components/events/highlight-events-carousel";
 import { Link } from "@/i18n/navigation";
+import { getEventDays } from "@/lib/event-days";
 import { cn } from "@/lib/utils";
 import type { Event } from "@/payload-types";
 import { getTranslations } from "next-intl/server";
@@ -257,26 +258,13 @@ function formatEventDuration(
   dayCopy: string,
   daysCopy: string,
 ) {
-  const start = new Date(startDate);
-  const end = new Date(endDate);
+  // Inclusive day count, same as the agenda tabs: Oct 20 -> Oct 21 is 2 days.
+  const duration = getEventDays(startDate, endDate).length;
 
-  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+  if (duration === 0) {
     return null;
   }
 
-  const startUtc = Date.UTC(
-    start.getUTCFullYear(),
-    start.getUTCMonth(),
-    start.getUTCDate(),
-  );
-  const endUtc = Date.UTC(
-    end.getUTCFullYear(),
-    end.getUTCMonth(),
-    end.getUTCDate(),
-  );
-  const msInDay = 1000 * 60 * 60 * 24;
-  const roundedDiff = Math.round((endUtc - startUtc) / msInDay);
-  const duration = Math.max(roundedDiff, 1);
   const durationLabel = duration === 1 ? dayCopy : daysCopy;
   // const durationLabel = duration === 1 ? copy[locale].day : copy[locale].days;
 

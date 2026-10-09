@@ -234,6 +234,7 @@ export interface Event {
         title: string;
         description: string;
         time: string;
+        day: number;
         id?: string | null;
       }[]
     | null;
@@ -424,6 +425,7 @@ export interface EventsSelect<T extends boolean = true> {
         title?: T;
         description?: T;
         time?: T;
+        day?: T;
         id?: T;
       };
   images?:
